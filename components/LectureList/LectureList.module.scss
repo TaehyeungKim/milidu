@@ -1,0 +1,24 @@
+@use '@/utils/toremfunc';
+
+.container {
+    padding: toremfunc.toRem(12);
+    .lectureList {
+        position: relative;
+        box-sizing: border-box;
+        border: 1px solid gray;
+        border-radius: toremfunc.toRem(10);
+        padding: toremfunc.toRem(10);
+
+        .lectureList--lecture, .lectureList--teacher {
+            display: block;
+        }
+        .lectureList--lecture {
+            font-size: toremfunc.toRem(25);
+        }
+        .lectureList--teacher {
+            font-size: toremfunc.toRem(13);
+            font-style: italic;
+        }
+    }
+}
+

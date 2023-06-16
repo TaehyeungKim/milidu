@@ -1,0 +1,17 @@
+@use '@/utils/toremfunc';
+
+.header {
+    width: 100%;
+    display: flex;
+    position: sticky;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    
+    justify-content: center;
+    align-items: center;
+    padding: toremfunc.toRem(30) 0;
+    background-color: aquamarine;
+    z-index: 100;
+    
+}

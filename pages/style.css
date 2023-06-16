@@ -1,0 +1,29 @@
+@font-face {
+    font-family: '--main-kr';
+    src: url('./fonts/NotoSansKR-Regular.otf');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: '--main-kr';
+    src: url('./fonts/NotoSansKR-Light.otf');
+    font-weight: 200;
+}
+
+@font-face {
+    font-family: '--main-kr';
+    src: url('./fonts/NotoSansKR-Bold.otf');
+    font-weight: 600;
+}
+
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: '--main-kr'
+}
+
+h1,h2,h3,h4,h5,h6,mark {
+    all: unset;
+    display: block;
+}

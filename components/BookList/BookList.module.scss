@@ -1,0 +1,84 @@
+@use '@/utils/toremfunc';
+
+// @keyframes SlideToLeft{
+//     from {
+//         transform: translateX(0%);
+//     } to {
+//         transform: translateX(-100%);
+//     }
+// }
+
+// @keyframes SlideToRight {
+//     from {
+//         transform: translateX(0%);
+//     } to {
+//         transform: translateX(100%);
+//     }
+// }
+
+.container {
+    position: relative;
+    width: 100%;
+    min-height: toremfunc.toRem(300);
+    height: 100%;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .slide {
+        position: absolute;
+        z-index: 10;
+    }
+
+    #right {
+        right: 0;
+    }
+    #left {
+        left: 0;
+    }
+
+
+	.transitionRemoved {
+		transition: none !important;
+	}
+
+    .slideContainer {
+        display: flex;
+        flex-flow: row nowrap;
+        transition: transform 0.5s ease-in-out;
+        height: 100%;
+        align-items: center;
+        width: 100%;
+        .bookList {
+            width: 100%;
+            flex-shrink: 0;
+            flex-grow: 0;
+            
+            
+            .bookImage {
+                position: relative;
+                height: 50%;
+                margin: 0 auto 0;
+                padding: toremfunc.toRem(10);
+    
+                img {
+                    position: relative;
+                    height: 100%;
+                    display: block;
+                    margin: 0 auto 0;
+                }
+            }
+    
+            .bookInfo {
+                margin: 0 auto 0;
+                font-size: toremfunc.toRem(20);
+                text-align: center;
+                padding: toremfunc.toRem(10);
+            }
+            
+    
+        }
+    }
+
+    
+}
