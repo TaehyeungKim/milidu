@@ -1,0 +1,49 @@
+@use './utils/toremfunc';
+
+.univ_list {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    // display: flex;
+    // flex-flow: row wrap;
+    // justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: toremfunc.toRem(10) 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.univ_list--transition {
+    opacity: 0;
+}
+
+.univ_list--nodisplay {
+    display: none;
+}
+
+.univ {
+    //min-width: toremfunc.toRem(200);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    //margin-right: auto;
+    padding: toremfunc.toRem(10);
+    user-select: none;
+    &:hover {
+        cursor: pointer;
+    }
+
+
+
+    .univ_logo {
+        position: relative;
+        width: toremfunc.toRem(40);
+        box-sizing: border-box;
+        height: fit-content;
+    }
+
+    .univ_name {
+        margin-left: toremfunc.toRem(10);
+    }
+}

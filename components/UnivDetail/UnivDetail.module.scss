@@ -1,0 +1,97 @@
+@use '@/utils/toremfunc';
+
+@keyframes contentAppear {
+    0% {
+        transform: translateY(toremfunc.toRem(30));
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0%);
+        opacity: 1;
+    }
+}
+
+.univ_detail {
+    font-family: '--main-kr';
+    width: 100;
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+
+    
+
+    .scheduleTable {
+        box-sizing: border-box;
+        width: 100%;
+        text-align: center;
+        padding: toremfunc.toRem(10);
+        border-collapse: collapse;
+        position: relative;
+        margin-bottom: toremfunc.toRem(10);
+        animation: contentAppear 0.5s ease-in-out;
+        animation-fill-mode: backwards;
+        th, td {
+            border: 2px solid #F6F6F6;
+            border-right: none;
+            border-left: none;
+            padding: toremfunc.toRem(20) toremfunc.toRem(5);
+        }
+
+    }
+
+    .lectureListContainer {
+        animation: contentAppear 0.5s ease-in-out 0.5s;
+        animation-fill-mode: backwards;
+        h3 {
+            font-size: toremfunc.toRem(20);
+            text-align: center;
+        }
+        width: 100%;
+        .lectureList {
+            all: unset;
+            width: 100%;
+            position: relative;
+            box-sizing: border-box;
+            list-style: none;
+            padding: toremfunc.toRem(10);
+
+    
+            .lecture {
+                width: 100%;
+                position: relative;
+                box-sizing: inherit;
+                padding: toremfunc.toRem(10);
+                border-bottom: 2px solid #F6F6F6;
+                transition: background-color 0.3s ease-in-out;
+                &:hover {
+                    cursor: pointer;
+                    background-color: #F6F6F6;
+                }
+    
+                .lecture_title {
+                    font-size: toremfunc.toRem(18);
+                    font-weight: 600;
+                    margin-bottom: toremfunc.toRem(7);
+                    
+                }
+    
+                .lecture_info {
+                    display: flex;
+    
+                    .lecture_info--text {
+                        flex-grow: 1;
+                    }
+                    .showComment {
+                        all: unset;
+                        display: block;
+                    }
+                }
+                
+            }
+        }
+    }
+   
+}

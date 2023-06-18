@@ -10,25 +10,26 @@ type ScheduleData = {
     "최종합격발표": string
 }
 
-const data: ScheduleData = {
-    "구분": "2023년 정기 기사 1회",
-    "필기원서접수": "2023.01.10 ~ 2023.01.19",
-    "필기시험": "2023.02.13 ~ 2023.03.15",
-    "필기합격발표": "2023.03.21",
-    "실기원서접수": "2023.03.28 ~ 2023.03.31",
-    "실기시험": "2023.04.22 ~ 2023.06.25",
-    "최종합격발표": "2023.04.22 ~ 2023.06.25"
-}
-
-const dataArr = [data]
-
-
 export default function ScheduleTable() {
+    const data: ScheduleData = {
+        "구분": "2023년 정기 기사 1회",
+        "필기원서접수": "2023.01.10 ~ 2023.01.19",
+        "필기시험": "2023.02.13 ~ 2023.03.15",
+        "필기합격발표": "2023.03.21",
+        "실기원서접수": "2023.03.28 ~ 2023.03.31",
+        "실기시험": "2023.04.22 ~ 2023.06.25",
+        "최종합격발표": "2023.04.22 ~ 2023.06.25"
+    }
+    
+    const dataArr = [data]
     return(
         <table className = {styles.table}>
-            <tr>
-                {Object.keys(data).map((key: string, index: number)=><th key={index} className={styles.table_head}>{key}</th>)}
-            </tr>
+            <thead>
+                <tr>
+                    {Object.keys(data).map((key: string, index: number)=><th key={index} className={styles.table_head}>{key}</th>)}
+                </tr>
+            </thead>
+            <tbody>
             {dataArr.map((data: ScheduleData, index:number)=>(
                 <tr key={index} className = {styles.table_data}>
                     <td>{data.구분}</td>
@@ -40,6 +41,7 @@ export default function ScheduleTable() {
                     <td>{data.최종합격발표}</td>
                 </tr>
             ))}
+            </tbody>
         </table>
     )
 }

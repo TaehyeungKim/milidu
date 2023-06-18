@@ -1,0 +1,26 @@
+
+
+@keyframes selectedStretch{
+    100% {
+        width: 100%;
+        top: 0;
+        left: 0;
+    }
+}
+
+.backgroundList {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+
+    .back_selected {
+        animation-name: selectedStretch;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+        box-sizing: content-box;
+    }
+}
+
+.backgroundList--afterTransition {
+    display: flex !important;
+}
