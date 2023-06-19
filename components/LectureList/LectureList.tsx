@@ -26,9 +26,6 @@ export default function LectureList() {
                     <span className = {styles['lecturList--teacher']}>{data.teacher}</span>
                 </article>
             ))}
-            
-            
-        
         </div>
         
     )

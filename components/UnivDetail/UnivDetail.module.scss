@@ -63,30 +63,48 @@
                 width: 100%;
                 position: relative;
                 box-sizing: inherit;
-                padding: toremfunc.toRem(10);
-                border-bottom: 2px solid #F6F6F6;
-                transition: background-color 0.3s ease-in-out;
-                &:hover {
-                    cursor: pointer;
-                    background-color: #F6F6F6;
+                
+
+                .commentListContainer {
+                    width: 100%;
+                    position: relative;
+                    transition: grid-template-rows 0.3s ease-in-out;
+                    display: grid;
+                    box-sizing: border-box;
+                    background: #ebeeff91;
                 }
-    
-                .lecture_title {
-                    font-size: toremfunc.toRem(18);
-                    font-weight: 600;
-                    margin-bottom: toremfunc.toRem(7);
-                    
+
+                .hideCommentList {
+                    grid-template-rows: 0fr;
                 }
+
+                .showCommentList {
+                    grid-template-rows: 1fr;
+                }
+                
     
-                .lecture_info {
-                    display: flex;
-    
-                    .lecture_info--text {
-                        flex-grow: 1;
+                .container {
+                    padding: toremfunc.toRem(10);
+                    border-bottom: 2px solid #F6F6F6;
+                     transition: background-color 0.3s ease-in-out;
+                     box-sizing: inherit;
+                     &:hover {
+                     cursor: pointer;
+                     background-color: #F6F6F6;
+                }
+                    .lecture_title {
+                        font-size: toremfunc.toRem(18);
+                        font-weight: 600;
+                        margin-bottom: toremfunc.toRem(7);
+                        
                     }
-                    .showComment {
-                        all: unset;
-                        display: block;
+        
+                    .lecture_info {
+                        display: flex;
+        
+                        .lecture_info--text {
+                            flex-grow: 1;
+                        }
                     }
                 }
                 
