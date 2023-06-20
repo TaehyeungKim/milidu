@@ -32,7 +32,6 @@ export default function UnivList({dispatch, state}: UnivListProps) {
                 {list.map((elm: string, index: number)=>(
                     <article key={index} className = {styles.univ + ' ' + 'univ'} onClick={(e)=>{
                         e.stopPropagation()
-                        console.log(e.currentTarget);
                         dispatch({
                         type: 'selectedUnivFromList',
                         selected: e.currentTarget as HTMLElement})

@@ -110,6 +110,7 @@ const MAXPERPAGE = 3;
         align-items: center;
         justify-content: center;
         padding: ${toRem(10)}rem;
+        box-sizing: border-box;
     `
 
     const PageButton = styled.button`
@@ -132,6 +133,90 @@ const MAXPERPAGE = 3;
     `
 
 
+    const CommentTextArea = styled.textarea`
+        resize: none;
+        overflow: hidden;
+        box-sizing: content-box;
+        outline: none;
+        border: 2px solid #ebeeff91;
+        transition: border 0.3s ease-in-out;
+        display: block;
+        width: auto;
+        font-size: ${toRem(16)}rem;
+        font-family: '--main-kr';
+        padding: ${toRem(5)}rem;
+        &:focus-visible {
+            border: 2px solid #84FFEA;
+        }
+        flex-grow: 1;
+    `
+
+    const SIZEOFTHESTAR = 25;
+
+    const StarRateBox = styled.div`
+        width: ${toRem(SIZEOFTHESTAR)*5}rem;
+        height: auto;
+        font-size: ${toRem(SIZEOFTHESTAR)}rem;
+        position: relative;
+        box-sizing: content-box;
+    `
+
+    const TransparentInput = styled.input`
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        opacity: 0;    
+        margin: 0;
+        height: 100%;
+        z-index: 10;
+        &:hover {
+            cursor: pointer;
+        }
+        `
+
+    const StarRate = styled.div`
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        font-size: ${toRem(SIZEOFTHESTAR)}rem;
+        background-clip: text;
+        -webkit-background-clip: text;
+        background-color: tomato;
+        color: rgba(0, 0, 0, 0.2);
+        
+        transition: width 0.2s ease-in-out;
+    `
+
+    const LabelForStarBox = styled.span`
+        font-size: ${toRem(14)}rem;
+        font-family: '--main-kr';
+        display: inline-block;
+        font-weight: 200;
+    `
+
+    const RegisterButton = styled.button`
+        all: unset;
+        font-size: ${toRem(14)}rem;
+        font-family: '--main-kr';
+        background-color: white;
+        border: 2px solid aqua;
+        border-radius: 1em;
+        padding: ${toRem(10)}rem;
+        color: black;
+        display: block;
+        margin: 0 auto 0;
+        transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+
+        &:hover {
+            background-color: aqua;
+            color: white;
+            cursor: pointer;
+        }
+    `
+    
+
 export default function UnivLectureComment() {
 
     
@@ -146,6 +231,9 @@ export default function UnivLectureComment() {
     }
 
     const [left, right] = [useRef<HTMLButtonElement>(null), useRef<HTMLButtonElement>(null)]
+    const textarea = useRef<HTMLTextAreaElement>(null);
+    const [starRateBox, starRate] = [useRef<HTMLDivElement>(null),useRef<HTMLDivElement>(null)];
+    const transparentInput = useRef<HTMLInputElement>(null);
 
     
 
@@ -164,6 +252,27 @@ export default function UnivLectureComment() {
         }
     },[page])
 
+    useEffect(()=>{
+        textarea.current?.addEventListener('input', (e)=>{
+            const target = e.target as HTMLTextAreaElement;
+            
+            target.setAttribute('style', 'height: auto')
+            if(target.scrollHeight !== target.clientHeight) {
+                target.setAttribute('style', `height: ${toRem(target.scrollHeight)}rem`)}
+        })
+    },[])
+
+    useEffect(()=>{
+        const heightOfTheStar = starRate.current?.offsetHeight
+        starRateBox.current?.setAttribute('style', `height: ${heightOfTheStar}px`)
+
+        transparentInput.current?.addEventListener('change', (e)=>{
+            const target = e.target as HTMLInputElement
+            starRate.current?.setAttribute('style', `width: ${target.valueAsNumber * 20}%`)
+            
+        })
+    },[])
+
     return(
         <div style={{overflow: 'hidden'}}>
         <CommentList>
@@ -181,6 +290,23 @@ export default function UnivLectureComment() {
             <LeftButton $index={page} onClick={pageDecrease} ref={left}>{arrowLeft()}</LeftButton>
             <RightButton $index={page} onClick={pageIncrement} ref={right}>{arrowRight()}</RightButton>
         </Wrapper>
+        <section>
+            <div style={{padding: `${toRem(5)}rem`, display: 'flex', flexDirection: 'column', alignItems:'center'}}>
+                <LabelForStarBox>별점을 매겨주세요!</LabelForStarBox>
+                <StarRateBox ref={starRateBox}>
+                    <TransparentInput type="range" min={0} max={5} step={0.5} ref={transparentInput}/>
+                    <StarRate ref={starRate}>★★★★★</StarRate>
+                </StarRateBox>
+            </div>
+            <div style={{width: '100%', display: 'flex'}}><CommentTextArea ref={textarea} placeholder="수강평을 입력해주세요!"/></div>
+            <RegisterButton>수강평 등록하기</RegisterButton>
+            
+ 
+            
+            
+        </section>
+        
+        
         </div>
     )
 }
