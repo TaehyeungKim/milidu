@@ -1,0 +1,8 @@
+@use 'utils/toremfunc';
+
+.wrapper {
+    width: 100%;
+    max-width: toremfunc.toRem(700);
+    min-height: 120vh;
+}
+

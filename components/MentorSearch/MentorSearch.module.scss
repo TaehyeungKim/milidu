@@ -1,0 +1,64 @@
+
+@use 'utils/toremfunc';
+
+.search {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: toremfunc.toRem(10);
+    box-sizing: border-box;
+    font-weight: 400;
+
+    .searchBelow_left {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        width: toremfunc.toRem(80);
+        flex-shrink: 0;
+        li {
+            width: 100%;
+            box-sizing: border-box;
+            border-bottom: 1px solid aqua;
+            &:last-child {
+                border-bottom: none;
+            }
+            input {
+                &:checked + label {
+                    background-color: aqua;
+                    color: white;
+                }
+            }
+
+            label {
+                box-sizing: inherit;
+                width: 100%;
+                display: block;
+                cursor: pointer;
+                padding: toremfunc.toRem(5);
+                transition: background-color 0.1s ease-in-out, color 0.1s ease-in-out;
+
+            }
+
+        }
+    }
+}
+
+.labelContainer {
+    display: block;
+    width: fit-content;
+    background-color: aquamarine;
+    margin: toremfunc.toRem(5);
+    border-radius: 1em;
+    font-size: toremfunc.toRem(12);
+    
+}
+
+.selected_label {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    padding: toremfunc.toRem(10);
+    cursor: pointer;
+}

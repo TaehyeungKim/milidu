@@ -129,7 +129,7 @@ const MAXPERPAGE = 3;
     `
 
     const RightButton = styled(PageButton)<{$index:number}>`
-        opacity: ${props=>props.$index+1 * MAXPERPAGE >= ServerDataArr.length  ? 0.4 : 1}
+        opacity: ${props=>(props.$index+1) * MAXPERPAGE >= ServerDataArr.length  ? 0.4 : 1}
     `
 
 
@@ -151,7 +151,7 @@ const MAXPERPAGE = 3;
         flex-grow: 1;
     `
 
-    const SIZEOFTHESTAR = 25;
+    const SIZEOFTHESTAR = 40;
 
     const StarRateBox = styled.div`
         width: ${toRem(SIZEOFTHESTAR)*5}rem;
@@ -190,7 +190,7 @@ const MAXPERPAGE = 3;
     `
 
     const LabelForStarBox = styled.span`
-        font-size: ${toRem(14)}rem;
+        font-size: ${toRem(20)}rem;
         font-family: '--main-kr';
         display: inline-block;
         font-weight: 200;
@@ -298,7 +298,7 @@ export default function UnivLectureComment() {
                     <StarRate ref={starRate}>★★★★★</StarRate>
                 </StarRateBox>
             </div>
-            <div style={{width: '100%', display: 'flex'}}><CommentTextArea ref={textarea} placeholder="수강평을 입력해주세요!"/></div>
+            <div style={{width: '100%', display: 'flex'}}><CommentTextArea ref={textarea} placeholder="한 줄 수강평을 입력해주세요!"/></div>
             <RegisterButton>수강평 등록하기</RegisterButton>
             
  

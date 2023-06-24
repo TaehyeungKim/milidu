@@ -47,11 +47,11 @@ function LectureLi({data}: LectureLiProps) {
 
     return(
         <li className = {styles.lecture}>
-            <div className = {styles.container}>
+            <div className = {styles.container} onClick={toggleCommentArea}>
             <h5 className = {styles.lecture_title}>{data.강의명}</h5>
             <div className = {styles.lecture_info}>
                 <div className = {styles['lecture_info--text']}><span>{data.교수}</span>&nbsp;/&nbsp;<span>{data.학점}학점</span>&nbsp;/&nbsp;<span>{data.정원}명</span></div>
-                <CommentShowButton $commentVisible={commentVisible}  onClick={toggleCommentArea}>▼</CommentShowButton>
+                <CommentShowButton $commentVisible={commentVisible}>▼</CommentShowButton>
                 
             </div>
             </div>

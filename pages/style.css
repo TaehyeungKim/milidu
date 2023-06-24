@@ -1,18 +1,18 @@
 @font-face {
     font-family: '--main-kr';
-    src: url('./fonts/NotoSansKR-Regular.otf');
+    src: url('/public/fonts/NotoSansKR-Regular.otf');
     font-weight: 400;
 }
 
 @font-face {
     font-family: '--main-kr';
-    src: url('./fonts/NotoSansKR-Light.otf');
+    src: url('/public/fonts/NotoSansKR-Light.otf');
     font-weight: 200;
 }
 
 @font-face {
     font-family: '--main-kr';
-    src: url('./fonts/NotoSansKR-Bold.otf');
+    src: url('/public/fonts/NotoSansKR-Bold.otf');
     font-weight: 600;
 }
 
