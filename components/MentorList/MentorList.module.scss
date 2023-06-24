@@ -1,0 +1,68 @@
+@use 'utils/toremfunc';
+
+.mentorList_wrapper {
+        width: 100%;
+        box-sizing: border-box;
+
+        .sectionName {
+            font-size: toremfunc.toRem(16);
+            margin-bottom: toremfunc.toRem(20);    
+        }
+    .mentorList {
+        width: inherit;
+        box-sizing: inherit;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: auto;
+        gap: toremfunc.toRem(20);
+    
+        .mentorRoom {
+            width: 100%;
+            position: relative;
+            box-sizing: border-box;
+            padding: toremfunc.toRem(10);
+            border: 2px solid #ebeeff91;
+            background-color: #ebeeff91;
+            border-radius: 1em;
+            transition: transform 0.3s ease-in-out;
+    
+            &:hover {
+                cursor: pointer;
+                transform: translateY(-5px);
+            }
+    
+            .mentor_thumb {
+                width: 100%;
+                box-sizing: inherit;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: toremfunc.toRem(20) 0;
+                img {
+                    width: toremfunc.toRem(100);
+                    aspect-ratio: 1;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    background-position: center;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                }
+            }
+    
+            .mentor_info {
+                position: relative;
+    
+                span {
+                    display: block;
+                    margin: toremfunc.toRem(7) 0;
+                    mark {
+                        all: unset;
+                        font-size: toremfunc.toRem(18);
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+    }
+}
+
