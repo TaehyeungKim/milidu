@@ -1,47 +1,129 @@
-import styles from './index.module.scss'
-import ChartComponent from '@/components/Chart/Chart'
-import LectureList from '@/components/LectureList/LectureList'
-import BookList from '@/components/BookList/BookList'
-import ScheduleTable from '@/components/ScheduleTable/ScheduleTable'
+import style from './style.module.scss'
 
 export default function Certification() {
-    return (
-        <div className = {styles.wrapper}>
-            <section className = {styles.cert_info}>
-                <h1 className = {styles['cert_info--name']}>자격증명</h1>
-                <h3 className = {styles['cert_info--desc']}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lorem neque. Donec a pharetra justo. Integer pellentesque pretium lorem ac facilisis. Nulla eu quam at nisl sagittis accumsan vitae eu nibh. Mauris rutrum lobortis ultricies. Ut non elit at metus venenatis fringilla eu et elit. Nullam blandit ac odio id convallis. Nulla facilisi. In dapibus libero ac elit interdum porta.
-In non lectus quis enim dictum volutpat ut in nibh. Pellentesque viverra dolor vitae diam fermentum hendrerit ac nec dui. In dapibus sodales est, ut placerat nulla imperdiet et. Vivamus venenatis augue eget quam ultrices fringilla. Vivamus luctus a libero eu malesuada. Nulla hendrerit magna odio, eu volutpat lectus suscipit fringilla. Pellentesque sodales tristique augue quis ullamcorper. Fusce gravida at velit sed euismod.</h3>
-                <h6 className = {styles['cert_info--organization']}>주관: 한국산업인력공단</h6>
-            </section>
-            <section className = {styles.cert_statistic}>
-                <div className = {styles.representative_stat_container}>
-                    <article className = {styles.representative_stat}>
-                        <h5 className = {styles['representative_stat--field']}>전공명</h5>
-                        <mark className = {styles['representative_stat--value']}>전기＊전자</mark>
-                    </article>
-                    <article className = {styles.representative_stat}>
-                        <h5 className = {styles['representative_stat--field']}>합격률</h5>
-                        <mark className = {styles['representative_stat--value']}>36%</mark>
-                    </article>
-                    <article className = {styles.representative_stat}>
-                        <h5 className = {styles['representative_stat--field']}>응시자수</h5>
-                        <mark className = {styles['representative_stat--value']}>345,000명</mark>
-                    </article>
-                    
+    return(
+        <div className = {style.wrapper}>
+            <div id = {style.post}>
+                <h2>
+                    <p id={style.point_1}>자격증의 모든 것,</p>
+                    <p id={style.point_2}>당신의 궁금증을 해결하세요.</p>
+                </h2>
+            </div>
+        
+        <div id={style.sb}>
+            <form>
+                <fieldset>
+                    <legend className={style['visually-hidden']}>검색</legend>
+                    <div className={style.search_box}>
+                        <input type="text" maxLength={255} tabIndex={1} />
+                        <button type="submit" tabIndex={2}>
+                            검색
+                        </button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        <ul className={style.post_list}>
+            <li>
+                <div className={style.list}>
+                    <h4 className={style.name}>컴퓨터활용능력 1급</h4>
+                    <div className={style.content}>
+                        <h6>IT·컴퓨터</h6>
+                        <h6>3개월</h6>
+                        <h6>32%</h6>
+                    </div>
                 </div>
-                <div className = {styles.graph_container}>
-                    <ChartComponent/>
+            </li>
+            <li>
+                <div className={style.list}>
+                    <h4 className={style.name}>자격증명</h4>
+                    <div className={style.content}>
+                        <h6>전공명</h6>
+                        <h6>소요기간</h6>
+                        <h6>최종합격률</h6>
+                    </div>
                 </div>
-            </section>
-            <section className = {styles.cert_studyMaterial}>
-                <h3 className = {styles.field}>무료강의</h3>
-                <h3 className = {styles.field}>도서추천</h3>
-                <LectureList/>
-                <BookList/>
-            </section>
-            <section className = {styles.cert_schedule}>
-                <ScheduleTable/>
-            </section>
+            </li>
+            <li>
+                <div className={style.list}>
+                    <h4 className={style.name}>자격증명</h4>
+                    <div className={style.content}>
+                        <h6>전공명</h6>
+                        <h6>소요기간</h6>
+                        <h6>최종합격률</h6>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div className={style.list}>
+                    <h4 className={style.name}>자격증명</h4>
+                    <div className={style.content}>
+                        <h6>전공명</h6>
+                        <h6>소요기간</h6>
+                        <h6>최종합격률</h6>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div className={style.list}>
+                    <h4 className={style.name}>자격증명</h4>
+                    <div className={style.content}>
+                        <h6>전공명</h6>
+                        <h6>소요기간</h6>
+                        <h6>최종합격률</h6>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div className={style.list}>
+                    <h4 className={style.name}>자격증명</h4>
+                    <div className={style.content}>
+                        <h6>전공명</h6>
+                        <h6>소요기간</h6>
+                        <h6>최종합격률</h6>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div className={style.list}>
+                    <h4 className={style.name}>자격증명</h4>
+                    <div className={style.content}>
+                        <h6>전공명</h6>
+                        <h6>소요기간</h6>
+                        <h6>최종합격률</h6>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div className={style.list}>
+                    <h4 className={style.name}>자격증명</h4>
+                    <div className={style.content}>
+                        <h6>전공명</h6>
+                        <h6>소요기간</h6>
+                        <h6>최종합격률</h6>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        
+       <div className={style.page}>
+            <ul className={style.pagenation}>
+                <li><a className={style.first}>처음으로</a></li>
+                <li><a className={style.arrow_left}>{'<<'}</a></li>
+                <li><a className={style.num}>1</a></li>
+                <li><a className={style.num}>2</a></li>
+                <li><a className={style.num}>3</a></li>
+                <li><a className={style.num}>4</a></li>
+                <li><a className={style.num}>5</a></li>
+                <li><a className={style.num}>6</a></li>
+                <li><a className={style.num}>7</a></li>
+                <li><a className={style.num}>8</a></li>
+                <li><a className={style.num}>9</a></li>
+                <li><a className={style.arrow_right}>{'>>'}</a></li>
+                <li><a className={style.last}>끝으로</a></li> 
+            </ul>
+       </div>
         </div>
     )
 }

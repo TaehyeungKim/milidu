@@ -1,0 +1,246 @@
+@use 'utils/toremfunc';
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: toremfunc.toRem(900);
+    box-sizing: border-box;
+}
+#post {
+    display: flex;
+    justify-content: center;
+    margin-top: 0;
+    align-items: center;
+    h2 {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+}
+
+#point_1 {
+    margin-right: 179px;
+    margin-left: 60px;
+    user-select: none;
+}
+
+#point_2 {
+    margin-left: 155px;
+    margin-right: 60px;
+    user-select: none;
+}
+
+#sb {
+    display: flex;
+    justify-content: center;
+    fieldset {
+        border: none;
+    }
+}
+
+
+
+.visually-hidden {
+    
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
+}
+.search_box {
+    width: 520px;
+    height: 50px;
+    border: 2px solid silver;
+    display: flex;
+    align-items: center;
+    margin: auto;
+}
+.search_box input {
+    flex: 9; 
+    height: 46px;
+    padding-left: 12px;
+    padding-right: 12px;
+    border: none;
+    outline: none;
+    font-size: 18px;
+}
+.search_box button {
+    flex: 1; 
+    height: 46px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: black;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.post_list {
+    list-style: none;
+    margin: auto;
+    padding: 0px;
+    width: 70%;
+    margin-top: 20px;
+    /*border: 1px solid;
+    border-radius: 8px;*/
+}
+
+.name {
+    min-width: 200px;
+    font-weight: bold;
+}
+
+.post_list li {
+    padding: 10px;
+    font-size: 18px;
+    height: 50px;
+    border-bottom: 1px solid #efefef;
+    
+}
+
+.post_list li:last-child {
+    border-bottom: 0px;
+}
+
+.list {
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.list h6 {
+    text-align: right;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    flex-grow: 1;
+    font-size: 0.67em;
+    font-weight: bold;
+}
+
+.pagenation {
+    padding: 0;
+    margin-top: 20px;
+    display: inline-block;
+    display: flex;
+    margin-bottom: 40px;
+}
+
+.pagenation li {
+    list-style: none;
+    text-align: center;
+    display: inline;
+}
+
+.page {
+    text-align: center;
+    align-items: center;
+    margin: auto;
+}
+
+.pagenation a {
+    float: left;
+    display: block;
+    font-size: 14px;
+    text-decoration: none;
+    padding: 5px 12px;
+    color:black;
+    line-height: 1.5;
+}
+
+
+.first:hover, .last:hover, .arrow_left:hover, .num:hover, .arrow_right:hover {
+    text-decoration: underline;
+}
+
+.pagenation a:active {
+    cursor: default;
+    color: #fda94e;
+}
+
+.pagenation a:active {
+    outline: none;
+}
+
+.num:active, .arrow_left:active, .arrow_right:active, .first:active, .last:active {
+    cursor: pointer;
+}
+
+.arrow_left, .arrow_right, .first, .last {
+    padding: 0;
+    line-height: 10px;
+    border-radius: 100%;
+}
+
+.num {
+    padding: 0;
+    line-height: 10px;
+}
+
+.num, .arrow_left, .arrow_right, .first, .last {
+    user-select: none;
+}
+
+#footer {
+    display: flex;
+    padding: 24px 16px;
+    background-color:#EFEFEF;
+    width: 100%;
+    box-sizing: border-box;
+    top: 0%;
+    width: 100%;
+    z-index: 100;
+    justify-content: space-between;
+}
+
+#footer h5 {
+    font-size: 16px;
+}
+
+#footer li {
+    all:unset;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 5px 10px;
+}
+
+#footer ul {
+    all:unset;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 0px 100px;
+}
+
+.footer_one li span {
+    font-size: 12px;
+    vertical-align: baseline;
+}
+
+.footer_one {
+    margin-top: 0;
+}
+
+#right {
+    display: flex;
+    text-align: center;
+    width: 100%;
+    height: 50px;
+    background-color: #fda94e;
+}
+
+#right_ment {
+    all:unset;
+    color: white;
+    margin: auto;
+    align-items: center;
+}

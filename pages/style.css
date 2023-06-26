@@ -1,26 +1,32 @@
 @font-face {
     font-family: '--main-kr';
-    src: url('/public/fonts/NotoSansKR-Regular.otf');
+    src: url('~public/fonts/NotoSansKR-Regular.otf');
     font-weight: 400;
 }
 
 @font-face {
     font-family: '--main-kr';
-    src: url('/public/fonts/NotoSansKR-Light.otf');
+    src: url('~public/fonts/NotoSansKR-Light.otf');
     font-weight: 200;
 }
 
 @font-face {
     font-family: '--main-kr';
-    src: url('/public/fonts/NotoSansKR-Bold.otf');
+    src: url('~public/fonts/NotoSansKR-Bold.otf');
     font-weight: 600;
 }
+
+/* @font-face {
+    font-family: 'test';
+    src: url('/public/fonts/BagelFatOne-Regular.ttf');
+}  */
 
 
 body {
     padding: 0;
     margin: 0;
-    font-family: '--main-kr'
+    font-family: '--main-kr';
+    /* font-family: 'test'; */
 }
 
 body::-webkit-scrollbar {
