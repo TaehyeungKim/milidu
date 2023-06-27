@@ -9,6 +9,7 @@
     flex-direction: row;
     padding: toremfunc.toRem(20);
     justify-content: space-around;
+    box-sizing: border-box;
     .sum_container {
         padding: toremfunc.toRem(20);
         border: 1px solid #ebeeff91;
@@ -32,4 +33,61 @@
 
 .reviewArea {
     flex-direction: column;
+    .review {
+        padding: toremfunc.toRem(10);
+        border: 2px solid #ebeeff91;
+        background-color: #ebeeff91;
+        border-radius: 1em;
+        &:not(:last-child) {
+            margin-bottom: toremfunc.toRem(50);
+        }
+        
+
+        span, em {
+            padding: toremfunc.toRem(5);
+        }
+
+        .label {
+            color: gray;
+        }
+        .review_writer {
+
+            box-sizing: border-box;
+            border-bottom: 1px solid #ebeeff;
+            padding-bottom: toremfunc.toRem(10);
+
+            span {
+                font-size: toremfunc.toRem(20);
+                
+            }
+            em {
+                font-size: toremfunc.toRem(15);
+            }
+        }
+
+        .below_header {
+            margin: toremfunc.toRem(10) 0;
+        }
+        .level {
+            display: flex;
+            align-items: center;
+
+        }
+
+        .study {
+            span:not(.label) {
+                display: inline-block;
+                padding: toremfunc.toRem(10);
+                background-color: #ebeeff;
+                margin: 0 toremfunc.toRem(7);
+                border-radius: 1em;
+                
+            }
+        }
+
+        .text {
+            font-size: toremfunc.toRem(13);
+            padding: toremfunc.toRem(7);
+        }
+    }
 }

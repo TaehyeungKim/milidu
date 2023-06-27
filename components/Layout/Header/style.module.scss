@@ -66,6 +66,10 @@
                 background-color: #fda94e;
                 color: white;
             }
+            &:has( input:checked) {
+                background-color: #fda94e;
+                color: white;
+            }
         }
     }
     

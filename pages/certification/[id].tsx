@@ -16,8 +16,80 @@ export type CertDetailInfo = {
     taker: number
 }
 
-export const getServerSideProps: GetServerSideProps<{ certDetailInfo: CertDetailInfo }> = async({params}) => {
+export type CertReview = {
+    cert: string,
+    avr_level: number,
+    avr_trynum: number,
+    avr_period: string,
+    reviewArr: ReviewData[]
+}
 
+export type ReviewData = {
+    user: {
+        name: string,
+        age: number,
+        sex: string,
+        major: string
+    },
+    trynum: number,
+    period: string,
+    level: number,
+    studyMethod: string[],
+    material: string,
+    comment: string
+}
+
+type CertServerSideProps = {
+    certDetailInfo: CertDetailInfo,
+    reviewData: CertReview
+}
+
+export const getServerSideProps: GetServerSideProps<{ certServerSideProps: CertServerSideProps }> = async({params}) => {
+
+    const reviewArr: ReviewData[] = [
+        {
+            user: {
+                name: 'taehyeungkim98',
+                age: 21,
+                sex: '남',
+                major: '컴퓨터공학'
+            },
+            trynum: 3,
+            period: '1개월',
+            level: 4,
+            studyMethod: ['기출풀이', '인터넷강의'],
+            material: '이기적 컴퓨터활용능력1급',
+            comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec lectus vitae mauris dignissim volutpat id in turpis. Ut ut faucibus neque. Maecenas rutrum sollicitudin purus, et auctor sem tincidunt ut. Nulla ut quam vitae erat egestas ultricies vitae eget lectus. Vivamus viverra rhoncus turpis, quis sodales tortor placerat nec. Etiam convallis tincidunt scelerisque. In hac habitasse platea dictumst. Maecenas nisi felis, blandit vitae lacus sit amet, hendrerit vehicula mauris. Cras feugiat ultrices justo ac auctor.'
+        },
+        {
+            user: {
+                name: 'taehyeungkim98',
+                age: 21,
+                sex: '남',
+                major: '컴퓨터공학'
+            },
+            trynum: 3,
+            period: '1개월',
+            level: 4,
+            studyMethod: ['기출풀이', '인터넷강의'],
+            material: '이기적 컴퓨터활용능력1급',
+            comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec lectus vitae mauris dignissim volutpat id in turpis. Ut ut faucibus neque. Maecenas rutrum sollicitudin purus, et auctor sem tincidunt ut. Nulla ut quam vitae erat egestas ultricies vitae eget lectus. Vivamus viverra rhoncus turpis, quis sodales tortor placerat nec. Etiam convallis tincidunt scelerisque. In hac habitasse platea dictumst. Maecenas nisi felis, blandit vitae lacus sit amet, hendrerit vehicula mauris. Cras feugiat ultrices justo ac auctor.'
+        },
+        {
+            user: {
+                name: 'taehyeungkim98',
+                age: 21,
+                sex: '남',
+                major: '컴퓨터공학'
+            },
+            trynum: 3,
+            period: '1개월',
+            level: 4,
+            studyMethod: ['기출풀이', '인터넷강의'],
+            material: '이기적 컴퓨터활용능력1급',
+            comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec lectus vitae mauris dignissim volutpat id in turpis. Ut ut faucibus neque. Maecenas rutrum sollicitudin purus, et auctor sem tincidunt ut. Nulla ut quam vitae erat egestas ultricies vitae eget lectus. Vivamus viverra rhoncus turpis, quis sodales tortor placerat nec. Etiam convallis tincidunt scelerisque. In hac habitasse platea dictumst. Maecenas nisi felis, blandit vitae lacus sit amet, hendrerit vehicula mauris. Cras feugiat ultrices justo ac auctor.'
+        }
+    ]
 
     const certDetailInfo: CertDetailInfo = {
         name: (params as ParsedUrlQuery).id as string,
@@ -28,7 +100,21 @@ export const getServerSideProps: GetServerSideProps<{ certDetailInfo: CertDetail
         taker: 345000
     };
 
-    return { props: {certDetailInfo} }
+    const reviewData: CertReview = {
+        cert: (params as ParsedUrlQuery).id as string,
+        avr_level: 3.7,
+        avr_trynum: 2.7,
+        avr_period: '3개월',
+        reviewArr: reviewArr
+    }
+
+    const certServerSideProps = {
+        certDetailInfo: certDetailInfo,
+        reviewData: reviewData
+    }
+
+
+    return { props: {certServerSideProps} }
 }
 
 export type CertDetailPageState = {
@@ -43,7 +129,7 @@ const reducer = (state: CertDetailPageState, action: CertDetailPageAction) => {
     return { page: action.to }
 }
 
-export default function Certification({certDetailInfo}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Certification({certServerSideProps}: InferGetServerSidePropsType<typeof getServerSideProps>) {
 
     const [state, dispatch] = useReducer(reducer, {page: "info"})
 
@@ -55,11 +141,11 @@ export default function Certification({certDetailInfo}: InferGetServerSidePropsT
                 switch(state.page) {
                     case "info":
                         return(
-                            <CertInfo certDetailInfo={certDetailInfo}/>
+                            <CertInfo certDetailInfo={certServerSideProps.certDetailInfo}/>
                         )
                     case "review":
                         return(
-                            <CertReview/>
+                            <CertReview reviewData={certServerSideProps.reviewData}/>
                         )
                 }   
             })()}

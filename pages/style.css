@@ -37,3 +37,9 @@ h1,h2,h3,h4,h5,h6,mark, figure, a {
     all: unset;
     display: block;
 }
+
+em, span {
+    all: unset;
+    display: inline;
+    
+}

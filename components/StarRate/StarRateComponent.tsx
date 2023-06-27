@@ -6,10 +6,11 @@ const SIZEOFTHESTAR = 40;
 
 const StarRateBox = styled.div<{$size: number}>`
         width: ${props => toRem(props.$size)*5}rem;
-        height: auto;
+        height: fit-content;
         font-size: ${props => toRem(props.$size)}rem;
         position: relative;
         box-sizing: content-box;
+        
 `
 
 const TransparentInput = styled.input<{$disabled: boolean}>`

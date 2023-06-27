@@ -1,8 +1,13 @@
+import Link from 'next/link'
 import styles from './Header.module.scss'
 import style from './style.module.scss'
 import { favicion } from '@/public/icons/icons'
+import { useRouter } from 'next/router'
 
 export default function Header() {
+
+    const router = useRouter()
+
     return(
         <header className={styles.header}>
             <nav className={style.navbar}>
@@ -13,16 +18,16 @@ export default function Header() {
 
             <ul className={style.navbar_menu}>
                 <li>
-                    <input type="radio" id ="ra_1" name="nav" />
-                    <label htmlFor="ra_1" className={style.ra_all} >자격증</label>
+                    
+                    <input type="radio" id ="ra_1" name="nav" onChange={()=>router.push("/certification")}/>
+                    <label htmlFor="ra_1" className={style.ra_all} >자격증</label>    
+                    
                 </li>
                 <li>
-                    <input type="radio" id ="ra_2" name="nav" />
+                    
+                    <input type="radio" id ="ra_2" name="nav" onChange={()=>router.push("/university")}/>
                     <label htmlFor="ra_2" className={style.ra_all} >대학 군 수강</label>
-                </li>
-                <li>
-                    <input type="radio" id ="ra_3" name="nav" />
-                    <label htmlFor="ra_3" className={style.ra_all} >멘토·멘티</label> 
+                    
                 </li>
             </ul>
 
