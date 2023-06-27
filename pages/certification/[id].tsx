@@ -1,47 +1,71 @@
 import styles from './[id].module.scss'
-import ChartComponent from '@/components/Chart/Chart'
-import LectureList from '@/components/LectureList/LectureList'
-import BookList from '@/components/BookList/BookList'
-import ScheduleTable from '@/components/ScheduleTable/ScheduleTable'
 
-export default function Certification() {
+import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
+import { ParsedUrlQuery } from 'querystring'
+import CertAside from './CertAside'
+import { useReducer } from 'react'
+import CertInfo from './CertInfo'
+import CertReview from './CertReview'
+
+export type CertDetailInfo = {
+    name: string,
+    desc?: string,
+    host: string,
+    major: string,
+    rate: number,
+    taker: number
+}
+
+export const getServerSideProps: GetServerSideProps<{ certDetailInfo: CertDetailInfo }> = async({params}) => {
+
+
+    const certDetailInfo: CertDetailInfo = {
+        name: (params as ParsedUrlQuery).id as string,
+        desc: '산업계의 정보화가 진전되면서 영업, 재무, 생산 등의 분야에 대한 경영분석은 물론 데이터 관리가 필수적입니다. <컴퓨터활용능력> 검정은 사무자동화의 필수 프로그램인 스프레드시트(SpreadSheet), 데이터베이스(Database) 활용능력을 평가하는 국가기술자격 시험입니다.',
+        host: '대한상공회의소',
+        major: '사무, 회계',
+        rate: 32,
+        taker: 345000
+    };
+
+    return { props: {certDetailInfo} }
+}
+
+export type CertDetailPageState = {
+    page: string
+} 
+
+export type CertDetailPageAction = {
+    to: string
+}
+
+const reducer = (state: CertDetailPageState, action: CertDetailPageAction) => { 
+    return { page: action.to }
+}
+
+export default function Certification({certDetailInfo}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+
+    const [state, dispatch] = useReducer(reducer, {page: "info"})
+
     return (
+        <>
+        
         <div className = {styles.wrapper}>
-            <section className = {styles.cert_info}>
-                <h1 className = {styles['cert_info--name']}>자격증명</h1>
-                <h3 className = {styles['cert_info--desc']}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lorem neque. Donec a pharetra justo. Integer pellentesque pretium lorem ac facilisis. Nulla eu quam at nisl sagittis accumsan vitae eu nibh. Mauris rutrum lobortis ultricies. Ut non elit at metus venenatis fringilla eu et elit. Nullam blandit ac odio id convallis. Nulla facilisi. In dapibus libero ac elit interdum porta.
-In non lectus quis enim dictum volutpat ut in nibh. Pellentesque viverra dolor vitae diam fermentum hendrerit ac nec dui. In dapibus sodales est, ut placerat nulla imperdiet et. Vivamus venenatis augue eget quam ultrices fringilla. Vivamus luctus a libero eu malesuada. Nulla hendrerit magna odio, eu volutpat lectus suscipit fringilla. Pellentesque sodales tristique augue quis ullamcorper. Fusce gravida at velit sed euismod.</h3>
-                <h6 className = {styles['cert_info--organization']}>주관: 한국산업인력공단</h6>
-            </section>
-            <section className = {styles.cert_statistic}>
-                <div className = {styles.representative_stat_container}>
-                    <article className = {styles.representative_stat}>
-                        <h5 className = {styles['representative_stat--field']}>전공명</h5>
-                        <mark className = {styles['representative_stat--value']}>전기＊전자</mark>
-                    </article>
-                    <article className = {styles.representative_stat}>
-                        <h5 className = {styles['representative_stat--field']}>합격률</h5>
-                        <mark className = {styles['representative_stat--value']}>36%</mark>
-                    </article>
-                    <article className = {styles.representative_stat}>
-                        <h5 className = {styles['representative_stat--field']}>응시자수</h5>
-                        <mark className = {styles['representative_stat--value']}>345,000명</mark>
-                    </article>
-                    
-                </div>
-                <div className = {styles.graph_container}>
-                    <ChartComponent/>
-                </div>
-            </section>
-            <section className = {styles.cert_studyMaterial}>
-                <h3 className = {styles.field}>무료강의</h3>
-                <h3 className = {styles.field}>도서추천</h3>
-                <LectureList/>
-                <BookList/>
-            </section>
-            <section className = {styles.cert_schedule}>
-                <ScheduleTable/>
-            </section>
+            {(()=>{
+                switch(state.page) {
+                    case "info":
+                        return(
+                            <CertInfo certDetailInfo={certDetailInfo}/>
+                        )
+                    case "review":
+                        return(
+                            <CertReview/>
+                        )
+                }   
+            })()}
+            
         </div>
+        <CertAside dispatch={dispatch}/>
+        </>
     )
 }

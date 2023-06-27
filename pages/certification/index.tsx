@@ -1,6 +1,72 @@
+import Link from 'next/link';
 import style from './style.module.scss'
+import type {InferGetStaticPropsType, GetStaticProps } from "next";
 
-export default function Certification() {
+type CertInfo = {
+    name: string,
+    major: string,
+    period: string,
+    rate: number
+}
+
+export const getStaticProps: GetStaticProps<{certInfoArr: CertInfo[]}> = async() => {
+
+    const certInfoArr = [
+        {
+            name: "컴퓨터활용능력1급",
+            major: "IT·컴퓨터",
+            period: "3개월",
+            rate: 32
+        },
+        {
+            name: "컴퓨터활용능력1급",
+            major: "IT·컴퓨터",
+            period: "3개월",
+            rate: 32
+        }, 
+        {
+            name: "컴퓨터활용능력1급",
+            major: "IT·컴퓨터",
+            period: "3개월",
+            rate: 32
+        }, 
+        {
+            name: "컴퓨터활용능력1급",
+            major: "IT·컴퓨터",
+            period: "3개월",
+            rate: 32
+        }, 
+        {
+            name: "컴퓨터활용능력1급",
+            major: "IT·컴퓨터",
+            period: "3개월",
+            rate: 32
+        },
+        {
+            name: "컴퓨터활용능력1급",
+            major: "IT·컴퓨터",
+            period: "3개월",
+            rate: 32
+        },
+        {
+            name: "컴퓨터활용능력1급",
+            major: "IT·컴퓨터",
+            period: "3개월",
+            rate: 32
+        },
+        {
+            name: "컴퓨터활용능력1급",
+            major: "IT·컴퓨터",
+            period: "3개월",
+            rate: 32
+        }
+    ]
+
+
+    return { props : {certInfoArr} }
+}
+
+export default function Certification({certInfoArr}: InferGetStaticPropsType<typeof getStaticProps>) {
     return(
         <div className = {style.wrapper}>
             <div id = {style.post}>
@@ -25,86 +91,20 @@ export default function Certification() {
         </div>
 
         <ul className={style.post_list}>
-            <li>
-                <div className={style.list}>
-                    <h4 className={style.name}>컴퓨터활용능력 1급</h4>
-                    <div className={style.content}>
-                        <h6>IT·컴퓨터</h6>
-                        <h6>3개월</h6>
-                        <h6>32%</h6>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div className={style.list}>
-                    <h4 className={style.name}>자격증명</h4>
-                    <div className={style.content}>
-                        <h6>전공명</h6>
-                        <h6>소요기간</h6>
-                        <h6>최종합격률</h6>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div className={style.list}>
-                    <h4 className={style.name}>자격증명</h4>
-                    <div className={style.content}>
-                        <h6>전공명</h6>
-                        <h6>소요기간</h6>
-                        <h6>최종합격률</h6>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div className={style.list}>
-                    <h4 className={style.name}>자격증명</h4>
-                    <div className={style.content}>
-                        <h6>전공명</h6>
-                        <h6>소요기간</h6>
-                        <h6>최종합격률</h6>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div className={style.list}>
-                    <h4 className={style.name}>자격증명</h4>
-                    <div className={style.content}>
-                        <h6>전공명</h6>
-                        <h6>소요기간</h6>
-                        <h6>최종합격률</h6>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div className={style.list}>
-                    <h4 className={style.name}>자격증명</h4>
-                    <div className={style.content}>
-                        <h6>전공명</h6>
-                        <h6>소요기간</h6>
-                        <h6>최종합격률</h6>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div className={style.list}>
-                    <h4 className={style.name}>자격증명</h4>
-                    <div className={style.content}>
-                        <h6>전공명</h6>
-                        <h6>소요기간</h6>
-                        <h6>최종합격률</h6>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div className={style.list}>
-                    <h4 className={style.name}>자격증명</h4>
-                    <div className={style.content}>
-                        <h6>전공명</h6>
-                        <h6>소요기간</h6>
-                        <h6>최종합격률</h6>
-                    </div>
-                </div>
-            </li>
+            {certInfoArr.map((info: CertInfo, index: number)=>(
+                <li key={index}>
+                    <Link href={`/certification/${info.name}`}>
+                        <div className={style.list}>
+                            <h4 className={style.name}>{info.name}</h4>
+                            <div className={style.content}>
+                                <h6>{info.major}</h6>
+                                <h6>{info.period}</h6>
+                                <h6>{info.rate}%</h6>
+                            </div>
+                        </div>
+                    </Link>
+                </li>
+            ))}
         </ul>
         
        <div className={style.page}>

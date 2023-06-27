@@ -1,6 +1,8 @@
 import styled from "styled-components"
 import { arrowRight, arrowLeft } from '@/public/icons/icons'
 import { useState, useEffect, useRef } from "react"
+import { toRem } from "@/utils/toRem"
+import StarRateComponent from "../StarRate/StarRateComponent"
 
 export type LectureCommentData = {
     period: string,
@@ -44,7 +46,7 @@ const ServerDataArr: LectureCommentData[] = [
 
 const commentDataArr = [ServerDataArr[0], ServerDataArr[1], ServerDataArr[2]]
 
-const toRem = (px: number) => px / 16 
+
 
 const MAXPERPAGE = 3;
 
@@ -86,6 +88,7 @@ const MAXPERPAGE = 3;
     `
 
     const LectureInfoSection = styled(CommentSection)``
+
     const CommentData = styled(CommentSection)`
         font-size: ${toRem(17)}rem;
     `
@@ -151,43 +154,7 @@ const MAXPERPAGE = 3;
         flex-grow: 1;
     `
 
-    const SIZEOFTHESTAR = 40;
-
-    const StarRateBox = styled.div`
-        width: ${toRem(SIZEOFTHESTAR)*5}rem;
-        height: auto;
-        font-size: ${toRem(SIZEOFTHESTAR)}rem;
-        position: relative;
-        box-sizing: content-box;
-    `
-
-    const TransparentInput = styled.input`
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        opacity: 0;    
-        margin: 0;
-        height: 100%;
-        z-index: 10;
-        &:hover {
-            cursor: pointer;
-        }
-        `
-
-    const StarRate = styled.div`
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 0;
-        font-size: ${toRem(SIZEOFTHESTAR)}rem;
-        background-clip: text;
-        -webkit-background-clip: text;
-        background-color: tomato;
-        color: rgba(0, 0, 0, 0.2);
-        
-        transition: width 0.2s ease-in-out;
-    `
+    
 
     const LabelForStarBox = styled.span`
         font-size: ${toRem(20)}rem;
@@ -232,8 +199,7 @@ export default function UnivLectureComment() {
 
     const [left, right] = [useRef<HTMLButtonElement>(null), useRef<HTMLButtonElement>(null)]
     const textarea = useRef<HTMLTextAreaElement>(null);
-    const [starRateBox, starRate] = [useRef<HTMLDivElement>(null),useRef<HTMLDivElement>(null)];
-    const transparentInput = useRef<HTMLInputElement>(null);
+    
 
     
 
@@ -262,16 +228,7 @@ export default function UnivLectureComment() {
         })
     },[])
 
-    useEffect(()=>{
-        const heightOfTheStar = starRate.current?.offsetHeight
-        starRateBox.current?.setAttribute('style', `height: ${heightOfTheStar}px`)
-
-        transparentInput.current?.addEventListener('change', (e)=>{
-            const target = e.target as HTMLInputElement
-            starRate.current?.setAttribute('style', `width: ${target.valueAsNumber * 20}%`)
-            
-        })
-    },[])
+    
 
     return(
         <div style={{overflow: 'hidden'}}>
@@ -293,10 +250,7 @@ export default function UnivLectureComment() {
         <section>
             <div style={{padding: `${toRem(5)}rem`, display: 'flex', flexDirection: 'column', alignItems:'center'}}>
                 <LabelForStarBox>별점을 매겨주세요!</LabelForStarBox>
-                <StarRateBox ref={starRateBox}>
-                    <TransparentInput type="range" min={0} max={5} step={0.5} ref={transparentInput}/>
-                    <StarRate ref={starRate}>★★★★★</StarRate>
-                </StarRateBox>
+                <StarRateComponent size={40} disabled={false}/>
             </div>
             <div style={{width: '100%', display: 'flex'}}><CommentTextArea ref={textarea} placeholder="한 줄 수강평을 입력해주세요!"/></div>
             <RegisterButton>수강평 등록하기</RegisterButton>

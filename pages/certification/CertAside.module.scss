@@ -1,0 +1,32 @@
+
+@use 'utils/toremfunc';
+.aside {
+    width: toremfunc.toRem(100);
+    position: sticky;
+    top: toremfunc.toRem(200);
+    right: 0;
+    height: fit-content;
+    margin-left: toremfunc.toRem(40);
+
+    .aside_select {
+        width: 100%;
+        position: relative;
+        text-align: center;
+        box-sizing: border-box;
+        padding: toremfunc.toRem(10);
+        display: block;
+        &:hover {
+            cursor: pointer;
+        }
+        &:not(:last-child) {
+            border-bottom: 1px solid #EFEFEF;
+        }
+    }
+
+    input {
+        &:checked + .aside_select {
+            //background-color: #EFEFEF;
+            color: #ff8e24;
+        }
+    }
+}

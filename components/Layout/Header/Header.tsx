@@ -8,7 +8,7 @@ export default function Header() {
             <nav className={style.navbar}>
                 <div className={style.navbar_logo}>
                     {favicion()}
-                    <img src="milidu_logo.png" id = {style.logo_image}/>
+                    <img src="/milidu_logo.png" id = {style.logo_image}/>
                 </div>
 
             <ul className={style.navbar_menu}>
