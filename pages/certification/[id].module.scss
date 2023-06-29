@@ -1,3 +1,4 @@
+//자격증 상세 페이지의 레이아웃 틀
 @use '@/utils/toremfunc';
 
 .wrapper {
@@ -8,4 +9,23 @@
     box-sizing: border-box;
     min-height: 100vh;
     margin: toremfunc.toRem(20) 0;
+    align-items: center;
+
+    .goBack {
+        align-self: flex-start;
+        display: flex;
+        align-items: center;
+        align-content: center;
+        cursor: pointer;
+
+        >div {
+            width: toremfunc.toRem(30);
+
+            svg {
+                vertical-align: middle;
+            }
+            
+        }
+
+    }
 }

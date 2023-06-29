@@ -1,12 +1,13 @@
 import { Dispatch, useCallback } from 'react';
 import styles from './CertAside.module.scss';
-import { CertDetailPageAction } from './[id]';
+import { CertDetailPageAction, CertDetailPageState } from './[id]';
 
 interface CertAsideProps {
     dispatch: Dispatch<CertDetailPageAction>
+    state: CertDetailPageState
 }
 
-export default function CertAside({dispatch}:CertAsideProps) {
+export default function CertAside({dispatch, state}:CertAsideProps) {
 
 
     const pageModeChangeFunc = (e: any) => {
@@ -23,6 +24,8 @@ export default function CertAside({dispatch}:CertAsideProps) {
             <label className={styles.aside_select} htmlFor='info'>자격증 정보</label>
             <input type="radio" name="asideSelect" id="review" hidden onChange={memoizedFunc}/>
             <label className={styles.aside_select} htmlFor='review'>합격후기</label>
+            <input type="radio" name="asideSelect" id="write" hidden onChange={memoizedFunc}/>
+            <label className={styles.aside_select} htmlFor='write'>합격후기 쓰기</label>
         </aside>
     )
 }

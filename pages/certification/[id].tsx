@@ -6,6 +6,9 @@ import CertAside from './CertAside'
 import { useReducer } from 'react'
 import CertInfo from './CertInfo'
 import CertReview from './CertReview'
+import CertReviewWrite from './CertReviewWrite'
+import Link from 'next/link'
+import { doubleArrowLeft } from '@/public/icons/icons'
 
 export type CertDetailInfo = {
     name: string,
@@ -137,6 +140,9 @@ export default function Certification({certServerSideProps}: InferGetServerSideP
         <>
         
         <div className = {styles.wrapper}>
+            <Link className = {styles.goBack} href={'/certification'}>
+                <div>{doubleArrowLeft()}</div>
+            뒤로가기</Link>
             {(()=>{
                 switch(state.page) {
                     case "info":
@@ -147,11 +153,15 @@ export default function Certification({certServerSideProps}: InferGetServerSideP
                         return(
                             <CertReview reviewData={certServerSideProps.reviewData}/>
                         )
+                    case "write":
+                        return(
+                            <CertReviewWrite cert={certServerSideProps.certDetailInfo.name}/>
+                        )
                 }   
             })()}
             
         </div>
-        <CertAside dispatch={dispatch}/>
+        <CertAside dispatch={dispatch} state={state}/>
         </>
     )
 }

@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { arrowRight, arrowLeft } from '@/public/icons/icons'
 import { useState, useEffect, useRef } from "react"
 import { toRem } from "@/utils/toRem"
+import { textAreaResize } from "@/utils/textAreaResize"
 import StarRateComponent from "../StarRate/StarRateComponent"
 
 export type LectureCommentData = {
@@ -219,13 +220,16 @@ export default function UnivLectureComment() {
     },[page])
 
     useEffect(()=>{
-        textarea.current?.addEventListener('input', (e)=>{
-            const target = e.target as HTMLTextAreaElement;
+
+        textAreaResize(textarea.current as HTMLTextAreaElement);
+
+        // textarea.current?.addEventListener('input', (e)=>{
+        //     const target = e.target as HTMLTextAreaElement;
             
-            target.setAttribute('style', 'height: auto')
-            if(target.scrollHeight !== target.clientHeight) {
-                target.setAttribute('style', `height: ${toRem(target.scrollHeight)}rem`)}
-        })
+        //     target.setAttribute('style', 'height: auto')
+        //     if(target.scrollHeight !== target.clientHeight) {
+        //         target.setAttribute('style', `height: ${toRem(target.scrollHeight)}rem`)}
+        // })
     },[])
 
     

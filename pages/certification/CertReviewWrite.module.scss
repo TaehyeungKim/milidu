@@ -1,0 +1,134 @@
+//자격증 후기 작성 페이지
+@use 'utils/toremfunc';
+
+.cert {
+    font-size: toremfunc.toRem(25);
+    margin-bottom: toremfunc.toRem(30);
+}
+
+.text, .questionaire {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.reviewSubmit {
+    width: toremfunc.toRem(100);
+    border: 2px solid #ff8e24;
+    text-align: center;
+    padding: toremfunc.toRem(10);
+    border-radius: 1em;
+    margin: auto 0;
+    cursor: pointer;
+
+    &:hover {
+        color: white;
+        background-color: #ff8e24;
+    }
+
+}
+
+.text {
+    .textarea {
+        width: 100%;
+        box-sizing: inherit;
+        min-height: toremfunc.toRem(150);
+        resize: none;
+        padding: toremfunc.toRem(10);
+        outline: none;
+        border: 2px solid #e2e2e2;
+        background-color: #efefef;
+        overflow: hidden;
+        font-family: '--main-kr';
+        font-size: toremfunc.toRem(18);
+    }
+}
+
+.questionaire {
+    .question {
+        font-size: toremfunc.toRem(18);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        //min-height: toremfunc.toRem(70);
+        height: toremfunc.toRem(70);
+        justify-content: space-between;
+        .question_label {
+            display: inline-flex;
+            height: 100%;
+            line-height: 1em;
+            align-items: center;           
+
+        }
+        
+       
+        .star_inline {
+            display: inline-block;
+            margin-left: toremfunc.toRem(30);
+        }
+
+        .trynum, .method {
+            display: inline-block;
+            margin: 0 toremfunc.toRem(10);
+            padding: toremfunc.toRem(10);
+            flex-grow: 1;
+            text-align: center;
+            border: 1px solid #efefef;
+            background-color: #efefef;
+            border-radius: 1em;
+            cursor: pointer;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+
+        .method {
+            font-size: toremfunc.toRem(14);
+        }
+
+        input {
+            &:checked + .trynum, &:checked + .method {
+                outline: 2px solid #ff8e24
+            }
+        }
+
+        .period_inp, .period_label {
+            display: inline-block;
+        }
+
+        .period_inp {
+            width: 4em;
+            text-align: right;
+            border: none;
+            border-bottom: 2px solid #efefef;
+            margin-right: toremfunc.toRem(5);
+            padding: 0;
+            box-sizing: border-box;
+            
+    
+            &::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+                display: none;
+            }
+            &:focus-visible {
+                outline: none;
+            }
+        }
+        .period_label {
+            &:not(:last-child) {
+                margin-right: toremfunc.toRem(10);
+            }
+        }
+
+        .period_inp, .material {
+            font-size: 1em;
+        }
+
+        .material {
+            flex-grow: 1;
+            margin-left: toremfunc.toRem(40);
+            border: none;
+            outline: none;
+            border-bottom: 2px solid #efefef;
+        }
+    }
+
+}

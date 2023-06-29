@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { toRem } from "@/utils/toRem";
 import { useEffect, useRef } from "react";
 
-const SIZEOFTHESTAR = 40;
 
 const StarRateBox = styled.div<{$size: number}>`
         width: ${props => toRem(props.$size)*5}rem;

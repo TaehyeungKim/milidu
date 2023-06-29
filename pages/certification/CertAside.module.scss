@@ -1,20 +1,23 @@
-
+//자격증 상세 페이지 사이드바
 @use 'utils/toremfunc';
 .aside {
-    width: toremfunc.toRem(100);
+    //width: toremfunc.toRem(100);
     position: sticky;
     top: toremfunc.toRem(200);
     right: 0;
     height: fit-content;
     margin-left: toremfunc.toRem(40);
 
-    .aside_select {
+    .aside_select, .aside_button {
         width: 100%;
         position: relative;
         text-align: center;
         box-sizing: border-box;
         padding: toremfunc.toRem(10);
         display: block;
+    }
+
+    .aside_select {
         &:hover {
             cursor: pointer;
         }
@@ -27,6 +30,19 @@
         &:checked + .aside_select {
             //background-color: #EFEFEF;
             color: #ff8e24;
+        }
+    }
+
+    .aside_button {
+        background-color: #ff8e24;
+        color: white;
+        border-radius: 1em;
+        margin-top: toremfunc.toRem(30);
+        cursor: pointer;
+
+        &:disabled {
+            cursor: none;
+            opacity: 0.5;
         }
     }
 }

@@ -51,6 +51,7 @@ interface CertReviewProps {
 export default function CertReview({reviewData}:CertReviewProps) {
     return(
         <>
+        <h3 className = {styles.cert}>{reviewData.cert}</h3>
         <section className={styles.summaryArea}>
             <div className = {styles.sum_container}>
                 <h3 className = {styles.sum_label}>난이도</h3>
