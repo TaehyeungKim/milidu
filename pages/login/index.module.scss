@@ -1,0 +1,36 @@
+@use 'utils/toremfunc';
+
+.wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: toremfunc.toRem(16);
+    justify-content: center;
+
+
+
+    input {
+        margin: 0;
+        padding: 0;
+        display: block;
+        padding: 1em 0.75em;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .signin {
+        width: toremfunc.toRem(300);
+        .logo {
+            width: 100%;
+            // max-width: toremfunc.toRem(200);
+            img {
+                width: 100%;
+                max-width: toremfunc.toRem(200);
+                margin: 0 auto;
+                display: block;
+            }
+        }
+    }
+}
