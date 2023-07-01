@@ -5,14 +5,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: toremfunc.toRem(10) toremfunc.toRem(10);
-    background-color:#EFEFEF;
-    
-    width: 100%;
+    padding: 24px 16px;
+    background-color:white;
     box-sizing: border-box;
     width: 100%;
     font-weight: 400;
-
+	
     input {
         all: unset;
     }
@@ -58,20 +56,21 @@
         padding-left: 0;
         margin-right: auto;
         margin-left: toremfunc.toRem(60);
-        li {
-            cursor: pointer;
-            border-radius: 6px;
-            overflow: hidden;
-            &:hover {
-                background-color: #fda94e;
-                color: white;
-            }
-            &:has( input:checked) {
-                background-color: #fda94e;
-                color: white;
-            }
-        }
     }
+	
+	.navbar_menu li {
+        cursor: pointer;
+        border-radius: 6px;
+        overflow: hidden;
+        &:hover {
+               background-color: #fda94e;
+               color: white;
+        }
+        &:has(input:checked) {
+            background-color: #fda94e;
+            color: white;
+        }
+	}
     
 
     
@@ -79,16 +78,16 @@
         list-style: none;
         display: flex;
         margin-right: 2px;
-
+		padding-left: 0;
         li {
             border-radius: 6px;
             overflow: hidden;
 
             &:hover {
                 background-color: #fda94e;
-            border-radius: 6px;
-            overflow: hidden;
-         color: white;
+            	border-radius: 6px;
+            	overflow: hidden;
+         		color: white;
             }
         }
     }
@@ -107,13 +106,14 @@
         flex-direction: column;
         align-items: flex-start;
         padding: 8px 24px;
-    }
-    
+		margin: 0%;
+		width: 100%;
+		
     .navbar_menu {
         flex-direction: column;
         align-items: center;
         width: 100%;
-        margin: 0%;
+        margin-left: 0%;
     }
 
     .navbar_menu li {
@@ -124,9 +124,8 @@
     .navbar_links {
         justify-content: center;
         width: 100%;
-        margin: 0%;
     }
 }
-
+}
 
 /* header end */

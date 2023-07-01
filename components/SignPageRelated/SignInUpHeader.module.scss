@@ -1,0 +1,23 @@
+@use '@/utils/toremfunc';
+
+.signin_header {
+    width: 100%;
+    
+    .header_link {
+        width: inherit;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        .favicon {
+            height: toremfunc.toRem(70);
+        }
+        // max-width: toremfunc.toRem(200);
+        img {
+            max-width: toremfunc.toRem(200);
+
+            display: block;
+        }
+    }
+    
+}

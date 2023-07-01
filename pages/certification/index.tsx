@@ -11,6 +11,11 @@ type CertInfo = {
 
 export const getStaticProps: GetStaticProps<{certInfoArr: CertInfo[]}> = async() => {
 
+    const res = await fetch('https://milidu-backend-ykzlu.run.goorm.site/certs')
+    const json = await res.json()
+    console.log(json)
+
+
     const certInfoArr = [
         {
             name: "컴퓨터활용능력1급",

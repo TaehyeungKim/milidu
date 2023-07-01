@@ -5,8 +5,8 @@
     .lectureList {
         position: relative;
         box-sizing: border-box;
-        border: 1px solid gray;
-        border-radius: toremfunc.toRem(10);
+        border-bottom: 1px solid gray;
+        /*border-radius: toremfunc.toRem(10);*/
         padding: toremfunc.toRem(10);
 
         .lectureList--lecture, .lectureList--teacher {

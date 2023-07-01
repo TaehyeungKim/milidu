@@ -17,12 +17,11 @@ export default function Layout({children}:LayoutProps) {
 
     return (
         <div className = {styles.layout}>
-        {router.pathname !== '/login' ? <Header></Header> : null}
+        {router.pathname !== '/signin' && router.pathname !== '/signup' ? <Header></Header> : null}
         <Main>
             {children}
         </Main>
         <Footer></Footer>
-        
         </div>
         
         

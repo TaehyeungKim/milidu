@@ -7,6 +7,7 @@
     width: 100%;
     max-width: toremfunc.toRem(900);
     box-sizing: border-box;
+	background-color:white;
 }
 #post {
     display: flex;
@@ -20,13 +21,13 @@
 }
 
 #point_1 {
-    margin-right: 179px;
-    margin-left: 60px;
+    margin-right: toremfunc.toRem(179);
+    margin-left: toremfunc.toRem(60);
     user-select: none;
 }
 
 #point_2 {
-    margin-left: 155px;
+    margin-left: toremfunc.toRem(155);
     margin-right: 60px;
     user-select: none;
 }
@@ -39,10 +40,20 @@
     }
 }
 
+@media screen and (max-width: 501px) {
+	#point_1 {
+		margin: 0%;
+		text-align: center;
+	}
+	#point_2 {
+		margin: 0%;
+		text-align:center;
+	}
+}
+
 
 
 .visually-hidden {
-    
     position: absolute !important;
     height: 1px;
     width: 1px;
@@ -54,11 +65,16 @@
 .search_box {
     width: 520px;
     height: 50px;
-    border: 2px solid silver;
+    border: none;
     display: flex;
     align-items: center;
     margin: auto;
+	text-align:center;
+	outline: 2px solid skyblue;
+	border-radius: toremfunc.toRem(10);
+	transition: outline 0.3s ease-in-out;
 }
+
 .search_box input {
     flex: 9; 
     height: 46px;
@@ -68,6 +84,7 @@
     outline: none;
     font-size: 18px;
 }
+
 .search_box button {
     flex: 1; 
     height: 46px;
@@ -78,6 +95,7 @@
     background: black;
     color: #ffffff;
     cursor: pointer;
+	border-radius: toremfunc.toRem(10);
 }
 
 .post_list {
@@ -95,17 +113,33 @@
     font-weight: bold;
 }
 
+.post_list li:hover {
+	border:2px solid skyblue;
+	border-radius: 12px;
+}
+
 .post_list li {
     padding: 10px;
     font-size: 18px;
     height: 50px;
     border-bottom: 1px solid #efefef;
-    
 }
 
-.post_list li:last-child {
-    border-bottom: 0px;
+@media screen and (max-width: 528px) {
+	.post_list li {
+		font-size: 14px;
+	}
+	.name {
+		min-width: auto;
+	}
 }
+
+@media screen and (max-width: 367px) {
+	.post_list li {
+		font-size:12px;
+	}
+}
+
 
 .list {
     display: flex;
@@ -114,6 +148,8 @@
     align-items: center;
     cursor: pointer;
 }
+
+
 
 .list h6 {
     text-align: right;
@@ -139,6 +175,7 @@
     list-style: none;
     text-align: center;
     display: inline;
+	cursor: pointer;
 }
 
 .page {
@@ -244,4 +281,10 @@
     color: white;
     margin: auto;
     align-items: center;
+}
+
+@media screen and (max-width: 550px) {
+	.search_box {
+		width: 320px;
+	}
 }

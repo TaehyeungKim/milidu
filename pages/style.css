@@ -43,3 +43,8 @@ em, span {
     display: inline;
     
 }
+
+ul, li {
+    all: unset;
+    display: block;
+}

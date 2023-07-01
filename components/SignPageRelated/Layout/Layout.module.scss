@@ -1,0 +1,16 @@
+@use '@/utils/toremfunc';
+
+.layout {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: toremfunc.toRem(16);
+    justify-content: center;
+    .container {
+        width: toremfunc.toRem(300);
+        border: 2px solid gray;
+        padding: toremfunc.toRem(20);
+    }
+}

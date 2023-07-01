@@ -1,6 +1,6 @@
 import { useEffect, useState, useDeferredValue, useRef, useLayoutEffect} from 'react'
 import styles from './BookList.module.scss'
-
+import {booklistArrowLeft, booklistArrowRright} from '@/public/icons/icons'
 type BookListData = {
     imageURL: string,
     title: string,
@@ -108,6 +108,7 @@ export default function BookList() {
     return(
         <div className = {styles.container}>
             <button className = {styles.slide} id={styles.right}>오른</button>
+			<label for={styles.right}></label>
             <button className = {styles.slide} id={styles.left}>왼</button>
             <div className = {styles.slideContainer} ref={slideContainer}>
             {bookList.map((data: BookListData, index: number)=>(

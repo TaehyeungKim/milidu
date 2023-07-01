@@ -1,0 +1,58 @@
+@use '@/utils/toremfunc';
+.floating {
+    position: relative;
+    display: flex;
+    width: 100%;
+    font-size: toremfunc.toRem(20);
+
+
+    .floatingLb {
+        position: absolute;
+        padding-left: toremfunc.toRem(10);
+        font-size: 0.82em;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        transition: font-size 0.1s ease-in-out, padding 0.1s ease-in-out;
+        box-sizing: border-box;
+        color: #888888;
+    }
+
+    input {
+        margin: 0;
+        padding: 0;
+        display: block;
+        padding: 1.3em 0.75em;
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid skyblue;
+        margin: toremfunc.toRem(3) 0;   
+        border-radius: 1em;
+
+        &:focus-visible {
+            border: none;
+            outline: 2px solid orange;
+        }
+
+        &:focus-visible + .floatingLb, &:valid + .floatingLb {
+            font-size: 0.6em;
+            padding-bottom: 3.0em;
+            
+        }
+    }
+}
+
+.verify {
+    .verifyBt {
+        padding: toremfunc.toRem(5);
+        background-color: gray;
+        display: inline-block;
+        cursor: pointer;
+        color: white;
+    }
+
+    .verifyRes {
+        display: inline-block;
+        margin-left: toremfunc.toRem(10);
+    }
+}

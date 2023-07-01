@@ -39,7 +39,7 @@ export default function Header() {
 
             <ul className={style.navbar_links}>
                 <li>
-                    <input type="radio"  id="ra_4" name="nav" />
+                    <input type="radio"  id="ra_4" name="nav" onChange={()=>router.push("/signin")}/>
                     <label htmlFor="ra_4" className={style.ra_links} id={style.login}>로그인</label>
                 </li>
                 <li>
