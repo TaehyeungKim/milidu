@@ -3,17 +3,38 @@
 .birth_select {
     flex-grow: 1;
     cursor: pointer;
-    
-    .curSelect {
-        padding: toremfunc.toRem(5) 0;
-        span {
-            display: block;
-            width: 100%;
-            text-align: center;
-            font-weight: bold;
-        }
+    height: fit-content;
+    display: flex;
+
+    span, label {
+        height: toremfunc.toRem(30);
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+    }
+    label {
+        padding-bottom: toremfunc.toRem(6) ;
     }
     
+    .container {
+        // padding: toremfunc.toRem(5) 0;
+        flex-grow: 1;
+        
+        span {
+            width: 100%;
+            border-bottom: 1px solid gray;
+            display: inline-block;
+            text-align: center;
+            font-weight: bold;
+            // padding: toremfunc.toRem(5) 0;
+        }
+
+
+    }
+    
+    .container span, .birthdate {
+        
+    }
     .listContainer {
         position: relative;
         display: block;

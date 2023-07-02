@@ -77,10 +77,41 @@
                 text-align: center;
                 padding: toremfunc.toRem(10);
             }
-            
-    
         }
     }
+}
+@media screen and (max-width: 541px) {
+	.container {
+		.slideContainer {
+			.bookList {
+				.bookInfo {
+					font-size: toremfunc.toRem(16);
+				}
+			}
+		}
+	}
+}
 
-    
+@media screen and (max-width: 450px) {
+	.container {
+		.slideContainer {
+			.bookList {
+				.bookInfo {
+					font-size: toremfunc.toRem(12);
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 330px) {
+	.container {
+		.slideContainer {
+			.bookList {
+				.bookInfo {
+					font-size: toremfunc.toRem(10);
+				}
+			}
+		}
+	}
 }

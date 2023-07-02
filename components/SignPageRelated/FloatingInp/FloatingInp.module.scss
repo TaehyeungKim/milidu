@@ -43,16 +43,31 @@
 }
 
 .verify {
+    display: flex;
+    align-items: center;
     .verifyBt {
         padding: toremfunc.toRem(5);
         background-color: gray;
         display: inline-block;
         cursor: pointer;
         color: white;
+        width: toremfunc.toRem(70);
+        text-align: center;
+        flex-shrink: 0;
     }
 
     .verifyRes {
         display: inline-block;
         margin-left: toremfunc.toRem(10);
+        flex-shrink: 1;
     }
+}
+
+.fail {
+    color: red;
+    font-size: 0.75em;
+}
+
+.succeed {
+    color: green;
 }

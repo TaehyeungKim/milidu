@@ -1,6 +1,6 @@
 import {ReactNode} from 'react'
 import styles from './Layout.module.scss'
-import SignInUpHeader from '../SignInUpHeader'
+import SignInUpHeader from '@/components/SignPageRelated/SignInUpHeader/SignInUpHeader'
 
 interface LayoutProps {
     children: ReactNode

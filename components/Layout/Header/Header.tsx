@@ -43,7 +43,7 @@ export default function Header() {
                     <label htmlFor="ra_4" className={style.ra_links} id={style.login}>로그인</label>
                 </li>
                 <li>
-                    <input type="radio" id="ra_5" name="nav" />
+                    <input type="radio" id="ra_5" name="nav" onChange= {()=>router.push("/signup")}/>
                     <label htmlFor="ra_5" className={style.ra_links}>회원가입</label>
                 </li>
             </ul>

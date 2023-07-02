@@ -22,3 +22,28 @@
     }
 }
 
+@media screen and (max-width: 640px) {
+	.container {
+		.lectureList {
+			.lectureList--lecture {
+				font-size:toremfunc.toRem(18);
+			}
+			.lectureList--teacher {
+				font-size:toremfunc.toRem(6);
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 550px) {
+	.container {
+		.lectureList {
+			.lectureList--lecture {
+				font-size:toremfunc.toRem(12);
+			}
+			.lectureList--teacher {
+				font-size:toremfunc.toRem(4);
+			}
+		}
+	}
+}

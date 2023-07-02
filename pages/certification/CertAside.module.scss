@@ -11,7 +11,7 @@
     .aside_select, .aside_button {
         width: 100%;
         position: relative;
-        text-align: center;
+        text-align: left;
         box-sizing: border-box;
         padding: toremfunc.toRem(10);
         display: block;
@@ -45,4 +45,10 @@
             opacity: 0.5;
         }
     }
+}
+
+@media screen and (max-width: 777px) {
+	.aside {
+		display:none;
+	}
 }

@@ -112,7 +112,7 @@ export default function Certification({certInfoArr}: InferGetStaticPropsType<typ
             ))}
         </ul>
         
-       <div className={style.page}>
+		{/* <div className={style.page}>
             <ul className={style.pagenation}>
                 <li><a className={style.first}>처음으로</a></li>
                 <li><a className={style.arrow_left}>{'<<'}</a></li>
@@ -128,7 +128,7 @@ export default function Certification({certInfoArr}: InferGetStaticPropsType<typ
                 <li><a className={style.arrow_right}>{'>>'}</a></li>
                 <li><a className={style.last}>끝으로</a></li> 
             </ul>
-       </div>
+       </div>*/}
         </div>
     )
 }

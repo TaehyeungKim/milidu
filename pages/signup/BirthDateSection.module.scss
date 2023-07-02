@@ -1,0 +1,27 @@
+@use '@/utils/toremfunc';
+
+.container {
+    width: 100%;
+    box-sizing: inherit;
+    display: flex;
+    justify-content: center;
+}
+
+.select_year, .select_month, .select_date {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    background-color: white;
+
+    
+
+    li {
+        text-align: center;
+        padding: toremfunc.toRem(5) 0;
+        width: inherit;
+        &:not(:last-child) {
+            border-bottom: 1px solid #efefef;
+            box-sizing: border-box;
+        }
+    }
+}

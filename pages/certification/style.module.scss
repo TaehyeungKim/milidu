@@ -125,20 +125,7 @@
     border-bottom: 1px solid #efefef;
 }
 
-@media screen and (max-width: 528px) {
-	.post_list li {
-		font-size: 14px;
-	}
-	.name {
-		min-width: auto;
-	}
-}
 
-@media screen and (max-width: 367px) {
-	.post_list li {
-		font-size:12px;
-	}
-}
 
 
 .list {
@@ -286,5 +273,48 @@
 @media screen and (max-width: 550px) {
 	.search_box {
 		width: 320px;
+	}
+}
+@media screen and (max-width: 338px) {
+	.post_list li {
+		font-size:8px;
+	}
+	.search_box {
+		width: 260px;
+	}
+}
+
+@media screen and (max-width: 316px) {
+	.post_list li {
+		font-size:6px;
+	}
+}
+@media screen and (max-width: 287px) {
+	#point_1 {
+		font-size:18px;
+	}
+	#point_2 {
+		font-size:18px;
+	}
+}
+
+@media screen and (max-width: 528px) {
+	.post_list li {
+		font-size: 14px;
+	}
+	.name {
+		min-width: auto;
+	}
+	.content {
+		flex-grow:0.1;
+	}
+}
+
+@media screen and (max-width: 367px) {
+	.post_list li {
+		font-size:12px;
+	}
+	.content {
+		grid-template-columns:auto;
 	}
 }

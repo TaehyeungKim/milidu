@@ -23,7 +23,7 @@ export default function LectureList() {
             {data.map((data:LectureData, index: number)=>(
                 <article className = {styles.lectureList} key={index}>
                     <h3 className = {styles['lectureList--lecture']}>{data.lecture}</h3>
-                    <span className = {styles['lecturList--teacher']}>{data.teacher}</span>
+                    <span className = {styles['lectureList--teacher']}>{data.teacher}</span>
                 </article>
             ))}
         </div>

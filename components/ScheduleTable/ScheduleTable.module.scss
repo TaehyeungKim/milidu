@@ -14,3 +14,9 @@
         font-size: toremfunc.toRem(12);
     }
 }
+
+@media screen and (max-width: 330px) {
+	.table {
+			display:grid;
+		}
+	}

@@ -95,3 +95,65 @@
 	background:white;
 	border-radius: toremfunc.toRem(6);
 }
+
+@media screen and (max-width: 884px) {
+	.cert_info {
+		.cert_info--name {
+			font-size:toremfunc.toRem(20);
+		}
+		.cert_info--desc {
+			font-size:toremfunc.toRem(16);
+		}
+		.cert_info--organization {
+			font-size:toremfunc.toRem(8);
+		}
+	}
+}
+@media screen and (max-width: 526px) {
+	.cert_statistic {
+		.representative_stat_container {
+			.representative_stat{
+				width: auto;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 440px) {
+	.cert_statistic {
+		.representative_stat_container {
+			.representative_stat {
+				padding:0%;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 380px) {
+	.cert_statistic {
+		.representative_stat_container {
+			.representative_stat {
+				.representative_stat--field, .representative_stat--value {
+					font-size:toremfunc.toRem(20);
+				}
+			}
+		}
+	}
+}
+@media screen and (max-width: 292px) {
+	.cert_statistic {
+		.representative_stat_container {
+			.representative_stat {
+				.representative_stat--field, .representative_stat--value {
+					font-size:toremfunc.toRem(16);
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 330px) {
+		.cert_schedule {
+			display:grid;
+		}
+	}

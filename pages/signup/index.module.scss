@@ -1,59 +1,6 @@
 @use '@/utils/toremfunc';
 
-.container {
-    width: 100%;
-    box-sizing: inherit;
-    display: flex;
-    justify-content: center;
-}
 
-.select_year, .select_month, .select_date {
-    display: block;
-    box-sizing: border-box;
-    width: 100%;
-    background-color: white;
-
-    li {
-        text-align: center;
-        padding: toremfunc.toRem(5) 0;
-        width: inherit;
-        &:not(:last-child) {
-            border-bottom: 1px solid #efefef;
-            box-sizing: border-box;
-        }
-    }
-}
-
-.genderSelect {
-    width: 100%;
-    box-sizing: border-box;
-    
-
-    input + .gender {
-        display: block;
-        width: toremfunc.toRem(100);
-        text-align: center;
-        padding: toremfunc.toRem(10);
-        background-color: gray; 
-        border-radius: 1em;
-        color: white;
-        cursor: pointer;
-        margin: 0 toremfunc.toRem(10);
-        box-sizing: border-box;
-        border: 2px solid gray;
-    }
-
-    input {
-        &:checked + .gender {
-            border: 2px solid rgb(255, 142, 36);
-            background-color: white;
-            color: black;
-        }
-    }
-
-        
-    
-}
 
 .signup_footer {
     display: flex;
