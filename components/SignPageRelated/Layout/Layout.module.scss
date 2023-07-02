@@ -8,9 +8,13 @@
     justify-content: center;
     font-size: toremfunc.toRem(16);
     justify-content: center;
+    padding: toremfunc.toRem(40) 0;
     .container {
         width: toremfunc.toRem(300);
-        border: 2px solid gray;
         padding: toremfunc.toRem(20);
+
+        section {
+            margin: toremfunc.toRem(10) 0;
+        }
     }
 }

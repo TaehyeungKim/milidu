@@ -1,0 +1,16 @@
+@use '@/utils/toremfunc';
+
+.button {
+    padding: toremfunc.toRem(10);
+    cursor: pointer;
+    background-color: gray;
+    color: white;
+    border: 2px solid gray;
+    border-radius: 1em;
+    &:hover {
+        color: black;
+        background-color: white;
+        border: 2px solid rgb(255, 142, 36);
+    }
+
+}

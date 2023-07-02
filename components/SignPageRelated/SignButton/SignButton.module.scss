@@ -1,0 +1,22 @@
+@use '@/utils/toremfunc';
+
+.register_bt {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    &::after {
+        content: "";
+        box-sizing: border-box;
+        width: 0;
+        height: 0;
+        opacity: 0;
+        border: 1px solid gray;
+        transition: width 0.2s ease-in-out, opacity 0.2s ease-in-out;
+    }
+    &:hover {
+        &::after {
+            width: 100%;
+            opacity: 1;
+        }
+    }
+}
