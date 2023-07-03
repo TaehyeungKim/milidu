@@ -1,5 +1,5 @@
 
-import { useEffect, useRef, Dispatch, useCallback } from 'react'
+import { useEffect, useRef, Dispatch, useCallback, forwardRef, MutableRefObject } from 'react'
 import styles from './FloatingInp.module.scss'
 import { RegisterAction, StatePropertyData } from '@/pages/signup'
 
@@ -9,16 +9,20 @@ export type RegisterInpProps = {
     state: StatePropertyData
 }
 
-function FloatingId() {
+interface FloatingInpProps {
+    ref: MutableRefObject<HTMLInputElement>
+}
+
+const FloatingId = forwardRef(function FloatingId({ref}: FloatingInpProps) {
     return(
         <div className = {styles.floating}>
             <input type="text" id="userId" required></input >
             <label className = {styles.floatingLb} htmlFor='userId'>아이디를 입력해주세요</label>
         </div>
     )
-}
+})
 
-function FloatingPw() {
+const FloatingPw = forwardRef(function FloatingPw({ref}:FloatingInpProps) {
     return(
         <div className = {styles.floating}>
             <input type="password" id="userPW" required></input>
@@ -26,6 +30,7 @@ function FloatingPw() {
         </div>
     )
 }
+)
 
 
 function Floating_RegisterId({dispatch, state}: RegisterInpProps) {
