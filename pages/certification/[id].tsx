@@ -49,6 +49,12 @@ type CertServerSideProps = {
 
 export const getServerSideProps: GetServerSideProps<{ certServerSideProps: CertServerSideProps }> = async({params}) => {
 
+    const res = await fetch(`https://milidu-backend-zqddn.run.goorm.site/cert_stats?cert_code=${params?.id}`);
+    // console.log(params)
+    const json = await res.json()
+    console.log(json)
+
+
     const reviewArr: ReviewData[] = [
         {
             user: {

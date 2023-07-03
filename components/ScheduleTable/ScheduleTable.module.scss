@@ -15,8 +15,52 @@
     }
 }
 
-@media screen and (max-width: 330px) {
+@media screen and (max-width: 718px) {
 	.table {
-			display:grid;
+		.table_head {
+			font-size: toremfunc.toRem(12);
+		}
+		.table_data {
+			font-size: toremfunc.toRem(8);
 		}
 	}
+}
+
+@media screen and (max-width: 550px) {
+	.table {
+		width: 100%;
+		border-collapse: collapse;
+		border-spacing: 0;
+		display: block; 
+		position: relative; 
+		margin-left: auto;
+    	margin-right: auto;
+ 		.table_data {
+			font-size: toremfunc.toRem(16);
+		}
+		.table_head {
+			font-size: toremfunc.toRem(16);
+		}
+		td { margin: 0; vertical-align: top; }
+		th { text-align: left; }
+		thead { display: block; float: left; }
+		tbody {  width: auto; position: relative; overflow-x: auto; white-space: nowrap; }
+		th { display: block; text-align: center; }
+		tbody tr { display: inline-block; vertical-align: top; }
+		td { display: block; min-height: 1.25em; text-align: left; border-bottom: 1px solid; margin:5px;}
+		th { border-bottom: 1px solid; border-right: 1px solid; margin:5px;}
+	}
+}
+
+@media screen and (max-width: 331px) {
+	.table {
+		margin-left: auto;
+    	margin-right: auto;
+		.table_data {
+			font-size: toremfunc.toRem(12);
+		}
+		.table_head {
+			font-size: toremfunc.toRem(12);
+		}
+	}
+}

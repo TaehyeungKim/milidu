@@ -56,9 +56,15 @@
             display: inline-flex;
             height: 100%;
             line-height: 1em;
-            align-items: center;           
+            align-items: center;    
+			
 
         }
+		.period {
+			display:flex;
+			justify-content: center;
+		
+		}
         
        
         .star_inline {
@@ -91,9 +97,13 @@
             }
         }
 
-        .period_inp, .period_label {
+        .period_label {
             display: inline-block;
+			margin-right:toremfunc.toRem(30);
         }
+		.period_inp, .period_label :last-child {
+			margin-right:0;
+		}
 
         .period_inp {
             width: 4em;
@@ -130,5 +140,18 @@
             border-bottom: 2px solid #efefef;
         }
     }
+}
 
+@media screen and (max-width: 664px) {
+	.cert {
+		font-size:toremfunc.toRem(22);
+	}
+	.text, .questionaire {
+    width: 100%;
+	}
+	.questionaire {
+    	.question {
+			font-size:toremfunc.toRem(14);
+		}
+	}
 }

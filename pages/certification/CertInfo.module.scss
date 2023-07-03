@@ -95,6 +95,11 @@
 	background:white;
 	border-radius: toremfunc.toRem(6);
 }
+@media screen and (max-width: 550px) {
+	.cert_schedule {
+		width: auto;
+	}
+}
 
 @media screen and (max-width: 884px) {
 	.cert_info {

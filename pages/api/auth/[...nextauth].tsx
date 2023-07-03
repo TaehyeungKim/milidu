@@ -53,6 +53,9 @@ export const authOptions = {
     callbacks: {
         async redirect({url, baseUrl}:AuthRedirect) {
             return baseUrl
+        },
+        async session({session, user, token}:any) {
+            return session
         }
     }
 }

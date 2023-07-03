@@ -4,6 +4,11 @@
 .cert {
     font-size: toremfunc.toRem(25);
 }
+@media screen and (max-width: 320px) {
+	.cert {
+		font-size: toremfunc.toRem(18);
+	}
+}
 
 .summaryArea, .reviewArea {
     width: 100%;
@@ -37,7 +42,15 @@
         }
     }
 }
-
+@media screen and (max-width: 320px) {
+	.summaryArea {
+		.sum_container {
+			.value {
+				font-size: toremfunc.toRem(22);
+			}
+		}
+	}
+}
 
 .reviewArea {
     flex-direction: column;
@@ -59,7 +72,6 @@
             color: gray;
         }
         .review_writer {
-
             box-sizing: border-box;
             border-bottom: 1px solid #ebeeff;
             padding-bottom: toremfunc.toRem(10);
@@ -98,4 +110,25 @@
             padding: toremfunc.toRem(7);
         }
     }
+}
+
+@media screen and (max-width: 320px) {
+	.reviewArea {
+		.review {
+			span, em {
+				font-size: toremfunc.toRem(12);
+			}
+			.label {
+            	font-size: toremfunc.toRem(12);
+        	}
+			.review_writer {
+				span {
+                	font-size: toremfunc.toRem(16);
+            	}
+            	em {
+                	font-size: toremfunc.toRem(11);
+            	}
+			}
+		}
+	}
 }
