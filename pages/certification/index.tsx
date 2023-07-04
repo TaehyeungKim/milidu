@@ -2,8 +2,10 @@
 
 import Link from 'next/link';
 import style from './style.module.scss'
-import { useEffect, useSyncExternalStore } from 'react';
-import collector, {CertInfo} from '@/utils/DataCollector';
+import { useEffect, useSyncExternalStore, useState } from 'react';
+import collector, {CertInfo, getSnapshotOfCertData, subscribe} from '@/utils/DataCollector';
+import Loading from '@/components/Loading/Loading';
+import CertPagination from '@/components/CertPageRelated/CertPagination';
 
 
 // type CertInfo = {
@@ -80,18 +82,23 @@ import collector, {CertInfo} from '@/utils/DataCollector';
 export default function Certification() {
 
     
-    const data = useSyncExternalStore(collector.subscribe.bind(collector), collector.getSnapshotOfCertData.bind(collector), collector.getSnapshotOfCertData.bind(collector))
+    const data = useSyncExternalStore(subscribe.bind(collector), getSnapshotOfCertData.bind(collector), getSnapshotOfCertData.bind(collector))
+    const [pageIndex, setPageIndex] = useState<number>(0);
+
+    const flipPage = (index:number) => setPageIndex(index);
+    
 
     useEffect(()=>{
         if(!data) collector.collectCertData()
     },[])
 
+    if(!data) return (<Loading/>)
+
+    const shownData = data?.filter((data: CertInfo, index: number)=> index >= pageIndex*10 && index < (pageIndex+1)*10)
+
     return(
         
         <div className = {style.wrapper}>
-            {! data ? <h1>Loading...</h1>
-            :
-            <>
             <div id = {style.post}>
                 <h2>
                     <p id={style.point_1}>자격증의 모든 것,</p>
@@ -114,7 +121,7 @@ export default function Certification() {
             </div>
 
             <ul className={style.post_list}>
-                {data.map((info: CertInfo, index: number)=>(
+                {shownData.map((info: CertInfo, index: number)=>(
                     <li key={index}>
                         <Link href={`/certification/${info.code}`}>
                             <div className={style.list}>
@@ -135,21 +142,20 @@ export default function Certification() {
             <ul className={style.pagenation}>
                 <li><a className={style.first}>처음으로</a></li>
                 <li><a className={style.arrow_left}>{'<<'}</a></li>
-                <li><a className={style.num}>1</a></li>
-                <li><a className={style.num}>2</a></li>
-                <li><a className={style.num}>3</a></li>
-                <li><a className={style.num}>4</a></li>
-                <li><a className={style.num}>5</a></li>
-                <li><a className={style.num}>6</a></li>
-                <li><a className={style.num}>7</a></li>
-                <li><a className={style.num}>8</a></li>
-                <li><a className={style.num}>9</a></li>
+                <li className = {style.num}>1</li>
+                <li className = {style.num}>1</li>
+                <li className = {style.num}>1</li>
+                <li className = {style.num}>1</li>
+                <li className = {style.num}>1</li>
+                <li className = {style.num}>1</li>
+                <li className = {style.num}>1</li>
+                <li className = {style.num}>1</li>
+                <li className = {style.num}>1</li>
                 <li><a className={style.arrow_right}>{'>>'}</a></li>
                 <li><a className={style.last}>끝으로</a></li> 
             </ul>
-       </div>*/}
-       </>
-            }
+       </div> */}
+        <CertPagination pageNum={(data.length/10)+1} flipper={flipPage}/>
             
         </div>
     )

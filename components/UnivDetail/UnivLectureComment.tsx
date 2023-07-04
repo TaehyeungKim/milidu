@@ -51,20 +51,20 @@ const commentDataArr = [ServerDataArr[0], ServerDataArr[1], ServerDataArr[2]]
 
 const MAXPERPAGE = 3;
 
-
-
+	//ul  - min-width: ${toRem(500)}rem;
+	//li  - width:100%
     const CommentList = styled.ul`
         all: unset;
         width: 90%;
         list-style: none;
-        min-width: ${toRem(500)}rem;
+        
         display: block;
         margin: 0 auto 0;
     `
 
     const Comment = styled.li`
         all: unset;
-        width: 100%;
+        
         padding: ${toRem(10)}rem;
         position: relative;
         display: block;
@@ -92,13 +92,18 @@ const MAXPERPAGE = 3;
 
     const CommentData = styled(CommentSection)`
         font-size: ${toRem(17)}rem;
+		@media screen and (max-width: 553px) {
+			font-size: ${toRem(12)}rem;
+		}
     `
 
     const Info = styled.span`
         display: inline-block;
         margin-right: ${toRem(20)}rem;
         font-size: ${toRem(12)}rem;
-
+		@media screen and (max-width: 553px) {
+			font-size: ${toRem(8)}rem;
+		}
         &:last-child {
             margin-right: 0;
         }
@@ -149,6 +154,9 @@ const MAXPERPAGE = 3;
         font-size: ${toRem(16)}rem;
         font-family: '--main-kr';
         padding: ${toRem(5)}rem;
+		@media screen and (max-width: 553px) {
+			font-size: ${toRem(12)}rem;
+		}
         &:focus-visible {
             border: 2px solid #84FFEA;
         }
@@ -162,6 +170,9 @@ const MAXPERPAGE = 3;
         font-family: '--main-kr';
         display: inline-block;
         font-weight: 200;
+		@media screen and (max-width: 553px) {
+			font-size: ${toRem(14)}rem;
+		}
     `
 
     const RegisterButton = styled.button`
@@ -176,7 +187,9 @@ const MAXPERPAGE = 3;
         display: block;
         margin: 0 auto 0;
         transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-
+		@media screen and (max-width: 553px) {
+			font-size:${toRem(10)}rem;
+		}
         &:hover {
             background-color: aqua;
             color: white;
@@ -253,8 +266,8 @@ export default function UnivLectureComment() {
         </Wrapper>
         <section>
             <div style={{padding: `${toRem(5)}rem`, display: 'flex', flexDirection: 'column', alignItems:'center'}}>
-                <LabelForStarBox>별점을 매겨주세요!</LabelForStarBox>
-                <StarRateComponent size={40} disabled={false}/>
+                <LabelForStarBox className="labelstarbox">별점을 매겨주세요!</LabelForStarBox>
+                <StarRateComponent className="starbox" size={40} disabled={false}/>
             </div>
             <div style={{width: '100%', display: 'flex'}}><CommentTextArea ref={textarea} placeholder="한 줄 수강평을 입력해주세요!"/></div>
             <RegisterButton>수강평 등록하기</RegisterButton>

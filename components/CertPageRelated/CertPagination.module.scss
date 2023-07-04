@@ -1,0 +1,35 @@
+@use '@/utils/toremfunc';
+
+
+.pagination {
+    margin-top: toremfunc.toRem(30);
+
+    .paginationList {
+        display: inline-block;
+        list-style-type: none;
+        display: flex;
+        justify-content: center;
+
+        .container {
+            display: inline-block;
+            .index {
+                display:block;
+                width: toremfunc.toRem(30);
+                aspect-ratio: 1;
+                text-align: center;
+                box-sizing: border-box;
+                border: 1px solid white;
+                background-color: #efefef;
+
+            
+            }
+            input {
+                &:checked + .index {
+                    background-color: orange;
+                    color: white;
+                }
+            }
+        }
+        
+    }
+}

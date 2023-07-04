@@ -13,7 +13,7 @@
 
 .univ_detail {
     font-family: '--main-kr';
-    width: 100;
+    width: 100%;
     position: relative;
     box-sizing: border-box;
     display: flex;
@@ -118,6 +118,9 @@
 }
 
 @media screen and (max-width: 553px) {
+	.labelstarbox {
+		font-size:toremfunc.toRem(16);
+	}
 	.univ_detail {
 		.scheduleTable {
 			width: 100%;
@@ -146,6 +149,11 @@
 				.container {
 					.lecture_title {
 						font-size: toremfunc.toRem(16);
+					}
+					.lecture_info {
+						.lecture_info--text {
+							font-size: toremfunc.toRem(14);
+						}
 					}
 				}
 			}

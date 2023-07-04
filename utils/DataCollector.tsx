@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, RawAxiosRequestConfig } from "axios"
+import axios from "axios"
 
 export type CertInfo = {
     code: string|number,
@@ -10,7 +10,7 @@ export type CertInfo = {
 }
 
 interface DataCollector {
-    _certData: null|CertInfo[]
+    _data: null|CertInfo[]
     _listener: Array<any>
 }
 
@@ -18,16 +18,16 @@ interface DataCollector {
 class DataCollector {
 
     constructor() {
-        this._certData = null
+        this._data= null
         this._listener = []
     }
 
-    get certData() {
-        return this._certData;
+    get data() {
+        return this._data;
     }
 
-    set certData(data) {
-        this._certData = data
+    set data(data) {
+        this._data = data
         this.emitChange()
     }
 
@@ -40,12 +40,31 @@ class DataCollector {
         
     }
 
-    
-
     emitChange() {
         for(const l of this.listener) {
             l()
         }
+    }
+
+    
+
+
+}
+
+export function getSnapshotOfCertData(this:DataCollector) {
+    return this.data
+}
+
+export function subscribe(this: DataCollector, l:any) {
+    this.listener = [...this.listener, l];
+    return()=>{
+        this.listener = this.listener.filter((listener:any) => listener !== l)
+    }
+}
+
+class CertDataCollector extends DataCollector {
+    constructor() {
+        super()
     }
 
     async collectCertData() {
@@ -62,23 +81,12 @@ class DataCollector {
         const res = await axios.get('/certs', initconfig)
         const data = await res.data
         // const json = await res.json();
-        this.certData = data;
+        this.data = data;
         console.log('finished');
-    }
-
-    getSnapshotOfCertData(this:any) {
-        return this.certData
-    }
-
-    subscribe(this: any, l:any) {
-        this.listener = [...this.listener, l];
-        return()=>{
-            this.listener = this.listener.filter((listener:any) => listener !== l)
-        }
     }
 
 }
 
 
-const collector = new DataCollector();
+const collector = new CertDataCollector();
 export default collector

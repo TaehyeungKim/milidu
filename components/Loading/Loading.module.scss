@@ -1,0 +1,61 @@
+@use '@/utils/toremfunc';
+
+
+@keyframes slider {
+    0% {
+        transform: translateX(-0%);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+
+    .container {
+        width: 80%;
+
+        h3 {
+            text-align: center;
+            font-size: 1.5em;
+            margin-top: toremfunc.toRem(20);
+        }
+        
+
+        .logo {
+            max-width: toremfunc.toRem(300);
+            margin: 0 auto;
+        }
+
+        .loadingSlider {
+            box-sizing: border-box;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            max-width: toremfunc.toRem(500);
+            margin: 0 auto;
+
+            .filler {
+                width: 200%;
+                display: grid;
+                animation: slider 1s linear;
+                animation-iteration-count: infinite;
+
+                .filler_elm {
+                    height: toremfunc.toRem(20);
+                    transform:skewX(30deg);
+                    &:nth-child(even) {
+                        background-color: yellow;
+                    }
+                    &:nth-child(odd) {
+                        background-color: orange;
+                    }
+                }
+            }
+        }
+    }
+}
