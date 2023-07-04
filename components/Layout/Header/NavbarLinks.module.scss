@@ -1,0 +1,26 @@
+.navbar_links {
+    list-style: none;
+    display: flex;
+    margin-right: 2px;
+    padding-left: 0;
+    li {
+        border-radius: 6px;
+        overflow: hidden;
+
+        &:hover {
+            background-color: #fda94e;
+            border-radius: 6px;
+            overflow: hidden;
+             color: white;
+        }
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+    .navbar_links {
+        justify-content: center;
+        width: 100%;
+    }
+}
+

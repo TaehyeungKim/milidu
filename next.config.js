@@ -3,8 +3,9 @@ const nextConfig = {
     async rewrites() {
         return [
           {
-            source: "/:path*",
-            destination: "https://milidu-backend-zqddn.run.goorm.site/:path*",
+            // source: "/:path*",
+            source: "/certs",
+            destination: "https://milidu-backend-zqddn.run.goorm.site/certs",
           },
         ];
       }

@@ -4,10 +4,13 @@ import style from './style.module.scss'
 import { favicion } from '@/public/icons/icons'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import NavbarLinks from './NavbarLinks'
+
 
 export default function Header() {
 
     const router = useRouter()
+    
 
     useEffect(()=>{
         const path = router.pathname.split('/')
@@ -36,17 +39,9 @@ export default function Header() {
                     
                 </li>
             </ul>
+            <NavbarLinks/>
 
-            <ul className={style.navbar_links}>
-                <li>
-                    <input type="radio"  id="ra_4" name="nav" onChange={()=>router.push("/signin")}/>
-                    <label htmlFor="ra_4" className={style.ra_links} id={style.login}>로그인</label>
-                </li>
-                <li>
-                    <input type="radio" id="ra_5" name="nav" onChange= {()=>router.push("/signup")}/>
-                    <label htmlFor="ra_5" className={style.ra_links}>회원가입</label>
-                </li>
-            </ul>
+            
             </nav>
         </header>
     )

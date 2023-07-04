@@ -68,7 +68,7 @@ const MAXPERPAGE = 3;
         padding: ${toRem(10)}rem;
         position: relative;
         display: block;
-        border-bottom: 2px solid #ebeeff91;
+        border-bottom: 3px solid #ebeeff91;
         transition: background 0.3s ease-in-out;
         background: white;
 

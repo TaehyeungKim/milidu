@@ -20,17 +20,14 @@
     align-items: center;
     flex-direction: column;
 
-
-    
-
     .scheduleTable {
         box-sizing: border-box;
         width: 100%;
         text-align: center;
         padding: toremfunc.toRem(10);
-        border-collapse: collapse;
+        //border-collapse: collapse;
         position: relative;
-        margin-bottom: toremfunc.toRem(10);
+        margin-bottom: toremfunc.toRem(50);
         animation: contentAppear 0.5s ease-in-out;
         animation-fill-mode: backwards;
         th, td {
@@ -39,12 +36,18 @@
             border-left: none;
             padding: toremfunc.toRem(20) toremfunc.toRem(5);
         }
+		box-shadow: toremfunc.toRem(4) toremfunc.toRem(12) toremfunc.toRem(30) toremfunc.toRem(6) rgb(0 0 0 / 20%);
+		border-radius: toremfunc.toRem(8);
+		background:white;
 
     }
 
     .lectureListContainer {
         animation: contentAppear 0.5s ease-in-out 0.5s;
         animation-fill-mode: backwards;
+		box-shadow: toremfunc.toRem(4) toremfunc.toRem(12) toremfunc.toRem(30) toremfunc.toRem(6) rgb(0 0 0 / 20%);
+		border-radius:toremfunc.toRem(8);
+		background:white;
         h3 {
             font-size: toremfunc.toRem(20);
             text-align: center;
@@ -112,4 +115,56 @@
         }
     }
    
+}
+
+@media screen and (max-width: 553px) {
+	.univ_detail {
+		.scheduleTable {
+			width: 100%;
+			border-collapse: collapse;
+			border-spacing: 0;
+			display: block; 
+			position: relative; 
+			margin-left: auto;
+    		margin-right: auto;
+			td { margin: 0; vertical-align: top; }
+			th { text-align: left; }
+			thead { display: block; float: left; }
+			tbody {  width: auto; position: relative; overflow-x: auto; white-space: nowrap; }
+			th { display: block; text-align: center; }
+			tbody tr { display: inline-block; vertical-align: top; }
+			td { display: block; min-height: 1.25em; text-align: left; margin:5px;}
+			th {  margin:5px;}
+		}
+	
+	.lectureListContainer {
+		h3 {
+			font-size: toremfunc.toRem(16);
+		}
+		.lectureList {
+			.lecture {
+				.container {
+					.lecture_title {
+						font-size: toremfunc.toRem(16);
+					}
+				}
+			}
+		}
+	}
+}
+}
+
+@media screen and (max-width: 367px) {
+	.univ_detail {
+		.scheduleTable {
+			font-size:toremfunc.toRem(12);
+		}
+	}
+}
+@media screen and (max-width: 293px) {
+	.univ_detail {
+		.scheduleTable {
+			font-size:toremfunc.toRem(11);
+		}
+	}
 }

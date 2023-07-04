@@ -13,19 +13,20 @@ interface FloatingInpProps {
     ref: MutableRefObject<HTMLInputElement>
 }
 
-const FloatingId = forwardRef(function FloatingId({ref}: FloatingInpProps) {
+const FloatingId = forwardRef(function FloatingId(props, ref) {
+
     return(
         <div className = {styles.floating}>
-            <input type="text" id="userId" required></input >
+            <input type="text" id="userId" required ref={ref as MutableRefObject<HTMLInputElement>}></input >
             <label className = {styles.floatingLb} htmlFor='userId'>아이디를 입력해주세요</label>
         </div>
     )
 })
 
-const FloatingPw = forwardRef(function FloatingPw({ref}:FloatingInpProps) {
+const FloatingPw = forwardRef(function FloatingPw(props, ref) {
     return(
         <div className = {styles.floating}>
-            <input type="password" id="userPW" required></input>
+            <input type="password" id="userPW" required ref={ref as MutableRefObject<HTMLInputElement>}></input>
             <label className = {styles.floatingLb} htmlFor='userPW'>비밀번호를 입력해주세요</label>
         </div>
     )

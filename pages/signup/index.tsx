@@ -3,8 +3,7 @@ import { useEffect, useRef, useReducer, useCallback, MouseEventHandler } from "r
 import { Floating_RegisterId, Floating_RegisterPw, Floating_RegisterMajor } from "@/components/SignPageRelated/FloatingInp/FloatingInp"
 
 import styles from './index.module.scss'
-import CustomButton from "@/components/Global/CustomButton"
-import SignButton from "@/components/SignPageRelated/SignButton/SignButton"
+import { CustomButton, SignButton } from "@/components/Global/CustomButton"
 import Link from 'next/link'
 import BirthDateSection from "./BirthDateSection"
 import GenderSection from "./GenderSection"

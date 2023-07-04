@@ -54,9 +54,18 @@ export const authOptions = {
         async redirect({url, baseUrl}:AuthRedirect) {
             return baseUrl
         },
-        async session({session, user, token}:any) {
-            return session
-        }
+        // async jwt({ token, account, profile }:any) {
+        //     if (account) {
+        //       token.accessToken = account.access_token 
+        //       token.id = profile.id
+        //     }
+        //     return token 
+        // },
+        // async session({session, user, token}:any) {
+        //     console.log('session')
+        //     session.accessToken = token.accessToken
+        //     return session
+        // }
     }
 }
 

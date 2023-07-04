@@ -121,7 +121,7 @@ export default function Certification() {
                                 <h4 className={style.name}>{info.name}</h4>
                                 <div className={style.content}>
                                     <h6>{info.majors}</h6>
-                                    <h6>{(info.total_passed/info.total_taken)*100}%</h6>
+                                    <h6>{((info.total_passed/info.total_taken)*100).toFixed(2)}%</h6>
                                     <h6>{info.total_taken}명</h6>
                                 </div>
                             </div>

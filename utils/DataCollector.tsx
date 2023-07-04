@@ -49,7 +49,6 @@ class DataCollector {
     }
 
     async collectCertData() {
-        // const res = await fetch('https://milidu-backend-zqddn.run.goorm.site/certs');
         const initconfig = {
             method: 'GET',
             mode: 'no-cors',
