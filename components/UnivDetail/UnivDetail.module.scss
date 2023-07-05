@@ -36,16 +36,15 @@
             border-left: none;
             padding: toremfunc.toRem(20) toremfunc.toRem(5);
         }
-		box-shadow: toremfunc.toRem(4) toremfunc.toRem(12) toremfunc.toRem(30) toremfunc.toRem(6) rgb(0 0 0 / 20%);
+		box-shadow: toremfunc.toRem(4) toremfunc.toRem(12) toremfunc.toRem(30) toremfunc.toRem(6) rgb(0 0 0 / 10%);
 		border-radius: toremfunc.toRem(8);
 		background:white;
-
-    }
+}
 
     .lectureListContainer {
         animation: contentAppear 0.5s ease-in-out 0.5s;
         animation-fill-mode: backwards;
-		box-shadow: toremfunc.toRem(4) toremfunc.toRem(12) toremfunc.toRem(30) toremfunc.toRem(6) rgb(0 0 0 / 20%);
+		box-shadow: toremfunc.toRem(4) toremfunc.toRem(12) toremfunc.toRem(30) toremfunc.toRem(6) rgb(0 0 0 / 10%);
 		border-radius:toremfunc.toRem(8);
 		background:white;
         h3 {

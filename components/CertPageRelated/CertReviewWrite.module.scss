@@ -52,6 +52,7 @@
         //min-height: toremfunc.toRem(70);
         height: toremfunc.toRem(70);
         justify-content: space-between;
+		margin-left:toremfunc.toRem(12);
         .question_label {
             display: inline-flex;
             height: 100%;
@@ -138,6 +139,7 @@
             border: none;
             outline: none;
             border-bottom: 2px solid #efefef;
+			margin-right:toremfunc.toRem(12);
         }
     }
 }
@@ -152,6 +154,58 @@
 	.questionaire {
     	.question {
 			font-size:toremfunc.toRem(14);
+			.method {
+				font-size:toremfunc.toRem(12);
+			}
+			.period_inp {
+				width: 3em;
+			}
 		}
+	}
+	.text {
+		.textarea {
+			font-size: toremfunc.toRem(14);
+			min-height: toremfunc.toRem(100);
+		}
+	}
+	.reviewSubmit {
+		width: toremfunc.toRem(80);
+		margin: toremfunc.toRem(80) 0;
+		font-size: toremfunc.toRem(14);
+	}
+}
+
+@media screen and (max-width: 498px) {
+	.cert {
+		font-size:toremfunc.toRem(18);
+	}
+	.questionaire {
+		.question {
+			font-size:toremfunc.toRem(12);
+			.method {
+				font-size:toremfunc.toRem(10);
+			}
+			.period_inp {
+				width: 2em;
+			}
+			.trynum, .method {
+				margin: 0 toremfunc.toRem(4);
+				padding: toremfunc.toRem(6);
+			}
+			.period_label {
+				margin-right:toremfunc.toRem(6);
+			}
+		}
+	}
+	.text {
+		.textarea {
+			font-size: toremfunc.toRem(12);
+			min-height: toremfunc.toRem(80);
+		}
+	}
+	.reviewSubmit {
+		width: toremfunc.toRem(60);
+		margin: toremfunc.toRem(60) 0;
+		font-size: toremfunc.toRem(12);
 	}
 }

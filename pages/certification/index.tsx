@@ -155,7 +155,7 @@ export default function Certification() {
                 <li><a className={style.last}>끝으로</a></li> 
             </ul>
        </div> */}
-        <CertPagination pageNum={(data.length/10)+1} flipper={flipPage}/>
+        <CertPagination pageNum={(data.length/10)+1} flipper={flipPage} curPage={pageIndex}/>
             
         </div>
     )

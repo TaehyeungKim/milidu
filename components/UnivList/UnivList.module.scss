@@ -9,11 +9,11 @@
     // justify-content: center;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    margin: toremfunc.toRem(30) 0;
+    margin: toremfunc.toRem(50) 0;
     transition: opacity 0.5s ease-in-out;
 	background:white;
 	border-radius:toremfunc.toRem(8);
-	box-shadow: toremfunc.toRem(4) toremfunc.toRem(12) toremfunc.toRem(30) toremfunc.toRem(6) rgb(0 0 0 / 20%);
+	box-shadow: toremfunc.toRem(4) toremfunc.toRem(12) toremfunc.toRem(30) toremfunc.toRem(6) rgb(0 0 0 / 10%);
 }
 
 .univ_list--transition {

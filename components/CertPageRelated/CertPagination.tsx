@@ -1,20 +1,29 @@
 import styles from './CertPagination.module.scss'
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useDeferredValue} from 'react';
+import {useMediaQuery} from 'react-responsive'
 
 interface CertPagination {
     pageNum: number,
     flipper: (index:number)=>void;
+    curPage: number
 }
 
-export default function CertPagination({pageNum, flipper}:CertPagination) {
+export default function CertPagination({pageNum, flipper, curPage}:CertPagination) {
+
+    const isSmallSize = useMediaQuery({query: '(max-width: 500px'});
+    const deferredMedia = useDeferredValue(isSmallSize)
+
+    let PAGEPERBLOCK = 10;
+
+    if(isSmallSize) PAGEPERBLOCK = 5;
 
     const [pageBlockIndex, setPageBlockIndex] = useState<number>(0);
 
     const toPrevBlock = () => {
-        if(pageBlockIndex >  0) setPageBlockIndex(page=>page-1)
+        if(pageBlockIndex >  0) setPageBlockIndex(block=>block-1)
     }
     const toNextBlock = () => {
-        if(pageBlockIndex < pageNum/10-1) setPageBlockIndex(page=>page+1)
+        if(pageBlockIndex < pageNum/10 - 1) setPageBlockIndex(block=>block+1)
     }
 
     const liGenerator = (index: number) => {
@@ -25,11 +34,21 @@ export default function CertPagination({pageNum, flipper}:CertPagination) {
                </li>)
     }
 
+
     useEffect(()=>{
-        document.getElementById(`page_${pageBlockIndex*10+1}`)?.setAttribute('checked', 'true')
-        flipper(pageBlockIndex*10)
+        if(isSmallSize === deferredMedia) {
+            document.getElementById(`page_${pageBlockIndex*PAGEPERBLOCK+1}`)?.setAttribute('checked', 'true')
+            flipper(pageBlockIndex*PAGEPERBLOCK)
+        }
+        else document.getElementById(`page_${curPage+1}`)?.setAttribute('checked', 'true')
+        
+        
         return(()=>document.getElementById('pageBlank')?.setAttribute('checked', 'true'))
     },[pageBlockIndex])
+
+    useEffect(()=>{
+        setPageBlockIndex(Math.floor(curPage/PAGEPERBLOCK))
+    },[isSmallSize])
 
     return(
         <div className={styles.pagination}>
@@ -37,7 +56,8 @@ export default function CertPagination({pageNum, flipper}:CertPagination) {
                 <li className ={styles.container} onClick={toPrevBlock}>{'<<'}</li>
                 {(()=>{
                     let arr:any = []
-                    for(let i = pageBlockIndex*10 + 1; i <= (pageBlockIndex+1)*10; i++) {
+                    for(let i = pageBlockIndex*PAGEPERBLOCK + 1; i <= (pageBlockIndex+1)*PAGEPERBLOCK
+                    ; i++) {
                         if(i > pageNum) break;
                         arr = [...arr, liGenerator(i)];
                     }
