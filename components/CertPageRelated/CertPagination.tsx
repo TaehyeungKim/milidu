@@ -1,6 +1,8 @@
 import styles from './CertPagination.module.scss'
 import {useState, useEffect, useDeferredValue} from 'react';
 import {useMediaQuery} from 'react-responsive'
+import {arrowRight, arrowLeft} from '@/public/icons/icons'
+
 
 interface CertPagination {
     pageNum: number,
@@ -53,7 +55,7 @@ export default function CertPagination({pageNum, flipper, curPage}:CertPaginatio
     return(
         <div className={styles.pagination}>
             <ul className = {styles.paginationList}>
-                <li className ={styles.container} onClick={toPrevBlock}>{'<<'}</li>
+                <li className ={styles.container} onClick={toPrevBlock}>{arrowLeft()}</li>
                 {(()=>{
                     let arr:any = []
                     for(let i = pageBlockIndex*PAGEPERBLOCK + 1; i <= (pageBlockIndex+1)*PAGEPERBLOCK
@@ -63,7 +65,7 @@ export default function CertPagination({pageNum, flipper, curPage}:CertPaginatio
                     }
                     return arr
                 })()}
-                <li className = {styles.container} onClick={toNextBlock}>{'>>'}</li>
+                <li className = {styles.container} onClick={toNextBlock}>{arrowRight()}</li>
                 <input type='radio' name='index' hidden id='pageBlank'/>
             </ul>
         </div>

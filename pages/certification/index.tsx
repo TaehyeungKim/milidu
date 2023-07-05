@@ -8,77 +8,6 @@ import Loading from '@/components/Loading/Loading';
 import CertPagination from '@/components/CertPageRelated/CertPagination';
 
 
-// type CertInfo = {
-//     name: string,
-//     major: string,
-//     period: string,
-//     rate: number
-// }
-
-
-// export const getStaticProps: GetStaticProps<{certInfoArr: CertInfo[]}> = async() => {
-
-//     const res = await fetch('https://milidu-backend-zqddn.run.goorm.site/certs')
-//     const json = await res.json()
-//     console.log(json)
-
-
-//     // const certInfoArr = [
-//     //     {
-//     //         name: "컴퓨터활용능력1급",
-//     //         major: "IT·컴퓨터",
-//     //         period: "3개월",
-//     //         rate: 32
-//     //     },
-//     //     {
-//     //         name: "컴퓨터활용능력1급",
-//     //         major: "IT·컴퓨터",
-//     //         period: "3개월",
-//     //         rate: 32
-//     //     }, 
-//     //     {
-//     //         name: "컴퓨터활용능력1급",
-//     //         major: "IT·컴퓨터",
-//     //         period: "3개월",
-//     //         rate: 32
-//     //     }, 
-//     //     {
-//     //         name: "컴퓨터활용능력1급",
-//     //         major: "IT·컴퓨터",
-//     //         period: "3개월",
-//     //         rate: 32
-//     //     }, 
-//     //     {
-//     //         name: "컴퓨터활용능력1급",
-//     //         major: "IT·컴퓨터",
-//     //         period: "3개월",
-//     //         rate: 32
-//     //     },
-//     //     {
-//     //         name: "컴퓨터활용능력1급",
-//     //         major: "IT·컴퓨터",
-//     //         period: "3개월",
-//     //         rate: 32
-//     //     },
-//     //     {
-//     //         name: "컴퓨터활용능력1급",
-//     //         major: "IT·컴퓨터",
-//     //         period: "3개월",
-//     //         rate: 32
-//     //     },
-//     //     {
-//     //         name: "컴퓨터활용능력1급",
-//     //         major: "IT·컴퓨터",
-//     //         period: "3개월",
-//     //         rate: 32
-//     //     }
-//     // ]
-
-
-//     // return { props : {certInfoArr} }
-//     return { props: {certInfoArr: json}}
-// }
-
 export default function Certification() {
 
     
@@ -95,6 +24,8 @@ export default function Certification() {
     if(!data) return (<Loading/>)
 
     const shownData = data?.filter((data: CertInfo, index: number)=> index >= pageIndex*10 && index < (pageIndex+1)*10)
+    collector.dataOnRange = shownData;
+    
 
     return(
         
@@ -136,25 +67,6 @@ export default function Certification() {
                     </li>
                 ))}
             </ul>
-            
-        
-		{/* <div className={style.page}>
-            <ul className={style.pagenation}>
-                <li><a className={style.first}>처음으로</a></li>
-                <li><a className={style.arrow_left}>{'<<'}</a></li>
-                <li className = {style.num}>1</li>
-                <li className = {style.num}>1</li>
-                <li className = {style.num}>1</li>
-                <li className = {style.num}>1</li>
-                <li className = {style.num}>1</li>
-                <li className = {style.num}>1</li>
-                <li className = {style.num}>1</li>
-                <li className = {style.num}>1</li>
-                <li className = {style.num}>1</li>
-                <li><a className={style.arrow_right}>{'>>'}</a></li>
-                <li><a className={style.last}>끝으로</a></li> 
-            </ul>
-       </div> */}
         <CertPagination pageNum={(data.length/10)+1} flipper={flipPage} curPage={pageIndex}/>
             
         </div>

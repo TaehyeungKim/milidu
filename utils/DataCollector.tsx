@@ -6,7 +6,8 @@ export type CertInfo = {
     name: string,
     total_passed: number,
     total_taken: number,
-    year: number
+    year: number,
+    host: string
 }
 
 interface DataCollector {
@@ -62,9 +63,14 @@ export function subscribe(this: DataCollector, l:any) {
     }
 }
 
+interface CertDataCollector extends DataCollector {
+    _dataOnRange: CertInfo[]
+}
+
 class CertDataCollector extends DataCollector {
     constructor() {
         super()
+        this._dataOnRange = [];
     }
 
     async collectCertData() {
@@ -82,8 +88,12 @@ class CertDataCollector extends DataCollector {
         const data = await res.data
         // const json = await res.json();
         this.data = data;
-        console.log('finished');
+        console.log('finished', data);
+        return data
     }
+
+    get dataOnRange() {return this._dataOnRange}
+    set dataOnRange(data) {this._dataOnRange = data }
 
 }
 

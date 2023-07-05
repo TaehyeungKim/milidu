@@ -28,6 +28,8 @@
     .slide {
         position: absolute;
         z-index: 10;
+		width:toremfunc.toRem(24);
+		cursor:pointer;
     }
 
     #right {

@@ -3,20 +3,35 @@ import styles from './[id].module.scss'
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
 import { ParsedUrlQuery } from 'querystring'
 import CertAside from '@/components/CertPageRelated/CertAside'
-import { useReducer } from 'react'
-import CertInfo from '@/components/CertPageRelated/CertInfo'
+import { useReducer, useSyncExternalStore, useEffect, useState } from 'react'
+import CertInfoComponent from '@/components/CertPageRelated/CertInfo'
 import CertReview from '@/components/CertPageRelated/CertReview'
 import CertReviewWrite from '@/components/CertPageRelated/CertReviewWrite'
 import Link from 'next/link'
 import { doubleArrowLeft } from '@/public/icons/icons'
+import collector from '@/utils/DataCollector'
+import { CertInfo } from '@/utils/DataCollector'
+import { useRouter } from 'next/router'
+import { subscribe, getSnapshotOfCertData } from '@/utils/DataCollector'
+import Loading from '@/components/Loading/Loading'
+
 
 export type CertDetailInfo = {
     name: string,
-    desc?: string,
-    host: string,
-    major: string,
-    rate: number,
-    taker: number
+    description?: string,
+    name_eng: string
+}
+
+export type CertStats = {
+    pass_rate: number,
+    test_passed: number,
+    test_taken: number,
+    year: number
+}
+
+export type CertInfoAndStats = {
+    cert_info: CertDetailInfo,
+    data: CertStats[]
 }
 
 export type CertReview = {
@@ -43,16 +58,17 @@ export type ReviewData = {
 }
 
 type CertServerSideProps = {
-    certDetailInfo: CertDetailInfo,
+    certInfoAndStats: CertInfoAndStats,
     reviewData: CertReview
 }
 
 export const getServerSideProps: GetServerSideProps<{ certServerSideProps: CertServerSideProps }> = async({params}) => {
 
-    const res = await fetch(`https://milidu-backend-zqddn.run.goorm.site/cert_stats?cert_code=${params?.id}`);
+    const certInfoAndStatsRes = await fetch(`https://milidu-backend-zqddn.run.goorm.site/cert_stats?cert_code=${params?.id}`);
     // console.log(params)
-    const json = await res.json()
-    console.log(json)
+    const certInfoAndStats = await certInfoAndStatsRes.json()
+    console.log(certInfoAndStats)
+   
 
 
     const reviewArr: ReviewData[] = [
@@ -100,14 +116,6 @@ export const getServerSideProps: GetServerSideProps<{ certServerSideProps: CertS
         }
     ]
 
-    const certDetailInfo: CertDetailInfo = {
-        name: (params as ParsedUrlQuery).id as string,
-        desc: '산업계의 정보화가 진전되면서 영업, 재무, 생산 등의 분야에 대한 경영분석은 물론 데이터 관리가 필수적입니다. <컴퓨터활용능력> 검정은 사무자동화의 필수 프로그램인 스프레드시트(SpreadSheet), 데이터베이스(Database) 활용능력을 평가하는 국가기술자격 시험입니다.',
-        host: '대한상공회의소',
-        major: '사무, 회계',
-        rate: 32,
-        taker: 345000
-    };
 
     const reviewData: CertReview = {
         cert: (params as ParsedUrlQuery).id as string,
@@ -118,7 +126,7 @@ export const getServerSideProps: GetServerSideProps<{ certServerSideProps: CertS
     }
 
     const certServerSideProps = {
-        certDetailInfo: certDetailInfo,
+        certInfoAndStats: certInfoAndStats,
         reviewData: reviewData
     }
 
@@ -140,7 +148,28 @@ const reducer = (state: CertDetailPageState, action: CertDetailPageAction) => {
 
 export default function Certification({certServerSideProps}: InferGetServerSidePropsType<typeof getServerSideProps>) {
 
+    const data = useSyncExternalStore(subscribe.bind(collector), getSnapshotOfCertData.bind(collector), getSnapshotOfCertData.bind(collector))
+    const router = useRouter();
+
+    const [detailData, setDetailData] = useState<CertInfo>(collector.dataOnRange.filter((data:CertInfo)=>data.code == router.query.id)[0]);
+
     const [state, dispatch] = useReducer(reducer, {page: "info"})
+    
+
+    
+
+    useEffect(()=>{
+        if(!data) collector.collectCertData()
+    },[])
+
+    useEffect(()=>{
+        if(data) {
+            collector.dataOnRange = data.filter((data:CertInfo)=>data.code === router.query.id)
+            setDetailData(collector.dataOnRange[0]);
+        }
+    },[data])
+    
+    if(!data ||!detailData) return (<Loading/>)
 
     return (
         <>
@@ -153,7 +182,7 @@ export default function Certification({certServerSideProps}: InferGetServerSideP
                 switch(state.page) {
                     case "info":
                         return(
-                            <CertInfo certDetailInfo={certServerSideProps.certDetailInfo}/>
+                            <CertInfoComponent certInfoAndStats={certServerSideProps.certInfoAndStats} certInfo={detailData}/>
                         )
                     case "review":
                         return(
@@ -161,7 +190,7 @@ export default function Certification({certServerSideProps}: InferGetServerSideP
                         )
                     case "write":
                         return(
-                            <CertReviewWrite cert={certServerSideProps.certDetailInfo.name}/>
+                            <CertReviewWrite cert={certServerSideProps.certInfoAndStats.cert_info.name}/>
                         )
                 }   
             })()}
