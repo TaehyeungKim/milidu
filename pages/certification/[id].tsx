@@ -9,17 +9,19 @@ import CertReview from '@/components/CertPageRelated/CertReview'
 import CertReviewWrite from '@/components/CertPageRelated/CertReviewWrite'
 import Link from 'next/link'
 import { doubleArrowLeft } from '@/public/icons/icons'
-import collector from '@/utils/DataCollector'
+import {certDataCollector} from '@/utils/DataCollector'
 import { CertInfo } from '@/utils/DataCollector'
 import { useRouter } from 'next/router'
-import { subscribe, getSnapshotOfCertData } from '@/utils/DataCollector'
+import { subscribe, getSnapshotOfData } from '@/utils/DataCollector'
 import Loading from '@/components/Loading/Loading'
 
 
 export type CertDetailInfo = {
     name: string,
-    description?: string,
-    name_eng: string
+    description: string,
+    name_eng: string,
+    host: string,
+    ministry: string
 }
 
 export type CertStats = {
@@ -64,8 +66,8 @@ type CertServerSideProps = {
 
 export const getServerSideProps: GetServerSideProps<{ certServerSideProps: CertServerSideProps }> = async({params}) => {
 
-    const certInfoAndStatsRes = await fetch(`https://milidu-backend-zqddn.run.goorm.site/cert_stats?cert_code=${params?.id}`);
-    // console.log(params)
+    const certInfoAndStatsRes = await fetch(`https://milidu-backend-ykzlu.run.goorm.site/cert_stats?cert_code=${params?.id}`);
+    console.log(certInfoAndStatsRes)
     const certInfoAndStats = await certInfoAndStatsRes.json()
     console.log(certInfoAndStats)
    
@@ -148,10 +150,10 @@ const reducer = (state: CertDetailPageState, action: CertDetailPageAction) => {
 
 export default function Certification({certServerSideProps}: InferGetServerSidePropsType<typeof getServerSideProps>) {
 
-    const data = useSyncExternalStore(subscribe.bind(collector), getSnapshotOfCertData.bind(collector), getSnapshotOfCertData.bind(collector))
+    const data = useSyncExternalStore(subscribe.bind(certDataCollector), getSnapshotOfData.bind(certDataCollector), getSnapshotOfData.bind(certDataCollector))
     const router = useRouter();
 
-    const [detailData, setDetailData] = useState<CertInfo>(collector.dataOnRange.filter((data:CertInfo)=>data.code == router.query.id)[0]);
+    const [detailData, setDetailData] = useState<CertInfo>(certDataCollector.dataOnRange.filter((data:CertInfo)=>data.code == router.query.id)[0]);
 
     const [state, dispatch] = useReducer(reducer, {page: "info"})
     
@@ -159,13 +161,13 @@ export default function Certification({certServerSideProps}: InferGetServerSideP
     
 
     useEffect(()=>{
-        if(!data) collector.collectCertData()
+        if(!data) certDataCollector.collectCertData()
     },[])
 
     useEffect(()=>{
         if(data) {
-            collector.dataOnRange = data.filter((data:CertInfo)=>data.code === router.query.id)
-            setDetailData(collector.dataOnRange[0]);
+            certDataCollector.dataOnRange = data.filter((data:CertInfo)=>data.code === router.query.id)
+            setDetailData(certDataCollector.dataOnRange[0]);
         }
     },[data])
     

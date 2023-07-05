@@ -17,7 +17,7 @@ export default function CertInfo({certInfoAndStats, certInfo}: CertInfoProps) {
             <section className = {styles.cert_info}>
                 <h1 className = {styles['cert_info--name']}>{certInfoAndStats.cert_info.name}</h1>
                 <h3 className = {styles['cert_info--desc']}>{certInfoAndStats.cert_info.description}</h3>
-                <h6 className = {styles['cert_info--organization']}>주관: {certInfo.host}</h6>
+                <h6 className = {styles['cert_info--organization']}>주관: {certInfoAndStats.cert_info.host}</h6>
             </section>
             <section className = {styles.cert_statistic}>
                 <div className = {styles.representative_stat_container}>

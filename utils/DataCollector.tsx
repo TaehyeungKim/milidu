@@ -52,7 +52,7 @@ class DataCollector {
 
 }
 
-export function getSnapshotOfCertData(this:DataCollector) {
+export function getSnapshotOfData(this:DataCollector) {
     return this.data
 }
 
@@ -88,7 +88,7 @@ class CertDataCollector extends DataCollector {
         const data = await res.data
         // const json = await res.json();
         this.data = data;
-        console.log('finished', data);
+        console.log('finished_certs', data);
         return data
     }
 
@@ -97,6 +97,32 @@ class CertDataCollector extends DataCollector {
 
 }
 
+class UnivDataCollector extends DataCollector {
+    constructor() {
+        super()
+    }
 
-const collector = new CertDataCollector();
-export default collector
+    async collectUnivData() {
+        const initconfig = {
+            method: 'GET',
+            mode: 'no-cors',
+            headers: {
+              'Access-Control-Allow-Origin': '*',
+              'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'same-origin',
+          }
+        const res = await axios.get('/get_unischedule', initconfig)
+        const data = await res.data
+        // const json = await res.json();
+        this.data = data;
+        console.log('finished_univ', data);
+        return data
+    }
+}
+
+
+const certDataCollector = new CertDataCollector();
+const univDataCollector = new UnivDataCollector();
+export {certDataCollector, univDataCollector}

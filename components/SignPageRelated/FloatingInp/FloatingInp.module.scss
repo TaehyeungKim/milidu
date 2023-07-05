@@ -1,10 +1,13 @@
 @use '@/utils/toremfunc';
+#text_area {
+	margin-top:toremfunc.toRem(20);
+}
 .floating {
     position: relative;
     display: flex;
     width: 100%;
     font-size: toremfunc.toRem(20);
-
+	
 
     .floatingLb {
         position: absolute;
@@ -70,4 +73,20 @@
 
 .succeed {
     color: green;
+}
+@media screen and (max-width: 777px) {
+	.floating {
+		.floatingLb {
+			font-size: 0.7em;
+		}
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.verify {
+		.verifyBt {
+			font-size: toremfunc.toRem(14);
+			padding: toremfunc.toRem(3);
+		}
+	}
 }

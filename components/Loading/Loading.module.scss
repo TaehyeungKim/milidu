@@ -18,6 +18,8 @@
 
     .container {
         width: 80%;
+        
+        
 
         h3 {
             text-align: center;
@@ -38,6 +40,7 @@
             overflow: hidden;
             max-width: toremfunc.toRem(500);
             margin: 0 auto;
+            border-radius: 1em;
 
             .filler {
                 width: 200%;

@@ -1,10 +1,11 @@
 import { useEffect } from "react"
-import collector from "@/utils/DataCollector"
+import {certDataCollector, univDataCollector} from "@/utils/DataCollector"
 
 export default function App() {
 
     useEffect(()=>{
-        collector.collectCertData();
+        certDataCollector.collectCertData();
+        univDataCollector.collectUnivData();
     },[])
 
     return(

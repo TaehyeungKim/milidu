@@ -12,7 +12,12 @@
         background-color: white;
         border: 2px solid rgb(255, 142, 36);
     }
-
+}
+@media screen and (max-width: 500px) {
+	.button {
+		font-size: toremfunc.toRem(13);
+		padding: toremfunc.toRem(5);
+		}
 }
 
 .register_bt {
@@ -34,4 +39,11 @@
             opacity: 1;
         }
     }
+}
+
+@media screen and (max-width: 500px) {
+	.register_bt {
+		font-size: toremfunc.toRem(13);
+		padding: toremfunc.toRem(5);
+		}
 }

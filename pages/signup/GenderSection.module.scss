@@ -39,3 +39,10 @@
         
     
 }
+@media screen and (max-width: 500px) {
+	.genderSelect {
+		input + .gender {
+			width: toremfunc.toRem(50);
+		}
+	}
+}

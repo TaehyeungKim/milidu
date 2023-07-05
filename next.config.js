@@ -5,8 +5,12 @@ const nextConfig = {
           {
             // source: "/:path*",
             source: "/certs",
-            destination: "https://milidu-backend-zqddn.run.goorm.site/certs",
+            destination: "https://milidu-backend-ykzlu.run.goorm.site/certs",
           },
+          {
+            source: "/get_unischedule",
+            destination: "https://milidu-backend-ykzlu.run.goorm.site/get_unischedule",
+          }
         ];
       }
 }

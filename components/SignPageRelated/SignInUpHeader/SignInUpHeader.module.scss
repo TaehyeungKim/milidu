@@ -9,15 +9,25 @@
         align-items: center;
         justify-content: center;
         cursor: pointer;
+		margin-bottom:toremfunc.toRem(20);
         .favicon {
-            height: toremfunc.toRem(70);
+            height: toremfunc.toRem(30);
         }
         // max-width: toremfunc.toRem(200);
         img {
-            max-width: toremfunc.toRem(200);
+            max-width: toremfunc.toRem(90);
 
             display: block;
         }
     }
     
+}
+
+@media screen and (max-width: 777px) {
+	.signin_header {
+	
+		.header_link {
+			
+		}
+	}
 }

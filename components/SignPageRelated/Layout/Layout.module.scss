@@ -11,8 +11,9 @@
     padding: toremfunc.toRem(40) 0;
     .container {
         width: toremfunc.toRem(300);
-        padding: toremfunc.toRem(20);
-
+        padding: toremfunc.toRem(30);
+		border:1px solid #dadce0;
+		border-radius:toremfunc.toRem(12);
         section {
             margin: toremfunc.toRem(10) 0;
         }

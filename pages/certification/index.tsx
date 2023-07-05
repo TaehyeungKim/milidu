@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import style from './style.module.scss'
 import { useEffect, useSyncExternalStore, useState } from 'react';
-import collector, {CertInfo, getSnapshotOfCertData, subscribe} from '@/utils/DataCollector';
+import {certDataCollector, CertInfo, getSnapshotOfData, subscribe} from '@/utils/DataCollector';
 import Loading from '@/components/Loading/Loading';
 import CertPagination from '@/components/CertPageRelated/CertPagination';
 
@@ -11,20 +11,20 @@ import CertPagination from '@/components/CertPageRelated/CertPagination';
 export default function Certification() {
 
     
-    const data = useSyncExternalStore(subscribe.bind(collector), getSnapshotOfCertData.bind(collector), getSnapshotOfCertData.bind(collector))
+    const data = useSyncExternalStore(subscribe.bind(certDataCollector), getSnapshotOfData.bind(certDataCollector), getSnapshotOfData.bind(certDataCollector))
     const [pageIndex, setPageIndex] = useState<number>(0);
 
     const flipPage = (index:number) => setPageIndex(index);
     
 
     useEffect(()=>{
-        if(!data) collector.collectCertData()
+        if(!data) certDataCollector.collectCertData()
     },[])
 
     if(!data) return (<Loading/>)
 
     const shownData = data?.filter((data: CertInfo, index: number)=> index >= pageIndex*10 && index < (pageIndex+1)*10)
-    collector.dataOnRange = shownData;
+    certDataCollector.dataOnRange = shownData;
     
 
     return(
