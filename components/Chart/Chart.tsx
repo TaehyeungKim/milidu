@@ -12,8 +12,13 @@ import {
   } from 'chart.js';
 import type {ChartData, ChartOptions} from 'chart.js'
 import { Chart } from 'react-chartjs-2';
+import {CertStats} from '@/pages/certification/[id]'
 
-export default function ChartComponent() {
+interface ChartComponentProps {
+    stats_data: CertStats[]
+}
+
+export default function ChartComponent({stats_data}:ChartComponentProps) {
     ChartJS.register(
         LinearScale,
         CategoryScale,
@@ -65,13 +70,13 @@ export default function ChartComponent() {
     ]
 
     const data: ChartData  = {
-        labels: generalData.map(data=>data.year),
+        labels: stats_data.map(data=>data.year),
         datasets: [
             {
                 type: 'bar',
                 label: '응시자수',
                 backgroundColor: 'green',
-                data: generalData.map(data=>data.total),
+                data: stats_data.map(data=>data.test_taken),
                 borderColor: 'white',
                 borderWidth: 2,
                 yAxisID: 'yMain'
@@ -80,7 +85,7 @@ export default function ChartComponent() {
                 type: 'bar',
                 label: '합격자수',
                 backgroundColor: 'blue',
-                data: generalData.map(data=>data.pass),
+                data: stats_data.map(data=>data.test_passed),
                 borderColor: 'white',
                 borderWidth: 2,
                 yAxisID: 'yMain'
@@ -91,7 +96,7 @@ export default function ChartComponent() {
                 borderColor: 'red',
                 borderWidth: 2,
                 fill: true,
-                data: generalData.map(data=>(data.pass/data.total)*100),
+                data: stats_data.map(data=>(data.pass_rate)),
                 yAxisID: 'yAuxiliary'
             },
             {
@@ -100,7 +105,7 @@ export default function ChartComponent() {
                 borderColor: 'navy',
                 borderWidth: 2,
                 fill: false,
-                data: militaryData.map(data=>(data.pass/data.total)*100),
+                data: stats_data.map(data=>((data.military_passed/data.military_taken)*100)),
                 yAxisID: 'yAuxiliary'
             }
         ],

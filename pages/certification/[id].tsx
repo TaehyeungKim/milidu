@@ -1,5 +1,5 @@
 import styles from './[id].module.scss'
-
+import axios from 'axios'
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
 import { ParsedUrlQuery } from 'querystring'
 import CertAside from '@/components/CertPageRelated/CertAside'
@@ -28,35 +28,51 @@ export type CertStats = {
     pass_rate: number,
     test_passed: number,
     test_taken: number,
-    year: number
+    year: number,
+    military_taken: number,
+    military_passed: number
+}
+
+export type CertLecture = {
+    lecture_name: string,
+    teacher: string,
+    url: string
 }
 
 export type CertInfoAndStats = {
     cert_info: CertDetailInfo,
-    data: CertStats[]
+    data: CertStats[],
+    lecture_info: CertLecture[]
 }
 
 export type CertReview = {
-    cert: string,
-    avr_level: number,
-    avr_trynum: number,
-    avr_period: string,
-    reviewArr: ReviewData[]
+    average_difficulty: number,
+    average_num_attempts: number,
+    average_time_taken: number
+    ReviewList: ReviewData[]
 }
 
 export type ReviewData = {
-    user: {
-        name: string,
-        age: number,
-        sex: string,
-        major: string
-    },
-    trynum: number,
-    period: string,
-    level: number,
-    studyMethod: string[],
-    material: string,
-    comment: string
+
+    // user: {
+    //     name: string,
+    //     age: number,
+    //     sex: string,
+    //     major: string
+    // },
+    username: string
+    cert_code: string|number,
+    cert_name: string,
+    content: string,
+    created_at: string,
+    num_attempts: number,
+    time_taken: string,
+    difficulty: number,
+    study_method: string,
+    recommend_book: string,
+    num_likes: number,
+    updated_at: string,
+    id: number
 }
 
 type CertServerSideProps = {
@@ -64,72 +80,37 @@ type CertServerSideProps = {
     reviewData: CertReview
 }
 
+
 export const getServerSideProps: GetServerSideProps<{ certServerSideProps: CertServerSideProps }> = async({params}) => {
 
-    const certInfoAndStatsRes = await fetch(`https://milidu-backend-ykzlu.run.goorm.site/cert_stats?cert_code=${params?.id}`);
-    console.log(certInfoAndStatsRes)
-    const certInfoAndStats = await certInfoAndStatsRes.json()
-    console.log(certInfoAndStats)
+    //selfserver
+    //const certInfoAndStatsRes = await axios.get(`https://milidu-selfserver.run.goorm.site/cert_stats?cert_code=${params?.id}`)
+
+    //real backend
+    const certInfoAndStatsRes = await axios.get(`https://milidu-backend-ykzlu.run.goorm.site/cert_stats?cert_code=${params?.id}`)
+    
+
+    const certInfoAndStats: CertInfoAndStats = await certInfoAndStatsRes.data
+
+    const certReviewRes = await axios.post("https://milidu-backend-ykzlu.run.goorm.site/get_cert_review",
+    {
+        category: "자격증코드",
+        keyword: `${params?.id}`
+    },
+    {headers: {
+        "Content-Type": "application/json"
+    }})
+
+    const certReview:CertReview = await certReviewRes.data
+
+
+
    
 
 
-    const reviewArr: ReviewData[] = [
-        {
-            user: {
-                name: 'taehyeungkim98',
-                age: 21,
-                sex: '남',
-                major: '컴퓨터공학'
-            },
-            trynum: 3,
-            period: '1개월',
-            level: 4,
-            studyMethod: ['기출풀이', '인터넷강의'],
-            material: '이기적 컴퓨터활용능력1급',
-            comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec lectus vitae mauris dignissim volutpat id in turpis. Ut ut faucibus neque. Maecenas rutrum sollicitudin purus, et auctor sem tincidunt ut. Nulla ut quam vitae erat egestas ultricies vitae eget lectus. Vivamus viverra rhoncus turpis, quis sodales tortor placerat nec. Etiam convallis tincidunt scelerisque. In hac habitasse platea dictumst. Maecenas nisi felis, blandit vitae lacus sit amet, hendrerit vehicula mauris. Cras feugiat ultrices justo ac auctor.'
-        },
-        {
-            user: {
-                name: 'taehyeungkim98',
-                age: 21,
-                sex: '남',
-                major: '컴퓨터공학'
-            },
-            trynum: 3,
-            period: '1개월',
-            level: 4,
-            studyMethod: ['기출풀이', '인터넷강의'],
-            material: '이기적 컴퓨터활용능력1급',
-            comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec lectus vitae mauris dignissim volutpat id in turpis. Ut ut faucibus neque. Maecenas rutrum sollicitudin purus, et auctor sem tincidunt ut. Nulla ut quam vitae erat egestas ultricies vitae eget lectus. Vivamus viverra rhoncus turpis, quis sodales tortor placerat nec. Etiam convallis tincidunt scelerisque. In hac habitasse platea dictumst. Maecenas nisi felis, blandit vitae lacus sit amet, hendrerit vehicula mauris. Cras feugiat ultrices justo ac auctor.'
-        },
-        {
-            user: {
-                name: 'taehyeungkim98',
-                age: 21,
-                sex: '남',
-                major: '컴퓨터공학'
-            },
-            trynum: 3,
-            period: '1개월',
-            level: 4,
-            studyMethod: ['기출풀이', '인터넷강의'],
-            material: '이기적 컴퓨터활용능력1급',
-            comment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec lectus vitae mauris dignissim volutpat id in turpis. Ut ut faucibus neque. Maecenas rutrum sollicitudin purus, et auctor sem tincidunt ut. Nulla ut quam vitae erat egestas ultricies vitae eget lectus. Vivamus viverra rhoncus turpis, quis sodales tortor placerat nec. Etiam convallis tincidunt scelerisque. In hac habitasse platea dictumst. Maecenas nisi felis, blandit vitae lacus sit amet, hendrerit vehicula mauris. Cras feugiat ultrices justo ac auctor.'
-        }
-    ]
-
-
-    const reviewData: CertReview = {
-        cert: (params as ParsedUrlQuery).id as string,
-        avr_level: 3.7,
-        avr_trynum: 2.7,
-        avr_period: '3개월',
-        reviewArr: reviewArr
-    }
-
     const certServerSideProps = {
         certInfoAndStats: certInfoAndStats,
-        reviewData: reviewData
+        reviewData: certReview
     }
 
 
@@ -188,11 +169,11 @@ export default function Certification({certServerSideProps}: InferGetServerSideP
                         )
                     case "review":
                         return(
-                            <CertReview reviewData={certServerSideProps.reviewData}/>
+                            <CertReview reviewData={certServerSideProps.reviewData} certInfo={detailData}/>
                         )
                     case "write":
                         return(
-                            <CertReviewWrite cert={certServerSideProps.certInfoAndStats.cert_info.name}/>
+                            <CertReviewWrite cert_name={certServerSideProps.certInfoAndStats.cert_info.name} cert_code={detailData.code}/>
                         )
                 }   
             })()}

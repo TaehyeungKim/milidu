@@ -36,13 +36,13 @@ export default function CertInfo({certInfoAndStats, certInfo}: CertInfoProps) {
                     
                 </div>
                 <div className = {styles.graph_container}>
-                    <ChartComponent/>
+                    <ChartComponent stats_data={certInfoAndStats.data}/>
                 </div>
             </section>
             <section className = {styles.cert_studyMaterial}>
                 <h3 className = {styles.field}>무료강의</h3>
                 <h3 className = {styles.field}>도서추천</h3>
-                <LectureList/>
+                <LectureList lecture_data={certInfoAndStats.lecture_info}/>
                 <BookList/>
             </section>
             <section className = {styles.cert_schedule}>

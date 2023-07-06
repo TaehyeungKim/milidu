@@ -1,6 +1,7 @@
 import styles from './CertReview.module.scss';
 import StarRateComponent from '@/components/StarRate/StarRateComponent';
-import { CertReview, ReviewData } from './[id]';
+import { CertReview, ReviewData } from '@/pages/certification/[id]';
+import { CertInfo } from '@/utils/DataCollector';
 
 
 interface CertReviewArticleProps {
@@ -14,26 +15,27 @@ function CertReviewArticle({reviewArr}: CertReviewArticleProps) {
             {reviewArr.map((data: ReviewData, index: number)=>(
                  <article className={styles.review} key={index}>
                  <header className={styles.review_writer}>
-                     <em>{data.trynum}수 합격</em>/<em>{data.period}</em><br/>
-                      <span>{data.user.age}세</span>/<span>{data.user.sex}</span>/<span>{data.user.major}</span> 
+                     <em>{data.num_attempts}수 합격</em>/<em>{data.time_taken}</em><br/>
+                    {/* <span>{data.user.age}세</span>/<span>{data.user.sex}</span>/<span>{data.user.major}</span>  */}
+                    <span>{data.username}</span>
                  </header>
                  <div className = {styles.below_header}>
                      <div className = {styles.level}>
                          <span className = {styles.label}>체감난이도: </span>
-                         <StarRateComponent size={16} disabled={true} value={data.level}/>
+                         <StarRateComponent size={16} disabled={true} value={data.difficulty}/>
                      </div>
                      <div className = {styles.study}>
                         <span className = {styles.label}>공부방법: </span>
-                        {data.studyMethod.map((method: string, index: number, arr: string[])=>(
+                        {data.study_method.split(',').map((method: string, index: number, arr: string[])=>(
                             <span key={index}>{method}</span>
                         ))}
                      </div>
                      <div className = {styles.studyMaterial}>
-                         <span className={styles.label}>교재: </span><span>{data.material}</span>
+                         <span className={styles.label}>교재: </span><span>{data.recommend_book}</span>
                      </div>
                  </div>
                  <div className={styles.text}>
-                 {data.comment}
+                 {data.content}
                  </div>
  
              </article>
@@ -44,29 +46,30 @@ function CertReviewArticle({reviewArr}: CertReviewArticleProps) {
 }
 
 interface CertReviewProps {
-    reviewData: CertReview
+    reviewData: CertReview,
+    certInfo: CertInfo
 }
 
 
-export default function CertReview({reviewData}:CertReviewProps) {
+export default function CertReview({reviewData, certInfo}:CertReviewProps) {
     return(
         <>
-        <h3 className = {styles.cert}>{reviewData.cert}</h3>
+        <h3 className = {styles.cert}>{certInfo.name}</h3>
         <section className={styles.summaryArea}>
             <div className = {styles.sum_container}>
                 <h3 className = {styles.sum_label}>난이도</h3>
-                <StarRateComponent size={20} disabled={true} value={reviewData.avr_level}/>
+                <StarRateComponent size={20} disabled={true} value={reviewData.average_difficulty}/>
             </div>
             <div className = {styles.sum_container}>
                 <h3 className = {styles.sum_label}>소요기간</h3>
-                <span className = {styles.value}>{reviewData.avr_period}</span>
+                <span className = {styles.value}>{reviewData.average_time_taken}개월</span>
             </div>
             <div className = {styles.sum_container}>
                 <h3 className = {styles.sum_label}>시험 횟수</h3>
-                <span className = {styles.value}>{reviewData.avr_trynum}수</span>
+                <span className = {styles.value}>{reviewData.average_num_attempts}수</span>
             </div>
         </section>
-        <CertReviewArticle reviewArr={reviewData.reviewArr}/>
+        <CertReviewArticle reviewArr={reviewData.ReviewList}/>
         </>
     )
 }

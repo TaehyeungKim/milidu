@@ -84,6 +84,7 @@ class CertDataCollector extends DataCollector {
             withCredentials: true,
             credentials: 'same-origin',
           }
+        
         const res = await axios.get('/certs', initconfig)
         const data = await res.data
         // const json = await res.json();

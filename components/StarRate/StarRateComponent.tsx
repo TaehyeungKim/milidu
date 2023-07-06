@@ -43,10 +43,11 @@ const StarRate = styled.div<{$size: number}>`
 interface StarRateComponentProps {
     size: number,
     disabled: boolean,
-    value?: number
+    value?: number,
+    updater?:(rate:number)=>void
 }
 
-export default function StarRateComponent({size, disabled, value}:StarRateComponentProps) {
+export default function StarRateComponent({size, disabled, value, updater}:StarRateComponentProps) {
     const [starRateBox, starRate] = [useRef<HTMLDivElement>(null),useRef<HTMLDivElement>(null)];
     const transparentInput = useRef<HTMLInputElement>(null);
     useEffect(()=>{
@@ -55,17 +56,22 @@ export default function StarRateComponent({size, disabled, value}:StarRateCompon
 
         transparentInput.current?.addEventListener('change', (e)=>{
             const target = e.target as HTMLInputElement
-            starRate.current?.setAttribute('style', `width: ${target.valueAsNumber * 20}%`)
+            starRate.current?.setAttribute('style', `width: ${target.valueAsNumber * 10}%`)
             
         })
     },[])
 
     useEffect(()=>{
-        if(value) starRate.current?.setAttribute('style', `width: ${value * 20}%`)
+        if(value) starRate.current?.setAttribute('style', `width: ${value * 10}%`)
     },[value])
     return(
         <StarRateBox $size={size}ref={starRateBox}>
-                <TransparentInput type="range" min={0} max={5} step={0.5} ref={transparentInput} disabled={disabled} $disabled={disabled} value={value}/>
+                <TransparentInput type="range" min={0} max={10} step={1} ref={transparentInput} disabled={disabled} $disabled={disabled} value={value} onChange={(e)=>{
+                    if(updater) {
+                        const target = e.target as HTMLInputElement;
+                        updater(parseInt(target.value as string))
+                    }
+                    }}/>
                 <StarRate $size = {size} ref={starRate}>★★★★★</StarRate>
         </StarRateBox>
     )
