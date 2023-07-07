@@ -1,5 +1,5 @@
 import styles from './CertPagination.module.scss'
-import {useState, useEffect, useDeferredValue} from 'react';
+import {useState, useEffect, useDeferredValue, useLayoutEffect} from 'react';
 import {useMediaQuery} from 'react-responsive'
 import {arrowRight, arrowLeft} from '@/public/icons/icons'
 
@@ -36,6 +36,11 @@ export default function CertPagination({pageNum, flipper, curPage}:CertPaginatio
                </li>)
     }
 
+    // useEffect(()=>{
+
+    //     // document.getElementById(`page_${pageBlockIndex*PAGEPERBLOCK+1}`)?.setAttribute('checked', 'true')
+    //     // return(()=>document.getElementById('pageBlank')?.setAttribute('checked', 'true'))
+    // },[curPage])
 
     useEffect(()=>{
         if(isSmallSize === deferredMedia) {
@@ -51,6 +56,11 @@ export default function CertPagination({pageNum, flipper, curPage}:CertPaginatio
     useEffect(()=>{
         setPageBlockIndex(Math.floor(curPage/PAGEPERBLOCK))
     },[isSmallSize])
+
+    useEffect(()=>{
+        document.getElementById(`page_${curPage}`)?.setAttribute('checked', 'true')
+        console.log('curPage')
+    },[curPage])
 
     return(
         <div className={styles.pagination}>

@@ -3,8 +3,9 @@ import ChartComponent from '@/components/Chart/Chart'
 import LectureList from '@/components/LectureList/LectureList'
 import BookList from '@/components/BookList/BookList'
 import ScheduleTable from '@/components/ScheduleTable/ScheduleTable'
-import {CertInfoAndStats} from '@/pages/certification/[id]';
+import {CertInfoAndStats, CertTestSchedule} from '@/pages/certification/[id]';
 import {CertInfo} from '@/utils/DataCollector';
+
 
 interface CertInfoProps {
     certInfoAndStats: CertInfoAndStats,
@@ -12,6 +13,8 @@ interface CertInfoProps {
 }
 
 export default function CertInfo({certInfoAndStats, certInfo}: CertInfoProps) {
+
+
     return(
         <>
             <section className = {styles.cert_info}>
@@ -22,7 +25,7 @@ export default function CertInfo({certInfoAndStats, certInfo}: CertInfoProps) {
             <section className = {styles.cert_statistic}>
                 <div className = {styles.representative_stat_container}>
                     <article className = {styles.representative_stat}>
-                        <h5 className = {styles['representative_stat--field']}>전공명</h5>
+                        <h5 className = {styles['representative_stat--field']} >전공명</h5>
                         <mark className = {styles['representative_stat--value']}>{certInfo.majors}</mark>
                     </article>
                     <article className = {styles.representative_stat}>

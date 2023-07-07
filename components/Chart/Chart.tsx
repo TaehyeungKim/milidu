@@ -75,26 +75,26 @@ export default function ChartComponent({stats_data}:ChartComponentProps) {
             {
                 type: 'bar',
                 label: '응시자수',
-                backgroundColor: 'green',
+                backgroundColor: '#F77E73',
                 data: stats_data.map(data=>data.test_taken),
                 borderColor: 'white',
-                borderWidth: 2,
+                borderWidth: 4,
                 yAxisID: 'yMain'
             },
             {
                 type: 'bar',
                 label: '합격자수',
-                backgroundColor: 'blue',
+                backgroundColor: '#9B64A8',
                 data: stats_data.map(data=>data.test_passed),
                 borderColor: 'white',
-                borderWidth: 2,
+                borderWidth: 4,
                 yAxisID: 'yMain'
             },
             {
                 type: 'line',
                 label: '합격률',
-                borderColor: 'red',
-                borderWidth: 2,
+                borderColor: '#657899',
+                borderWidth: 4,
                 fill: true,
                 data: stats_data.map(data=>(data.pass_rate)),
                 yAxisID: 'yAuxiliary'
@@ -102,8 +102,8 @@ export default function ChartComponent({stats_data}:ChartComponentProps) {
             {
                 type: 'line',
                 label: '군 장병 합격률',
-                borderColor: 'navy',
-                borderWidth: 2,
+                borderColor: '#FFA5C4',
+                borderWidth: 4,
                 fill: false,
                 data: stats_data.map(data=>((data.military_passed/data.military_taken)*100)),
                 yAxisID: 'yAuxiliary'

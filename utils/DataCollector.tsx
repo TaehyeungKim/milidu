@@ -7,7 +7,8 @@ export type CertInfo = {
     total_passed: number,
     total_taken: number,
     year: number,
-    host: string
+    host: string,
+    id: number
 }
 
 interface DataCollector {

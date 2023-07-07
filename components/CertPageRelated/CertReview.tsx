@@ -69,7 +69,8 @@ export default function CertReview({reviewData, certInfo}:CertReviewProps) {
                 <span className = {styles.value}>{reviewData.average_num_attempts}수</span>
             </div>
         </section>
-        <CertReviewArticle reviewArr={reviewData.ReviewList}/>
+        {reviewData.ReviewList.length > 0 ? <CertReviewArticle reviewArr={reviewData.ReviewList}/>:<h3>아직 등록된 리뷰가 없습니다.</h3>}
+        
         </>
     )
 }

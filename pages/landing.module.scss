@@ -1,0 +1,125 @@
+@use '@/utils/toremfunc';
+
+
+.container {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+}
+.main_img {
+    position: relative;
+	.cert_img {
+		width:toremfunc.toRem(420);
+		
+		
+	}
+}
+.sub_img {
+    position: absolute;
+    top:toremfunc.toRem(150);
+    right: toremfunc.toRem(100);
+	.cert_sub_img {
+		width:toremfunc.toRem(420);
+		
+	}
+}
+
+.item_ment_one {
+    margin: auto;
+    text-align: center;
+    font-size: toremfunc.toRem(22);
+}
+
+.main_ment {
+    width: 100%;
+    padding: toremfunc.toRem(200) 0 toremfunc.toRem(300) 0;
+    text-align: center;
+    line-height: 2;
+    display: flex;
+    flex-direction: column;
+}
+.milidu_info {
+    font-size: toremfunc.toRem(52);
+    font-weight: 900;
+    /*text-shadow: 4px 6px 18px #F67F72*/
+}
+.item_box_two {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    background-color: white;
+}
+
+.item_box {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    background-color: #f9fafb;
+}
+.cert_item {
+    padding: 0 toremfunc.toRem(60);
+}
+
+.ment_part {
+    font-weight: 800;
+    font-size: toremfunc.toRem(32);
+    line-height: 1.8;
+    padding: toremfunc.toRem(50) 0;
+}
+.button {
+    cursor: pointer;
+    font-size:toremfunc.toRem(16);
+    padding: toremfunc.toRem(8);
+    border-radius: toremfunc.toRem(42);
+    border:2px solid #fda94e;
+    background-color: transparent;
+    font-weight: 600;
+}
+.button_div :hover {
+    background: #fda94e;
+    color: white;
+    transition: all 0.2s ease-in-out;
+}
+.button_div {
+    display: flex;
+    justify-content: center;
+    padding: toremfunc.toRem(80) 0;
+}
+.cert_img {
+    padding: toremfunc.toRem(50) 0;
+}
+.univ_img {
+    padding: toremfunc.toRem(50) 0;
+}
+.menu {
+	width:toremfunc.toRem(40);
+	display:flex;
+}
+
+.menubar {
+	display:inline-flex;
+	padding:toremfunc.toRem(2) toremfunc.toRem(4);
+	margin:toremfunc.toRem(20);
+	border:1px solid #ff8e24;
+	border-radius:toremfunc.toRem(14);
+	background-color:#ff8e24;
+	color:white;
+}
+.menu_name {
+	font-size:toremfunc.toRem(22);
+	margin:auto 0;
+	font-weight:600;
+	
+}
+
+
+@media screen and (max-width: 999px) {
+    .main_ment {
+        padding: toremfunc.toRem(100) 0 toremfunc.toRem(150) 0;
+        line-height: 1.4;
+    }
+    .milidu_info {
+        font-size: toremfunc.toRem(26);
+        font-weight: 700;
+    }
+}

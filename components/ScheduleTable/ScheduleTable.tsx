@@ -1,44 +1,35 @@
 import styles from './ScheduleTable.module.scss'
+import {useContext} from 'react'
+import { ScheduleContext, CertTestSchedule } from '@/pages/certification/[id]'
 
-type ScheduleData = {
-    "구분": string,
-    "필기원서접수": string,
-    "필기시험": string,
-    "필기합격발표": string,
-    "실기원서접수": string,
-    "실기시험": string,
-    "최종합격발표": string
-}
+
 
 export default function ScheduleTable() {
-    const data: ScheduleData = {
-        "구분": "2023년 정기 기사 1회",
-        "필기원서접수": "2023.01.10 ~ 2023.01.19",
-        "필기시험": "2023.02.13 ~ 2023.03.15",
-        "필기합격발표": "2023.03.21",
-        "실기원서접수": "2023.03.28 ~ 2023.03.31",
-        "실기시험": "2023.04.22 ~ 2023.06.25",
-        "최종합격발표": "2023.04.22 ~ 2023.06.25"
-    }
     
-    const dataArr = [data]
+    const schedule = useContext(ScheduleContext)
+
     return(
         <table className = {styles.table}>
             <thead>
                 <tr>
-                    {Object.keys(data).map((key: string, index: number)=><th key={index} className={styles.table_head}>{key}</th>)}
+                <th className={styles.table_head}>회차</th>
+                <th className={styles.table_head}>필기원서접수</th>
+                <th className={styles.table_head}>필기시험</th>
+                <th className={styles.table_head}>실기원서접수</th>
+                <th className={styles.table_head}>실기시험</th>
+                <th className={styles.table_head}>최종합격발표</th>
+                    {/* {Object.keys(data).map((key: string, index: number)=><th key={index} className={styles.table_head}>{key}</th>)} */}
                 </tr>
             </thead>
             <tbody>
-            {dataArr.map((data: ScheduleData, index:number)=>(
+            {schedule?.map((data: CertTestSchedule, index:number)=>(
                 <tr key={index} className = {styles.table_data}>
-                    <td>{data.구분}</td>
-                    <td>{data.필기원서접수}</td>
-                    <td>{data.필기시험}</td>
-                    <td>{data.필기합격발표}</td>
-                    <td>{data.실기원서접수}</td>
-                    <td>{data.실기시험}</td>
-                    <td>{data.최종합격발표}</td>
+                    <td>{data.회차}</td>
+                    <td>{data.필기원서접수시작}~{data.필기원서접수종료}</td>
+                    <td>{data.필기종료}</td>
+                    <td>{data.실기원서접수시작}~{data.실기원서접수종료}</td>
+                    <td>{data.실기종료}</td>
+                    <td>{data.합격발표시작}~{data.합격발표종료}</td>
                 </tr>
             ))}
             </tbody>

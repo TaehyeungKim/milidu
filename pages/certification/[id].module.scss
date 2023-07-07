@@ -1,6 +1,10 @@
 //자격증 상세 페이지의 레이아웃 틀
 @use '@/utils/toremfunc';
 
+.inner_layout {
+    display: flex;
+}
+
 .wrapper {
     display: flex;
     flex-direction: column;
@@ -28,5 +32,11 @@
             
         }
 
+    }
+}
+
+@media screen and (max-width: 777px) {
+    .wrapper {
+        order: 2;
     }
 }

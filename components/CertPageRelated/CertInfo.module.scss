@@ -28,6 +28,7 @@
     }
     .cert_info--name {
         font-size: toremfunc.toRem(30);
+		font-weight:700;
     }
 
     .cert_info--desc {
@@ -55,8 +56,8 @@
             width: toremfunc.toRem(200);
             display: flex;
             flex-direction: column;
-            border: 3px solid gray;
-            border-radius: toremfunc.toRem(10);
+            border: 3px solid #FFA84E;
+            border-radius: toremfunc.toRem(18);
             padding: toremfunc.toRem(10);
             box-sizing: border-box;
             .representative_stat--field, .representative_stat--value {
@@ -68,6 +69,7 @@
             }
             .representative_stat--value {
                 font-size: toremfunc.toRem(30);
+				font-weight:500;
             }
         }
     }
@@ -95,6 +97,7 @@
 	background:white;
 	border-radius: toremfunc.toRem(6);
 }
+
 @media screen and (max-width: 550px) {
 	.cert_schedule {
 		width: auto;

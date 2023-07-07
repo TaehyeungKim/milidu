@@ -21,7 +21,6 @@
                 aspect-ratio: 1;
                 text-align: center;
                 box-sizing: border-box;
-                border: 1px solid white;
                 //background-color: #efefef;
 				
 				cursor:pointer;
@@ -29,9 +28,9 @@
             }
             input {
                 &:checked + .index {
-                    background-color: orange;
+                    background-color: #F47874;
                     color: white;
-					border-radius:toremfunc.toRem(20)
+					border-radius:toremfunc.toRem(12);
                 }
             }
         }

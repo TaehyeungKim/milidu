@@ -7,3 +7,10 @@
     flex-grow: 1;
 	background-color:#f2f4f6;
 }
+
+@media (max-width: "777px") {
+    .main {
+        flex-direction: column;
+    }
+    
+}
