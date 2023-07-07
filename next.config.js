@@ -45,6 +45,18 @@ const nextConfig = {
           {
             source: "/cert_test_schedule",
             destination: "https://milidu-backend-ykzlu.run.goorm.site/cert_test_schedule",
+          },
+          {
+            source: "/get_lecture",
+            destination: "https://milidu-backend-ykzlu.run.goorm.site/get_lecture",
+          },
+          {
+            source: "/create_lect_review",
+            destination: "https://milidu-backend-ykzlu.run.goorm.site/create_lect_review",
+          },
+          {
+            source: "/get_lect_review",
+            destination: "https://milidu-backend-ykzlu.run.goorm.site/get_lect_review",
           }
         ];
       }

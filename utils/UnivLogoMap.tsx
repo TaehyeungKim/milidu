@@ -1,4 +1,8 @@
-export const UnivLogoMap = {
+type UnivLogoMap = {
+    [key: string]:string
+}
+
+export const UnivLogoMap: UnivLogoMap = {
     "가야대학교": '001.jpg',
     "가천대학교": '002.jpg',
     "가톨릭관동대학교": '003.png',

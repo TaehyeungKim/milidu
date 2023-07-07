@@ -21,7 +21,7 @@ const renderPagination = (data:CertInfo[]|null, flipper: (index:number)=>void, c
 export default function Certification() {
 
     
-    const data = useSyncExternalStore(subscribe.bind(certDataCollector), getSnapshotOfData.bind(certDataCollector), getSnapshotOfData.bind(certDataCollector))
+    const data = useSyncExternalStore(subscribe.bind(certDataCollector), getSnapshotOfData.bind(certDataCollector), getSnapshotOfData.bind(certDataCollector)) as CertInfo[]
 
 
     const [pageIndex, setPageIndex] = useState<number>(0);

@@ -1,14 +1,34 @@
 import styles from './UnivDetail.module.scss'
 import { univReducerState } from '@/pages/university'
 import UniveLectureList from './UniveLectureList'
+import {useEffect, useState} from 'react'
+import axios from 'axios'
 
-type univScheduledata = {
-    university: string,
-    "수강 신청일": string,
-    "개강일": string,
-    "수강신청 정정일": string,
-    "수강 철회일": string,
-    "종강일": string
+type UnivScheduledata = {
+    id: number,
+    reg_cancel_end: string,
+    reg_cancel_start: string,
+    reg_change_end: string,
+    reg_change_start: string,
+    reg_end: string,
+    reg_start: string,
+    sem_end: string,
+    sem_start: string,
+    school_name: string
+}
+
+export type UnivLectureData = {
+    code: string,
+    costs: number,
+    credit: number,
+    id: number,
+    lecture: string,
+    lecture_type: string,
+    max_seats: number,
+    prof: string,
+    reg_start: string,
+    tuition: number,
+    univ: string
 }
 
 export type lectureData = {
@@ -22,14 +42,6 @@ interface UnivDetailProps {
     state: univReducerState
 }
 
-const data: univScheduledata = {
-    "university": "서울대학교",
-    "수강 신청일": "2023.02.14 ~ 2023.03.14",
-    "개강일": "2023.03.02",
-    "수강신청 정정일": "2023.03.02 ~ 2023.03.14",
-    "수강 철회일" : "2023.03.02 ~ 2023.03.14",
-    "종강일": "2023.06.14"
-}
 
 const lectureDataArr: lectureData[] = [
     {"강의명": "르세라핌의 이해",
@@ -47,32 +59,61 @@ const lectureDataArr: lectureData[] = [
     "정원": 20}
 ]
 
+
+
+const fetchUnivData = async(name: string, path:string) => {
+    const body = {
+        school_name: name
+     }
+    const res = await axios.post(path, body, {
+        headers: {
+            "Content-Type": 'application/json'
+        }
+    })
+
+    return res.data
+}
+
+
 export default function UnivDetail({state}:UnivDetailProps) {
 
-     
+    const [univSchedule, setUnivSchedule] = useState<UnivScheduledata|null>(null)
+    const [lectureList, setLectureList] = useState<UnivLectureData[]|null>(null)
 
+    const updateUnivSchedule = (schedule: UnivScheduledata) => setUnivSchedule(schedule)
+    const updateLectureList = (list: UnivLectureData[]) => setLectureList(list) 
+
+    useEffect(()=>{
+        fetchUnivData(state.univName as string, '/get_unischedule').then((data:any)=>updateUnivSchedule(data))
+        fetchUnivData(state.univName as string, '/get_lecture').then((data:any)=>updateLectureList(data))
+
+    },[])
+     
+    if(!univSchedule || !lectureList) return (<></>)
 
     return(
         <section className = {styles.univ_detail}>
             <table className = {styles.scheduleTable}>
                 <thead>
                     <tr>
-                        {Object.keys(data).map((key: string, index: number)=>(
-                              key !== 'university' ? <th key={index}>{key}</th> : null    
-                        ))}
+                        <th>수강 신청일</th>
+                        <th>개강일</th>
+                        <th>수강신청 정정일</th>
+                        <th>수강 철회읠</th>
+                        <th>종강일</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>{data['수강 신청일']}</td>
-                        <td>{data.개강일}</td>
-                        <td>{data['수강신청 정정일']}</td>
-                        <td>{data['수강 철회일']}</td>
-                        <td>{data.종강일}</td>
+                        <td>{univSchedule.reg_start} ~ {univSchedule.reg_end}</td>
+                        <td>{univSchedule.sem_start}</td>
+                        <td>{univSchedule.reg_change_start} ~ {univSchedule.reg_change_end}</td>
+                        <td>{univSchedule.reg_cancel_start} ~ {univSchedule.reg_change_end}</td>
+                        <td>{univSchedule.sem_end}</td>
                     </tr>
                 </tbody>
             </table>
-            <UniveLectureList lectureDataArr={lectureDataArr}/>
+            <UniveLectureList lectureDataArr={lectureList}/>
         </section>
     )
 }

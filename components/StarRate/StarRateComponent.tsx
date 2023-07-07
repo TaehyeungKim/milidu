@@ -35,8 +35,7 @@ const StarRate = styled.div<{$size: number}>`
         background-clip: text;
         -webkit-background-clip: text;
         background-color: tomato;
-        color: rgba(0, 0, 0, 0.2);
-        
+        color: rgba(0, 0, 0, 0.2);        
         transition: width 0.2s ease-in-out;
 `
 

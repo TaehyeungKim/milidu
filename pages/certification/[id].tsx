@@ -146,7 +146,7 @@ const reducer = (state: CertDetailPageState, action: CertDetailPageAction) => {
 
 export default function Certification({certServerSideProps}: InferGetServerSidePropsType<typeof getServerSideProps>) {
 
-    const data = useSyncExternalStore(subscribe.bind(certDataCollector), getSnapshotOfData.bind(certDataCollector), getSnapshotOfData.bind(certDataCollector))
+    const data = useSyncExternalStore(subscribe.bind(certDataCollector), getSnapshotOfData.bind(certDataCollector), getSnapshotOfData.bind(certDataCollector)) as CertInfo[]
     const router = useRouter();
 
     const [detailData, setDetailData] = useState<CertInfo>(certDataCollector.dataOnRange.filter((data:CertInfo)=>data.code == router.query.id)[0]);

@@ -11,8 +11,13 @@ export type CertInfo = {
     id: number
 }
 
+export type UnivObject = {
+    school_id: number,
+    school_name: string
+}
+
 interface DataCollector {
-    _data: null|CertInfo[]
+    _data: null|CertInfo[]|UnivObject[]
     _listener: Array<any>
 }
 
@@ -106,7 +111,7 @@ class UnivDataCollector extends DataCollector {
 
     async collectUnivData() {
         const initconfig = {
-            method: 'GET',
+            method: 'POST',
             mode: 'no-cors',
             headers: {
               'Access-Control-Allow-Origin': '*',
@@ -115,7 +120,7 @@ class UnivDataCollector extends DataCollector {
             withCredentials: true,
             credentials: 'same-origin',
           }
-        const res = await axios.get('/get_unischedule', initconfig)
+        const res = await axios.post('/get_unischedule', initconfig)
         const data = await res.data
         // const json = await res.json();
         this.data = data;

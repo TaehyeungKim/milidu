@@ -1,9 +1,11 @@
 import styled from "styled-components"
 import { arrowRight, arrowLeft } from '@/public/icons/icons'
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useCallback, useContext } from "react"
 import { toRem } from "@/utils/toRem"
 import { textAreaResize } from "@/utils/textAreaResize"
 import StarRateComponent from "../StarRate/StarRateComponent"
+import axios from 'axios'
+import { LectureInfoContext, LectureComment } from "./UniveLectureList"
 
 export type LectureCommentData = {
     period: string,
@@ -88,7 +90,11 @@ const MAXPERPAGE = 3;
         display: block;
     `
 
-    const LectureInfoSection = styled(CommentSection)``
+    const LectureInfoSection = styled(CommentSection)`
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+    `
 
     const CommentData = styled(CommentSection)`
         font-size: ${toRem(17)}rem;
@@ -99,6 +105,7 @@ const MAXPERPAGE = 3;
 
     const Info = styled.span`
         display: inline-block;
+        bottom: 0;
         margin-right: ${toRem(20)}rem;
         font-size: ${toRem(12)}rem;
 		@media screen and (max-width: 553px) {
@@ -198,7 +205,27 @@ const MAXPERPAGE = 3;
     `
     
 
-export default function UnivLectureComment() {
+const OPTION = ['1', '여름', '2', '겨울']
+
+export type LectureReviewInp = {
+    school_name:string,
+    lecture_name:string,
+    lecture_id:number,
+    username:string,
+    content:string,
+    semester:string,
+    rating:number
+    load:string,
+    grade:string
+}
+
+interface UnivLectureCommentProps {
+    data: LectureComment[]
+}
+
+export default function UnivLectureComment({data}:UnivLectureCommentProps) {
+
+    const lectureInfo = useContext(LectureInfoContext)
 
     
     const [page, setPage] = useState<number>(0);
@@ -214,13 +241,32 @@ export default function UnivLectureComment() {
     const [left, right] = [useRef<HTMLButtonElement>(null), useRef<HTMLButtonElement>(null)]
     const textarea = useRef<HTMLTextAreaElement>(null);
     
+    const [selectedYear, setSelectedYear] = useState<string>("");
+    const [selectedSem, setSelectedSem] = useState<string>("");
+    const [rate, setRate] = useState<number>(0);
 
-    
+    const updateYear = (year:string) => setSelectedYear(year);
+    const updateSem = (sem:string)=> setSelectedSem(sem)
+    const updateRate = (rate:number)=>setRate(rate)
 
-    const shownDataArr = commentDataArr.filter((data: LectureCommentData, index: number)=>{
+
+    const shownDataArr = data.filter((data: LectureComment, index: number)=>{
         return index >= page*MAXPERPAGE && index < (page+1)*MAXPERPAGE
     })
 
+    
+    const handleSubmit = useCallback(async(data:LectureReviewInp)=>{
+        if(textarea.current?.value === ""
+        || selectedYear === ""
+        || selectedSem === ""
+        || rate === 0) return ;
+        const res = await axios.post('/create_lect_review', data, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        console.log(res.data)
+    },[selectedYear, selectedSem, rate])
     
 
     useEffect(()=>{
@@ -233,29 +279,23 @@ export default function UnivLectureComment() {
     },[page])
 
     useEffect(()=>{
-
         textAreaResize(textarea.current as HTMLTextAreaElement);
-
-        // textarea.current?.addEventListener('input', (e)=>{
-        //     const target = e.target as HTMLTextAreaElement;
-            
-        //     target.setAttribute('style', 'height: auto')
-        //     if(target.scrollHeight !== target.clientHeight) {
-        //         target.setAttribute('style', `height: ${toRem(target.scrollHeight)}rem`)}
-        // })
     },[])
 
     
 
     return(
         <div style={{overflow: 'hidden'}}>
+        {data.length === 0 ? <div style={{textAlign: 'center'}}>강의평이 존재하지 않습니다.</div>
+        :
+        <>
         <CommentList>
-            {shownDataArr.map((data: LectureCommentData, index: number)=>(
-                <Comment key={index}>
+            {shownDataArr.map((data: LectureComment, index: number)=>(
+                <Comment key={data.id}>
                 
-                <CommentData>{data.comment}</CommentData>
+                <CommentData>{data.content}</CommentData>
                 <LectureInfoSection>
-                    <Info>수강년도: {data.period}</Info><Info>교수: {data.pf}</Info><Rate>{'★'.repeat(data.rate)}</Rate>
+                    <Info>수강년도: {data.semester}</Info><Info><StarRateComponent size={15} value={data.rating} disabled={true}></StarRateComponent></Info>
                 </LectureInfoSection>
             </Comment>
             ))}
@@ -264,17 +304,46 @@ export default function UnivLectureComment() {
             <LeftButton $index={page} onClick={pageDecrease} ref={left}>{arrowLeft()}</LeftButton>
             <RightButton $index={page} onClick={pageIncrement} ref={right}>{arrowRight()}</RightButton>
         </Wrapper>
+        </>
+        }
+        
         <section>
-            <div style={{padding: `${toRem(5)}rem`, display: 'flex', flexDirection: 'column', alignItems:'center'}}>
-                <LabelForStarBox className="labelstarbox">별점을 매겨주세요!</LabelForStarBox>
-                <StarRateComponent className="starbox" size={40} disabled={false}/>
+            <div style={{padding: `${toRem(5)}rem`, display: "flex"}}>
+                <div style={{display: 'flex', flexDirection: 'column', alignItems:'flex-start'}}>
+                    <LabelForStarBox >별점을 매겨주세요!</LabelForStarBox>
+                    <StarRateComponent size={40} disabled={false} updater={updateRate}/>
+                </div>
+                <div>
+                    <div style={{display:'inline-block'}}>
+                        <select onChange={(e)=>updateYear(e.target.value)}>
+                            {(()=>{
+                                let arr:any = [];
+                                const curYear = new Date().getFullYear();
+                                for(let i = 0; i <=4; i++) arr = [...arr, <option key={`year_${curYear-i}`} value={curYear-i}>{curYear - i}</option>]
+                                return arr
+                            })()}
+                        </select>
+                        <span>년도</span>
+                    </div>
+                    <div style={{display: 'inline-block'}}>
+                        <select onChange={(e)=>updateSem(e.target.value)}>
+                            {OPTION.map((op: string, i:number)=>(<option key={op} value={op}>{op}</option>))}
+                        </select>
+                        <span>학기</span>
+                    </div>
+                    
+                </div>
             </div>
             <div style={{width: '100%', display: 'flex'}}><CommentTextArea ref={textarea} placeholder="한 줄 수강평을 입력해주세요!"/></div>
-            <RegisterButton>수강평 등록하기</RegisterButton>
-            
- 
-            
-            
+            <RegisterButton onClick={()=>handleSubmit({
+                    ...lectureInfo,
+                    username:'taehyeungkim98',
+                    content:textarea.current?.value as string,
+                    semester: selectedYear + '년도 ' + selectedSem + '학기',
+                    rating:rate,
+                    load:"매우 많음",
+                    grade:"박함"
+            })}>수강평 등록하기</RegisterButton>           
         </section>
         
         
