@@ -372,7 +372,7 @@ export default function UnivLectureComment({data}:UnivLectureCommentProps) {
                     <StarRateComponent size={40} disabled={false} updater={updateRate}/>
                 </div>
                 <div className= {styles.review_sub_box}>
-                    <div className= {styles.review_day} onclick={toggleYearSelect}>
+                    <div className= {styles.review_day} onClick={toggleYearSelect}>
                         <span className= {styles.lecture_year}>수강년도: </span>
                         <SelectContainer>
                             <Selected>{selectedYear}</Selected>
