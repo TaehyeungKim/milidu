@@ -117,6 +117,8 @@ export default function BirthDateSection({state, dispatch}: BirthDateSelectionPr
         dispatch({area: target.ariaLabel as string, selected: selected})
    },[state])
 
+   if(!state) return (<></>)
+
     return(
         <section className = {styles.birthdateWrite}>
                 <label>생년월일</label>
