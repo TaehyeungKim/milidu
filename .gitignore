@@ -4,6 +4,8 @@ public/univlogo/
 public/*.jpg
 public/*.png
 
+.env
+
 # dependencies
 /node_modules
 /.pnp
