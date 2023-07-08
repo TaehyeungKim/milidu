@@ -24,6 +24,7 @@
     "react-chartjs-2": "^5.2.0",
     "react-dom": "18.2.0",
     "react-responsive": "^9.0.2",
+    "react-svg": "^16.1.18",
     "sass": "^1.63.4",
     "styled-components": "^6.0.0-rc.3",
     "typescript": "5.1.3"
