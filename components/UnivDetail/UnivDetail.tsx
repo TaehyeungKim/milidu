@@ -6,14 +6,14 @@ import axios from 'axios'
 
 type UnivScheduledata = {
     id: number,
-    reg_cancel_end: string,
-    reg_cancel_start: string,
-    reg_change_end: string,
-    reg_change_start: string,
-    reg_end: string,
-    reg_start: string,
-    sem_end: string,
-    sem_start: string,
+    reg_cancel_end: string|Date,
+    reg_cancel_start: string|Date,
+    reg_change_end: string|Date,
+    reg_change_start: string|Date,
+    reg_end: string|Date,
+    reg_start: string|Date,
+    sem_end: string|Date,
+    sem_start: string|Date,
     school_name: string
 }
 
@@ -74,6 +74,8 @@ const fetchUnivData = async(name: string, path:string) => {
     return res.data
 }
 
+const yieldDateFormat = (data: Date) => `${data.getFullYear()}.${data.getMonth()+1}.${data.getUTCDay()}`
+
 
 export default function UnivDetail({state}:UnivDetailProps) {
 
@@ -91,6 +93,10 @@ export default function UnivDetail({state}:UnivDetailProps) {
      
     if(!univSchedule || !lectureList) return (<></>)
 
+    const {reg_start, reg_end, sem_start, reg_change_start, reg_change_end, reg_cancel_start, reg_cancel_end, sem_end} = univSchedule;
+
+   
+
     return(
         <section className = {styles.univ_detail}>
             <table className = {styles.scheduleTable}>
@@ -105,11 +111,11 @@ export default function UnivDetail({state}:UnivDetailProps) {
                 </thead>
                 <tbody>
                     <tr>
-                        <td>{univSchedule.reg_start} ~ {univSchedule.reg_end}</td>
-                        <td>{univSchedule.sem_start}</td>
-                        <td>{univSchedule.reg_change_start} ~ {univSchedule.reg_change_end}</td>
-                        <td>{univSchedule.reg_cancel_start} ~ {univSchedule.reg_change_end}</td>
-                        <td>{univSchedule.sem_end}</td>
+                        <td>{yieldDateFormat(new Date(reg_start))} ~ {yieldDateFormat(new Date(reg_end))}</td>
+                        <td>{yieldDateFormat(new Date(sem_start))}</td>
+                        <td>{yieldDateFormat(new Date(reg_change_start))} ~ {yieldDateFormat(new Date(reg_change_end))}</td>
+                        <td>{yieldDateFormat(new Date(reg_cancel_start))} ~ {yieldDateFormat(new Date(reg_cancel_end))}</td>
+                        <td>{yieldDateFormat(new Date(sem_end))}</td>
                     </tr>
                 </tbody>
             </table>

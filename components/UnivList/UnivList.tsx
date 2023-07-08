@@ -17,7 +17,6 @@ interface UnivListProps {
 
 export default function UnivList({dispatch, state, data}: UnivListProps) {
 
-    // const list = ['서울대학교', '연세대학교', '고려대학교', '가천대학교']
     
 
     const listContainer = useRef<HTMLDivElement>(null)

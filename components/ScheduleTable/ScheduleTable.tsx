@@ -3,6 +3,9 @@ import {useContext} from 'react'
 import { ScheduleContext, CertTestSchedule } from '@/pages/certification/[id]'
 
 
+const yieldDataWithString = (str: string) => `${str.slice(0,4)}.${str.slice(4,6)}.${str.slice(6,8)}`
+
+
 
 export default function ScheduleTable() {
     
@@ -25,11 +28,11 @@ export default function ScheduleTable() {
             {schedule?.map((data: CertTestSchedule, index:number)=>(
                 <tr key={index} className = {styles.table_data}>
                     <td>{data.회차}</td>
-                    <td>{data.필기원서접수시작}~{data.필기원서접수종료}</td>
-                    <td>{data.필기종료}</td>
-                    <td>{data.실기원서접수시작}~{data.실기원서접수종료}</td>
-                    <td>{data.실기종료}</td>
-                    <td>{data.합격발표시작}~{data.합격발표종료}</td>
+                    <td>{yieldDataWithString(data.필기원서접수시작)}~{yieldDataWithString(data.필기원서접수종료)}</td>
+                    <td>{yieldDataWithString(data.필기종료)}</td>
+                    <td>{yieldDataWithString(data.실기원서접수시작)}~{yieldDataWithString(data.실기원서접수종료)}</td>
+                    <td>{yieldDataWithString(data.실기종료)}</td>
+                    <td>{yieldDataWithString(data.합격발표시작)}~{yieldDataWithString(data.합격발표종료)}</td>
                 </tr>
             ))}
             </tbody>
