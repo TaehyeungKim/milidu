@@ -178,7 +178,7 @@ const RegisterButton = styled.button`
     padding: ${toRem(10)}rem;
     color: black;
     display: block;
-    margin: 0 auto 0;
+    margin: ${toRem(14)}rem auto ${toRem(14)}rem;
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
     @media screen and (max-width: 553px) {
         font-size:${toRem(10)}rem;
