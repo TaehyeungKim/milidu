@@ -159,12 +159,13 @@ const CommentTextArea = styled.textarea`
     flex-grow: 1;
 `
 const LabelForStarBox = styled.span`
-    font-size: ${toRem(20)}rem;
+    font-size: ${toRem(16)}rem;
     font-family: '--main-kr';
     display: inline-block;
-    font-weight: 200;
+    font-weight: 400;
+	margin:auto;
     @media screen and (max-width: 553px) {
-        font-size: ${toRem(14)}rem;
+        font-size: ${toRem(11)}rem;
     }
 `
 const RegisterButton = styled.button`
@@ -236,8 +237,12 @@ const RadioLabel = styled.label`
     border: 2px solid #efefef;
     cursor: pointer;
     font-weight: 600;
+	@media screen and (max-width: 459px) {
+		padding:${toRem(5)}rem ${toRem(12)}rem;
+	}
 	@media screen and (max-width: 348px) {
 		padding: ${toRem(3)}rem ${toRem(8)}rem;
+		font-size: ${toRem(10)}rem;
 	}
 `
 

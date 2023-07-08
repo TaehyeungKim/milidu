@@ -102,7 +102,7 @@ const Floating_RegisterMajor = forwardRef(function Floating_RegisterMajor(props,
         <section>
         <label htmlFor='reg_userMj'>전공</label>
         <div className = {styles.floating}>    
-            <input type="text" id="reg_userMj" required></input>
+            <input type="text" id="reg_userMj" required ref={ref as MutableRefObject<HTMLInputElement>}></input>
             <label className = {styles.floatingLb} htmlFor='reg_userPw'>Major</label>
         </div>
         </section>

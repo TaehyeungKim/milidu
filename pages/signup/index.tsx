@@ -82,21 +82,67 @@ const initialArg: RegisterState = {
     }
 }
 
+export type BirthSelectState = {
+    year: number,
+    month: number,
+    date: number
+}
+
+export type BirthSelectAction = {
+    area: string,
+    selected: number
+}
+
+const dateSetReducer = (state: BirthSelectState, action: BirthSelectAction):BirthSelectState => {
+    switch(action.area) {
+        case "year":
+            return {
+                ...state,
+                year: action.selected
+            }
+        case "month":
+            return {
+                ...state,
+                month: action.selected
+            }
+        case "date":
+            return {
+                ...state,
+                date: action.selected
+            }
+        default:
+            return{
+                ...state
+            }
+    }
+}
+
 
 
 export default function Signup() {
 
+    const now = new Date();
+
     const [state, dispatch] = useReducer(registerReducer, initialArg)
     const majorRef = useRef<HTMLInputElement>(null)
 
+    const [birthState, birthDispatch] = useReducer(dateSetReducer, {
+        year: now.getFullYear(),
+        month: now.getMonth()+1,
+        date: now.getUTCDate()
+    })
+
     const register = useCallback(async()=>{
         if(state.id.state && state.pw.state && state.gender.state) {
-            const res = axios.post('/signup', {
-                name: "김태형",
-                username: state.id.state,
-                password:state.pw.state,
-                
+            const res = await axios.post('/signup_register', {
+                name: state.id.data,
+                username: "김채원",
+                password:state.pw.data,
+                major: majorRef.current?.value as string,
+                sex: state.gender.data,
+                birthdate: `${birthState.year}.${birthState.month}.${birthState.date}`
             })
+            console.log(res.data)
         }
     },[state.id.state,state.pw.state,state.gender.state])
 
@@ -107,7 +153,7 @@ export default function Signup() {
             <Floating_RegisterPw dispatch={dispatch} state={state.pw}/>
             <Floating_RegisterMajor ref={majorRef}/>
             <GenderSection dispatch={dispatch} state={state.gender}/>
-            <BirthDateSection/>
+            <BirthDateSection state={birthState} dispatch={birthDispatch}/>
             <footer className = {styles.signup_footer}>
                 <CustomButton onClick={register}>제출하기</CustomButton>
                 <Link href='./signin'>

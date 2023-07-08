@@ -109,19 +109,19 @@
 }
 
 .name {
-    min-width: 200px;
+    min-width: toremfunc.toRem(200);
     font-weight: bold;
 }
 
 .post_list li:hover {
 	border:2px solid #F47874;
-	border-radius: 12px;
+	border-radius: toremfunc.toRem(12);
 }
 
 .post_list li {
-    padding: 10px;
-    font-size: 18px;
-    height: 50px;
+    padding: toremfunc.toRem(10);
+    font-size: toremfunc.toRem(18);
+    height: toremfunc.toRem(50);
     border-bottom: 1px solid #efefef;
 }
 
@@ -131,7 +131,7 @@
 .list {
     display: flex;
     justify-content: space-between;
-    height: 50px;
+    height: toremfunc.toRem(50);
     align-items: center;
     cursor: pointer;
 }
@@ -152,10 +152,10 @@
 
 .pagenation {
     padding: 0;
-    margin-top: 20px;
+    margin-top: toremfunc.toRem(20);
     display: inline-block;
     display: flex;
-    margin-bottom: 40px;
+    margin-bottom: toremfunc.toRem(40);
 }
 
 .pagenation li {
@@ -201,13 +201,13 @@
 
 .arrow_left, .arrow_right, .first, .last {
     padding: 0;
-    line-height: 10px;
+    line-height: toremfunc.toRem(10);
     border-radius: 100%;
 }
 
 .num {
     padding: 0;
-    line-height: 10px;
+    line-height: toremfunc.toRem(10);
 }
 
 .num, .arrow_left, .arrow_right, .first, .last {
@@ -216,7 +216,7 @@
 
 #footer {
     display: flex;
-    padding: 24px 16px;
+    padding: toremfunc.toRem(24) toremfunc.toRem(16);
     background-color:#EFEFEF;
     width: 100%;
     box-sizing: border-box;
@@ -227,7 +227,7 @@
 }
 
 #footer h5 {
-    font-size: 16px;
+    font-size: toremfunc.toRem(16);
 }
 
 #footer li {
@@ -235,7 +235,7 @@
     display: flex;
     align-items: center;
     width: 100%;
-    margin: 5px 10px;
+    margin: toremfunc.toRem(5) toremfunc.toRem(10);
 }
 
 #footer ul {
@@ -243,11 +243,11 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin: 0px 100px;
+    margin: 0 toremfunc.toRem(100);
 }
 
 .footer_one li span {
-    font-size: 12px;
+    font-size: toremfunc.toRem(12);
     vertical-align: baseline;
 }
 
@@ -272,35 +272,35 @@
 
 @media screen and (max-width: 550px) {
 	.search_box {
-		width: 320px;
+		width: toremfunc.toRem(320);
 	}
 }
 @media screen and (max-width: 338px) {
 	.post_list li {
-		font-size:8px;
+		font-size:toremfunc.toRem(8);
 	}
 	.search_box {
-		width: 260px;
+		width: toremfunc.toRem(260);
 	}
 }
 
 @media screen and (max-width: 316px) {
 	.post_list li {
-		font-size:6px;
+		font-size:toremfunc.toRem(6);
 	}
 }
 @media screen and (max-width: 287px) {
 	#point_1 {
-		font-size:18px;
+		font-size:toremfunc.toRem(18);
 	}
 	#point_2 {
-		font-size:18px;
+		font-size:toremfunc.toRem(18);
 	}
 }
 
 @media screen and (max-width: 528px) {
 	.post_list li {
-		font-size: 14px;
+		font-size: toremfunc.toRem(14);
 	}
 	.name {
 		min-width: auto;
@@ -312,9 +312,13 @@
 
 @media screen and (max-width: 367px) {
 	.post_list li {
-		font-size:12px;
+		font-size:toremfunc.toRem(12);
 	}
 	.content {
 		grid-template-columns:auto;
+	}
+	.search_box input {
+    	padding-left: toremfunc.toRem(3);
+    	padding-right: toremfunc.toRem(3);
 	}
 }

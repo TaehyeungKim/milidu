@@ -1,53 +1,21 @@
 import BirthDateSelect from "./BirthDateSelect"
 import styles from './BirthDateSection.module.scss'
-import { useEffect, useRef, useReducer, useCallback, MouseEventHandler } from "react"
+import { useEffect, useRef, useReducer, useCallback, MouseEventHandler, Dispatch }  from "react"
 
-type BirthSelectState = {
-    year: number,
-    month: number,
-    date: number
+import {BirthSelectState, BirthSelectAction} from '@/pages/signup/index'
+
+
+interface BirthDateSelectionProps {
+    state: BirthSelectState,
+    dispatch: Dispatch<BirthSelectAction>
 }
 
-type BirthSelectAction = {
-    area: string,
-    selected: number
-}
+export default function BirthDateSection({state, dispatch}: BirthDateSelectionProps) {
 
-const dateSetReducer = (state: BirthSelectState, action: BirthSelectAction):BirthSelectState => {
-    switch(action.area) {
-        case "year":
-            return {
-                ...state,
-                year: action.selected
-            }
-        case "month":
-            return {
-                ...state,
-                month: action.selected
-            }
-        case "date":
-            return {
-                ...state,
-                date: action.selected
-            }
-        default:
-            return{
-                ...state
-            }
-    }
-}
+    const now = new Date()
 
-export default function BirthDateSection() {
-
-    const now = new Date();
+    
     const SELECTED = '#efefef'
-
-    const [state, dispatch] = useReducer(dateSetReducer, {
-        year: now.getFullYear(),
-        month: now.getMonth()+1,
-        date: now.getUTCDate()
-    })
-
 
 
    const dateSelect = useRef<HTMLUListElement>(null)

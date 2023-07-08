@@ -1,5 +1,6 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from 'next-auth/providers/credentials';
+import {User} from '@/Interface/interface'
 
 interface AuthRedirect {
     baseUrl: string,
@@ -16,21 +17,23 @@ export const authOptions = {
             },
             async authorize(credentials, req) {
                 // Add logic here to look up the user from the credentials supplied
-                // const res = await fetch("url_path", {
-                //     method: "POST",
-                //     headers: {
-                //         'Content-type': 'application/json'
-                //     },
-                //     body: JSON.stringify({
-                //         username: credentials?.username,
-                //         password: credentials?.password
-                //     })
+                const res = await fetch("https://milidu-backend-ykzlu.run.goorm.site/login", {
+                    method: "POST",
+                    headers: {
+                        'Content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: credentials?.username,
+                        password: credentials?.password
+                    })
                 
-                // });
+                });
+                console.log(res)
 
-                // const user = await res.json()
-                const user:any = {username: credentials?.username, password: credentials?.password}
+                if(res.status !== 200) return null
 
+                const user = await res.json()
+                // const user:any = {username: credentials?.username, password: credentials?.password}
           
                 if (user) {
                   // Any object returned will be saved in `user` property of the JWT
@@ -62,7 +65,6 @@ export const authOptions = {
         //     return token 
         // },
         // async session({session, user, token}:any) {
-        //     console.log('session')
         //     session.accessToken = token.accessToken
         //     return session
         // }

@@ -89,6 +89,11 @@ export default function Certification() {
                 <div className={style.search_box}>
                     <input type="text" maxLength={255} tabIndex={1} onChange={(e)=>{
                         const target = e.target as HTMLInputElement;
+                        const specialCharPatt =  /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g
+                        if(specialCharPatt.test(target.value)) {
+                            target.value = ""
+                        return ;
+                        }
                         updateSearchInput(target.value)
                     }} />
                     <button type="submit" tabIndex={2}>

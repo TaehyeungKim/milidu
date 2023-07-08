@@ -37,4 +37,5 @@ const patternYield = (character: string) => {
 export const createFuzzyMatcher = (character: string) => {
     const pattern = character.split('').map(patternYield).join('.*?');
     return new RegExp(pattern);
+    
 }
