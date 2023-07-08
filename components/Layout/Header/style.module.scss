@@ -5,7 +5,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 24px 16px;
+    padding: toremfunc.toRem(24) toremfunc.toRem(16);
     background-color:white;
     box-sizing: border-box;
     width: 100%;
@@ -24,7 +24,7 @@
     label {
         cursor: pointer;
         width: 100%;
-        padding: 8px 12px;
+        padding:toremfunc.toRem(4) toremfunc.toRem(8);
         box-sizing: border-box;
         display: block;
         user-select: none;
@@ -39,7 +39,7 @@
     }
     
     .navbar_logo {
-        font-size: 30px;
+        font-size: toremfunc.toRem(30);
         cursor: pointer;
         user-select: none;
         display: flex;
@@ -60,7 +60,7 @@
 	
 	.navbar_menu li {
         cursor: pointer;
-        border-radius: 6px;
+        border-radius: toremfunc.toRem(6);
         overflow: hidden;
         &:hover {
                background-color: #fda94e;
@@ -82,14 +82,18 @@
 }
 
 
-
+@media screen and (max-width: 339px) {
+	.navbar {
+		font-size: toremfunc.toRem(12);
+	}
+}
 
 
 @media screen and (max-width: 768px) {
     .navbar {
         flex-direction: column;
         align-items: flex-start;
-        padding: 8px 24px;
+        padding: toremfunc.toRem(8) toremfunc.toRem(24);
 		margin: 0%;
 		width: 100%;
 		
@@ -98,6 +102,7 @@
         align-items: center;
         width: 100%;
         margin-left: 0%;
+	
     }
 
     .navbar_menu li {

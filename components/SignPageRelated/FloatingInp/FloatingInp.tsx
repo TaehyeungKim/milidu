@@ -97,7 +97,7 @@ function Floating_RegisterPw({dispatch, state}: RegisterInpProps) {
     )
 }
 
-function Floating_RegisterMajor() {
+const Floating_RegisterMajor = forwardRef(function Floating_RegisterMajor(props, ref) {
     return(
         <section>
         <label htmlFor='reg_userMj'>전공</label>
@@ -107,6 +107,6 @@ function Floating_RegisterMajor() {
         </div>
         </section>
     )
-}
+})
 
 export {FloatingId, FloatingPw, Floating_RegisterId, Floating_RegisterPw, Floating_RegisterMajor}

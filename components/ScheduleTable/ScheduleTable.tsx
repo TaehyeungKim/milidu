@@ -11,6 +11,9 @@ export default function ScheduleTable() {
     
     const schedule = useContext(ScheduleContext)
 
+
+    if(schedule)
+
     return(
         <table className = {styles.table}>
             <thead>
@@ -25,16 +28,17 @@ export default function ScheduleTable() {
                 </tr>
             </thead>
             <tbody>
-            {schedule?.map((data: CertTestSchedule, index:number)=>(
-                <tr key={index} className = {styles.table_data}>
-                    <td>{data.회차}</td>
-                    <td>{yieldDataWithString(data.필기원서접수시작)}~{yieldDataWithString(data.필기원서접수종료)}</td>
-                    <td>{yieldDataWithString(data.필기종료)}</td>
-                    <td>{yieldDataWithString(data.실기원서접수시작)}~{yieldDataWithString(data.실기원서접수종료)}</td>
-                    <td>{yieldDataWithString(data.실기종료)}</td>
-                    <td>{yieldDataWithString(data.합격발표시작)}~{yieldDataWithString(data.합격발표종료)}</td>
+            {/* {schedule?.map((data: CertTestSchedule, index:number)=>(
+                
+            ))} */}
+                <tr className = {styles.table_data}>
+                    <td>{schedule[0].회차}</td>
+                    <td>{yieldDataWithString(schedule[0].필기원서접수시작)}~{yieldDataWithString(schedule[0].필기원서접수종료)}</td>
+                    <td>{yieldDataWithString(schedule[0].필기종료)}</td>
+                    <td>{yieldDataWithString(schedule[0].실기원서접수시작)}~{yieldDataWithString(schedule[0].실기원서접수종료)}</td>
+                    <td>{yieldDataWithString(schedule[0].실기종료)}</td>
+                    <td>{yieldDataWithString(schedule[0].합격발표시작)}~{yieldDataWithString(schedule[0].합격발표종료)}</td>
                 </tr>
-            ))}
             </tbody>
         </table>
     )

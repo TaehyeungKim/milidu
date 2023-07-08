@@ -28,7 +28,7 @@
     //min-width: toremfunc.toRem(200);
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content:flex-start;
     align-items: center;
     //margin-right: auto;
     padding: toremfunc.toRem(10);
@@ -36,7 +36,6 @@
     &:hover {
         cursor: pointer;
     }
-
 
 
     .univ_logo {
@@ -49,4 +48,59 @@
     .univ_name {
         margin-left: toremfunc.toRem(10);
     }
+}
+@media screen and (max-width: 710px) {
+	.univ {
+			padding: toremfunc.toRem(8);
+			font-size: toremfunc.toRem(14);
+		.univ_logo {
+			width: toremfunc.toRem(30);
+			}
+		.univ_name {
+			margin-left: toremfunc.toRem(8);
+		}
+		}	
+	}
+@media screen and (max-width: 618px) {
+	.univ {
+		padding: toremfunc.toRem(6) 0;
+		font-size: toremfunc.toRem(12);
+	}
+}
+@media screen and (max-width: 530px) {
+	.univ {
+		font-size: toremfunc.toRem(16);
+		padding: toremfunc.toRem(5) 0;
+		.univ_logo {
+			width: toremfunc.toRem(40);
+			}
+		.univ_name {
+			margin-left: toremfunc.toRem(6);
+		}
+		}	
+	.univ_list {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+@media screen and (max-width: 430px) {
+	.univ {
+		font-size: toremfunc.toRem(14);
+		.univ_logo {
+			width: toremfunc.toRem(30);
+		}
+		.univ_name {
+			margin-left: toremfunc.toRem(4);
+		}
+	}
+}
+@media screen and (max-width: 300px) {
+	.univ {
+		font-size: toremfunc.toRem(12);
+		.univ_logo {
+			width: toremfunc.toRem(26);
+		}
+		.univ_name {
+			margin-left: toremfunc.toRem(3);
+		}
+	}
 }

@@ -5,7 +5,7 @@
     padding: toremfunc.toRem(10);
     box-sizing: border-box;
     text-align: center;
-
+	
     .table_head {
         font-size: toremfunc.toRem(16);
     }
@@ -36,10 +36,10 @@
 		margin-left: auto;
     	margin-right: auto;
  		.table_data {
-			font-size: toremfunc.toRem(16);
+			font-size: toremfunc.toRem(12);
 		}
 		.table_head {
-			font-size: toremfunc.toRem(16);
+			font-size: toremfunc.toRem(12);
 		}
 		td { margin: 0; vertical-align: top; }
 		th { text-align: left; }
@@ -51,16 +51,25 @@
 		th { margin:7px;}
 	}
 }
-
+@media screen and (max-width: 457px) {
+	.table {
+		.table_data {
+				font-size: toremfunc.toRem(10);
+			}
+			.table_head {
+				font-size: toremfunc.toRem(10);
+			}
+	}
+}
 @media screen and (max-width: 338px) {
 	.table {
 		margin-left: auto;
     	margin-right: auto;
 		.table_data {
-			font-size: toremfunc.toRem(12);
+			font-size: toremfunc.toRem(8);
 		}
 		.table_head {
-			font-size: toremfunc.toRem(12);
+			font-size: toremfunc.toRem(8);
 		}
 	}
 }

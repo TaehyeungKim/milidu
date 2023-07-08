@@ -1,7 +1,55 @@
+@use '@/utils/toremfunc';
 .radio {
     &:checked + label {
         border: 2px solid orange;
         background-color: orange;
         color: white;
     }
+}
+
+.review_box {
+	padding: toremfunc.toRem(5);
+	display: flex;
+	justify-content: space-between;
+	.review_mini_box {
+		display: flex;
+		flex-direction: column;
+		align-items:flex-start;
+	}
+	.review_sub_box {
+		align-self: flex-end;
+		.review_day {
+			display:inline-flex;
+			.lecture_year {
+				margin-right:toremfunc.toRem(7);
+			}
+		}
+	}
+}
+.load_part {
+	display:flex;
+	align-items: center;
+	padding:toremfunc.toRem(10);
+}
+
+
+
+
+@media screen and (max-width: 459px) {
+	.review_box {
+		display:block;
+		.review_mini_box {
+			align-items:center;
+		}
+		.review_sub_box {
+			text-align: center;
+			font-size: toremfunc.toRem(14);
+		}
+	}
+	.review_mini_box {
+		text-align:center;
+	}
+	.load_part {
+		font-size:toremfunc.toRem(12);
+	}
 }

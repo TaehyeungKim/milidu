@@ -54,10 +54,14 @@
         top: 0;
         display: flex;
         margin: 0;
-        
 
         .aside_select {
             text-align: center;
         }
+	}
+}
+@media screen and (max-width: 339px) {
+	.aside {
+		font-size:toremfunc.toRem(12);
 	}
 }

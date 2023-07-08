@@ -91,6 +91,9 @@ const LectureInfoSection = styled(CommentSection)`
     position: relative;
     display: flex;
     align-items: flex-end;
+	@media screen and (max-width: 405px) {
+        display:block;
+    }
 `
 const CommentData = styled(CommentSection)`
     font-size: ${toRem(17)}rem;
@@ -105,6 +108,7 @@ const Info = styled.span`
     font-size: ${toRem(12)}rem;
     @media screen and (max-width: 553px) {
         font-size: ${toRem(8)}rem;
+		margin-right: ${toRem(12)}rem;
     }
     &:last-child {
         margin-right: 0;
@@ -168,7 +172,7 @@ const RegisterButton = styled.button`
     font-size: ${toRem(14)}rem;
     font-family: '--main-kr';
     background-color: white;
-    border: 2px solid aqua;
+    border: 2px solid #FFAEAD;
     border-radius: 1em;
     padding: ${toRem(10)}rem;
     color: black;
@@ -179,7 +183,7 @@ const RegisterButton = styled.button`
         font-size:${toRem(10)}rem;
     }
     &:hover {
-        background-color: aqua;
+        background-color: #FFAEAD;
         color: white;
         cursor: pointer;
     }
@@ -232,6 +236,9 @@ const RadioLabel = styled.label`
     border: 2px solid #efefef;
     cursor: pointer;
     font-weight: 600;
+	@media screen and (max-width: 348px) {
+		padding: ${toRem(3)}rem ${toRem(8)}rem;
+	}
 `
 
 
@@ -359,14 +366,14 @@ export default function UnivLectureComment({data}:UnivLectureCommentProps) {
         }
         
         <section>
-            <div style={{padding: `${toRem(5)}rem`, display: "flex", justifyContent: 'space-between'}}>
-                <div style={{display: 'flex', flexDirection: 'column', alignItems:'flex-start'}}>
+            <div className = {styles.review_box}>
+                <div className = {styles.review_mini_box}>
                     <LabelForStarBox >별점을 매겨주세요!</LabelForStarBox>
                     <StarRateComponent size={40} disabled={false} updater={updateRate}/>
                 </div>
-                <div style={{alignSelf: 'flex-end'}}>
-                    <div style={{display:'inline-flex'}} onClick={toggleYearSelect}>
-                        <span style={{marginRight: `${toRem(7)}rem`}}>수강년도: </span>
+                <div className= {styles.review_sub_box}>
+                    <div className= {styles.review_day} onclick={toggleYearSelect}>
+                        <span className= {styles.lecture_year}>수강년도: </span>
                         <SelectContainer>
                             <Selected>{selectedYear}</Selected>
                             <div>
@@ -404,7 +411,7 @@ export default function UnivLectureComment({data}:UnivLectureCommentProps) {
                 </div>   
             </div>
             <div>
-                <div style={{display: 'flex', alignItems: 'center', padding: `${toRem(10)}rem`}}>
+                <div className= {styles.load_part}>
                     <span>로드: </span>
                     <div style={{display: 'flex', marginLeft: `${toRem(10)}rem`}}>
                         {Inp("load_little", "load", updateLoad, "적음")}
@@ -415,7 +422,7 @@ export default function UnivLectureComment({data}:UnivLectureCommentProps) {
                         <RadioLabel htmlFor="load_lot">많음</RadioLabel>
                     </div>
                 </div>
-                <div style={{display: 'flex', alignItems: 'center', padding: `${toRem(10)}rem`}}>
+                <div className= {styles.load_part}>
                     <span>성적: </span>
                     <div style={{display: 'flex', marginLeft: `${toRem(10)}rem`}}>
                         {Inp("grade_poor", "grade", updateGrade, "박함")}

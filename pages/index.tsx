@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import {certDataCollector, univDataCollector} from "@/utils/DataCollector"
 import styles from './landing.module.scss'
 import { addressCard, graduationCap } from "@/public/icons/icons"
-
+import {landingImg} from "@/public/icons/icons"
 export default function App() {
 
     useEffect(()=>{
@@ -15,6 +15,8 @@ export default function App() {
         <div className={styles.container}>
         <div className={styles.main_ment}>
                 <a href="#1" className={styles.milidu_ment}><h1 className={styles.milidu_info}>육·해·공 모든 장병부터 간부까지,<br/>당신의 교육을 책임질 밀리듀</h1></a>
+				<div className={styles.landingimg}>{landingImg()}</div>
+				
         </div>
 
         <div className={styles.item_box}>

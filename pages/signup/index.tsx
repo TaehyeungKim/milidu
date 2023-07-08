@@ -7,6 +7,7 @@ import { CustomButton, SignButton } from "@/components/Global/CustomButton"
 import Link from 'next/link'
 import BirthDateSection from "./BirthDateSection"
 import GenderSection from "./GenderSection"
+import axios from 'axios'
 
 
 
@@ -86,9 +87,17 @@ const initialArg: RegisterState = {
 export default function Signup() {
 
     const [state, dispatch] = useReducer(registerReducer, initialArg)
+    const majorRef = useRef<HTMLInputElement>(null)
 
-    const register = useCallback(()=>{
-        if(state.id.state && state.pw.state && state.gender.state) console.log('success')
+    const register = useCallback(async()=>{
+        if(state.id.state && state.pw.state && state.gender.state) {
+            const res = axios.post('/signup', {
+                name: "김태형",
+                username: state.id.state,
+                password:state.pw.state,
+                
+            })
+        }
     },[state.id.state,state.pw.state,state.gender.state])
 
     return(
@@ -96,7 +105,7 @@ export default function Signup() {
         <Layout>
             <Floating_RegisterId dispatch={dispatch} state={state.id}/>
             <Floating_RegisterPw dispatch={dispatch} state={state.pw}/>
-            <Floating_RegisterMajor/>
+            <Floating_RegisterMajor ref={majorRef}/>
             <GenderSection dispatch={dispatch} state={state.gender}/>
             <BirthDateSection/>
             <footer className = {styles.signup_footer}>
