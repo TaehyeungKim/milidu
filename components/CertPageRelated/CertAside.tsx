@@ -1,6 +1,6 @@
 import { Dispatch, useCallback } from 'react';
 import styles from './CertAside.module.scss';
-import { CertDetailPageAction, CertDetailPageState } from './[id]';
+import { CertDetailPageAction, CertDetailPageState } from '@/pages/certification/[id]';
 
 interface CertAsideProps {
     dispatch: Dispatch<CertDetailPageAction>
