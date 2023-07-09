@@ -1,3 +1,4 @@
+@use '@/utils/toremfunc';
 .navbar_links {
     list-style: none;
     display: flex;
@@ -6,7 +7,7 @@
     li {
         border-radius: 6px;
         overflow: hidden;
-
+	
         &:hover {
             background-color: #fda94e;
             border-radius: 6px;
@@ -14,6 +15,9 @@
              color: white;
         }
     }
+	.signbut {
+		margin-right:toremfunc.toRem(30);
+	}
 }
 
 

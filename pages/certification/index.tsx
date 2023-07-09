@@ -2,11 +2,12 @@
 
 import Link from 'next/link';
 import style from './style.module.scss'
-import { useEffect, useSyncExternalStore, useState, useMemo, useCallback } from 'react';
+import { useEffect, useSyncExternalStore, useState, useMemo, useCallback, useContext } from 'react';
 import {certDataCollector, CertInfo, getSnapshotOfData, subscribe} from '@/utils/DataCollector';
 import Loading from '@/components/Loading/Loading';
 import CertPagination from '@/components/CertPageRelated/CertPagination';
 import { createFuzzyMatcher } from '@/utils/FuzzyMatcher';
+import { PrevRouteContext } from '../_app';
 
 const ROWPERPAGE = 10
 
@@ -14,11 +15,14 @@ const renderPagination = (data:CertInfo[]|null, flipper: (index:number)=>void, c
 
     if(searchedData) return(<CertPagination pageNum={(searchedData.length/ROWPERPAGE)+1} flipper={flipper} curPage={curPage}/>)
 
-    if(data) return(<CertPagination pageNum={(data.length/ROWPERPAGE)+1} flipper={flipper} curPage={curPage}/>)
+    // if(data) return(<CertPagination pageNum={(data.length/ROWPERPAGE)+1} flipper={flipper} curPage={curPage}/>)
 }
 
 
 export default function Certification() {
+
+    const prevRoute = useContext(PrevRouteContext)
+    const [toCertStats, setToCertStats] = useState<boolean>(false);
 
     
     const data = useSyncExternalStore(subscribe.bind(certDataCollector), getSnapshotOfData.bind(certDataCollector), getSnapshotOfData.bind(certDataCollector)) as CertInfo[]
@@ -41,12 +45,12 @@ export default function Certification() {
 
     const searchedData = useMemo(()=>filterWithInputChange(),[searchInput, data])
     
-    
 
 
-    const Pagination = useMemo(()=>renderPagination(data, flipPage, pageIndex, searchedData),[data, searchedData])
+
+    const Pagination = useMemo(()=>renderPagination(data, flipPage, pageIndex, searchedData),[data, searchedData, pageIndex])
     
-    // const [shownData, setShownData] = useState<Array<CertInfo>|null>(null)
+    
     const shownData = useMemo(()=>{
         // if(searchInput === "") return data?.filter((data: CertInfo, index: number)=> index >= pageIndex*10 && index < (pageIndex+1)*10)
         // return searchedData?.filter((data: CertInfo, index: number)=> index >= pageIndex*10 && index < (pageIndex+1)*10)
@@ -64,11 +68,8 @@ export default function Certification() {
         flipPage(0);
     },[searchedData])
 
-    useEffect(()=>{
-        console.log(pageIndex)
-    },[pageIndex])
 
-    if(!data) return (<Loading/>)
+    if(!data||(prevRoute === '/certification' && toCertStats)) return (<Loading/>)
 
     
     certDataCollector.dataOnRange = shownData as CertInfo[];
@@ -87,7 +88,7 @@ export default function Certification() {
             <div id={style.sb}>
                    
                 <div className={style.search_box}>
-                    <input type="text" maxLength={255} tabIndex={1} onChange={(e)=>{
+                    <input type="text" maxLength={255} onChange={(e)=>{
                         const target = e.target as HTMLInputElement;
                         const specialCharPatt =  /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g
                         if(specialCharPatt.test(target.value)) {
@@ -96,7 +97,7 @@ export default function Certification() {
                         }
                         updateSearchInput(target.value)
                     }} />
-                    <button type="submit" tabIndex={2}>
+                    <button>
                         검색
                     </button>
                 </div>
@@ -105,7 +106,7 @@ export default function Certification() {
 
             <ul className={style.post_list}>
                 {shownData?.map((info: CertInfo)=>(
-                    <li key={info.id}>
+                    <li key={info.id} onClick={()=>setToCertStats(true)}>
                         <Link href={`/certification/${info.code}`}>
                             <div className={style.list}>
                                 <h4 className={style.name}>{info.name}</h4>

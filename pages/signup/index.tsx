@@ -1,6 +1,6 @@
 import Layout from "@/components/SignPageRelated/Layout/Layout"
 import { useEffect, useRef, useReducer, useCallback, MouseEventHandler } from "react"
-import { Floating_RegisterId, Floating_RegisterPw, Floating_RegisterMajor } from "@/components/SignPageRelated/FloatingInp/FloatingInp"
+import { Floating_RegisterId, Floating_RegisterPw, Floating_RegisterTextInput } from "@/components/SignPageRelated/FloatingInp/FloatingInp"
 
 import styles from './index.module.scss'
 import { CustomButton, SignButton } from "@/components/Global/CustomButton"
@@ -8,6 +8,8 @@ import Link from 'next/link'
 import BirthDateSection from "./BirthDateSection"
 import GenderSection from "./GenderSection"
 import axios from 'axios'
+import { signIn } from "next-auth/react"
+import { useRouter } from "next/router"
 
 
 
@@ -122,9 +124,11 @@ const dateSetReducer = (state: BirthSelectState, action: BirthSelectAction):Birt
 export default function Signup() {
 
     const now = new Date();
+    const router = useRouter();
 
     const [state, dispatch] = useReducer(registerReducer, initialArg)
     const majorRef = useRef<HTMLInputElement>(null)
+    const nameRef = useRef<HTMLInputElement>(null)
 
     const [birthState, birthDispatch] = useReducer(dateSetReducer, {
         year: now.getFullYear(),
@@ -133,16 +137,26 @@ export default function Signup() {
     })
 
     const register = useCallback(async()=>{
-        if(state.id.state && state.pw.state && state.gender.state) {
+        if(state.id.state && state.pw.state && state.gender.state && nameRef.current?.value !== "") {
             const res = await axios.post('/signup_register', {
-                name: state.id.data,
-                username: "김채원",
+                name: nameRef.current?.value as string,
+                username: state.id.data,
                 password:state.pw.data,
                 major: majorRef.current?.value as string,
                 sex: state.gender.data,
                 birthdate: `${birthState.year}.${birthState.month}.${birthState.date}`
             })
-            console.log(res.data)
+            if(res.status === 200)  {
+                const res = await signIn('credentials', {
+                    username: nameRef.current?.value,
+                    password: state.pw.data,
+                    redirect: false,
+                    callbackUrl: "/"
+                })
+                if(res?.ok) return router.push(res.url as string)
+            }
+            
+            
         }
     },[state.id.state,state.pw.state,state.gender.state])
 
@@ -151,7 +165,8 @@ export default function Signup() {
         <Layout>
             <Floating_RegisterId dispatch={dispatch} state={state.id}/>
             <Floating_RegisterPw dispatch={dispatch} state={state.pw}/>
-            <Floating_RegisterMajor ref={majorRef}/>
+            <Floating_RegisterTextInput label={"이름"} floatingLabel={"Name"} ref={nameRef}/>
+            <Floating_RegisterTextInput label={"전공"} floatingLabel={"Major"} ref={majorRef}/>
             <GenderSection dispatch={dispatch} state={state.gender}/>
             <BirthDateSection state={birthState} dispatch={birthDispatch}/>
             <footer className = {styles.signup_footer}>

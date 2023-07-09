@@ -2,7 +2,7 @@ import style from './NavbarLinks.module.scss';
 import { useRouter } from 'next/router';
 import { useSession, signOut } from 'next-auth/react'
 import { SignButton } from '@/components/Global/CustomButton';
-import { User } from '@/Interface/interface'
+// import { User } from '@/Interface/interface'
 
 
 export default function NavbarLinks() {
@@ -34,7 +34,7 @@ export default function NavbarLinks() {
                 :
                 <>    
                 
-                    <SignButton onClick={handleSignout}>로그아웃</SignButton>
+                    <SignButton className={style.signbut} onClick={handleSignout}>로그아웃</SignButton>
                     {session.user?.name}
                 
                 </>

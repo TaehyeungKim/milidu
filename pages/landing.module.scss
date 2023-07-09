@@ -39,7 +39,7 @@
 .landingimg {
 	width:toremfunc.toRem(400);
 	position:absolute;
-	bottom:toremfunc.toRem(150);
+	top:toremfunc.toRem(350);
 	left:toremfunc.toRem(50);
 }
 .milidu_info {
@@ -130,7 +130,7 @@
     }
 	.landingimg {
 		width:toremfunc.toRem(240);
-		bottom:toremfunc.toRem(440);
+		top:toremfunc.toRem(150);
 		left:toremfunc.toRem(0);
 	}
 	.ment_part {
@@ -173,7 +173,7 @@
 }
 @media screen and (max-width: 768px) {
 	.landingimg {
-		bottom:toremfunc.toRem(370);
+		top:toremfunc.toRem(250);
 		width:toremfunc.toRem(220);
 	}
 }
@@ -189,8 +189,8 @@
         font-weight: 700;
     }
 	.landingimg {
-		width:toremfunc.toRem(200);
-		bottom:toremfunc.toRem(385);
+		width:toremfunc.toRem(180);
+		top:toremfunc.toRem(280);
 	}
 	.ment_part {
     	font-size: toremfunc.toRem(16);
@@ -231,7 +231,7 @@
     }
 	.landingimg {
 		width:toremfunc.toRem(160);
-		bottom:toremfunc.toRem(400);
+		top:toremfunc.toRem(280);
 	}
 	.ment_part {
     	font-size: toremfunc.toRem(14);
@@ -277,7 +277,7 @@
     }
 	.landingimg {
 		width:toremfunc.toRem(150);
-		bottom:toremfunc.toRem(420);
+		top:toremfunc.toRem(260);
 	}
 	.ment_part {
     	font-size: toremfunc.toRem(12);
@@ -317,7 +317,7 @@
     }
 	.landingimg {
 		width:toremfunc.toRem(140);
-		bottom:toremfunc.toRem(440);
+		top:toremfunc.toRem(270);
 	}
 	.ment_part {
     	font-size: toremfunc.toRem(11);

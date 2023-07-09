@@ -97,16 +97,26 @@ function Floating_RegisterPw({dispatch, state}: RegisterInpProps) {
     )
 }
 
-const Floating_RegisterMajor = forwardRef(function Floating_RegisterMajor(props, ref) {
+type FloatingTextInpProps = {
+    label: string,
+    floatingLabel: string
+}
+
+const Floating_RegisterTextInput = forwardRef(function Floating_RegisterMajor(props:FloatingTextInpProps, ref) {
+
+    const {label, floatingLabel} = props
+
     return(
         <section>
-        <label htmlFor='reg_userMj'>전공</label>
+        <label htmlFor='reg_userMj'>{label}</label>
         <div className = {styles.floating}>    
             <input type="text" id="reg_userMj" required ref={ref as MutableRefObject<HTMLInputElement>}></input>
-            <label className = {styles.floatingLb} htmlFor='reg_userPw'>Major</label>
+            <label className = {styles.floatingLb} htmlFor='reg_userPw'>{floatingLabel}</label>
         </div>
         </section>
     )
 })
 
-export {FloatingId, FloatingPw, Floating_RegisterId, Floating_RegisterPw, Floating_RegisterMajor}
+
+
+export {FloatingId, FloatingPw, Floating_RegisterId, Floating_RegisterPw, Floating_RegisterTextInput}

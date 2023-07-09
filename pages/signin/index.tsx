@@ -23,7 +23,7 @@ export default function Signin() {
     const handleSubmit = async() => {
         const res = await signIn('credentials', {
             username: idRef.current?.value,
-            password: idRef.current?.value,
+            password: pwRef.current?.value,
             redirect: false,
             callbackUrl: "/"
         })

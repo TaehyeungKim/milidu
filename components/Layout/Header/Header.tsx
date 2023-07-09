@@ -3,24 +3,30 @@ import styles from './Header.module.scss'
 import style from './style.module.scss'
 import { favicion } from '@/public/icons/icons'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import NavbarLinks from './NavbarLinks'
+import { CurRouteContext } from '@/pages/_app'
 
 
 export default function Header() {
 
     const router = useRouter()
+
+    // const curRoute = useContext(CurRouteContext)
     
 
     useEffect(()=>{
-        const path = router.pathname.split('/')
-        document.getElementById('blank')?.removeAttribute('checked');
-        document.getElementById(path[1])?.setAttribute('checked', 'true')
-        return(()=>{
-            document.getElementById(path[1])?.removeAttribute('checked');
-            document.getElementById('blank')?.setAttribute('checked', 'true');
-        })
-    },[router.pathname])
+        const path = router.pathname
+        console.log(path)
+        const blank = document.getElementById('blank') as HTMLInputElement;
+        
+        if(path === '/') {
+            blank.checked = true;
+            return ;
+        }
+        const navForPath = document.getElementById(`${path.split('/')[1]}`) as HTMLInputElement
+        navForPath.checked = true;
+    },[router])
 
     return(
         <header className={styles.header}>

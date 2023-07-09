@@ -3,6 +3,7 @@
 
 .pagination {
     margin-top: toremfunc.toRem(30);
+    user-select: none;
 
     .paginationList {
         display: inline-block;

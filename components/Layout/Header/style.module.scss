@@ -15,10 +15,13 @@
         all: unset;
     }
 
-    input[type="radio"]:checked + label {
-        background: #fda94e;
-        color: white;
-        transition: all 0.5s ease-in-out;
+    input[type="radio"] {
+        &:checked + label {
+            background: #fda94e;
+            color: white;
+            transition: all 0.5s ease-in-out;
+        }
+        
     }
     
     label {

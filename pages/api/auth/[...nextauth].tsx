@@ -1,6 +1,7 @@
 import NextAuth from "next-auth"
 import CredentialsProvider from 'next-auth/providers/credentials';
 import {User} from '@/Interface/interface'
+import axios from 'axios'
 
 interface AuthRedirect {
     baseUrl: string,
@@ -16,23 +17,21 @@ export const authOptions = {
                 password: {label: "password", type: "password", placeholder: '비밀번호를 입력하세요'}
             },
             async authorize(credentials, req) {
-                // Add logic here to look up the user from the credentials supplied
-                const res = await fetch("https://milidu-backend-ykzlu.run.goorm.site/login", {
-                    method: "POST",
-                    headers: {
-                        'Content-type': 'application/json'
-                    },
-                    body: JSON.stringify({
+                const body = {
                         username: credentials?.username,
                         password: credentials?.password
-                    })
-                
+                }
+                // Add logic here to look up the user from the credentials supplied
+                const res = await axios.post("https://milidu-backend-ykzlu.run.goorm.site/login", body, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
                 });
                 console.log(res)
 
                 if(res.status !== 200) return null
 
-                const user = await res.json()
+                const user = await res.data
                 // const user:any = {username: credentials?.username, password: credentials?.password}
           
                 if (user) {
