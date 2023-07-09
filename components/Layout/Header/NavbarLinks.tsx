@@ -16,6 +16,7 @@ export default function NavbarLinks() {
     const handleSignout = () => {
         // signOut({callbackUrl: '/', redirect: true})
         userContext?.dispatch(null)
+        router.push('/')
         
     }
 

@@ -95,7 +95,6 @@ class CertDataCollector extends DataCollector {
         const data = await res.data
         // const json = await res.json();
         this.data = data;
-        console.log('finished_certs', data);
         return data
     }
 
@@ -124,7 +123,6 @@ class UnivDataCollector extends DataCollector {
         const data = await res.data
         // const json = await res.json();
         this.data = data;
-        console.log('finished_univ', data);
         return data
     }
 }

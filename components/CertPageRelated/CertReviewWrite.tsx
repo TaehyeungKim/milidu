@@ -59,7 +59,6 @@ export default function CertReviewWrite({cert_name, cert_code}: CertReviewWriteP
         }
         
         
-        console.log(data)
         await axios.post('/create_cert_review', data, {
             headers: {
                 'Content-Type': 'application/json'
