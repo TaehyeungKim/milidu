@@ -16,7 +16,7 @@ function CertReviewArticle({reviewArr}: CertReviewArticleProps) {
                  <article className={styles.review} key={index}>
                  <header className={styles.review_writer}>
                      <em>{data.num_attempts}수 합격</em>/<em>{data.time_taken}</em><br/>
-                    {/* <span>{data.user.age}세</span>/<span>{data.user.sex}</span>/<span>{data.user.major}</span>  */}
+                    <span>{data.birthday}세</span>/<span>{data.sex}</span>/<span>{data.major}</span><br/>
                     <span>{data.username}</span>
                  </header>
                  <div className = {styles.below_header}>
@@ -26,7 +26,7 @@ function CertReviewArticle({reviewArr}: CertReviewArticleProps) {
                      </div>
                      <div className = {styles.study}>
                         <span className = {styles.label}>공부방법: </span>
-                        {data.study_method.split(',').map((method: string, index: number, arr: string[])=>(
+                        {data.study_method.split(',').map((method: string, index: number)=>(
                             <span key={index}>{method}</span>
                         ))}
                      </div>

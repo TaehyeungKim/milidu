@@ -110,8 +110,8 @@ const Floating_RegisterTextInput = forwardRef(function Floating_RegisterMajor(pr
         <section>
         <label htmlFor='reg_userMj'>{label}</label>
         <div className = {styles.floating}>    
-            <input type="text" id="reg_userMj" required ref={ref as MutableRefObject<HTMLInputElement>}></input>
-            <label className = {styles.floatingLb} htmlFor='reg_userPw'>{floatingLabel}</label>
+            <input type="text" id={`reg_user${label}`} required ref={ref as MutableRefObject<HTMLInputElement>}></input>
+            <label className = {styles.floatingLb} htmlFor={`reg_user${label}`}>{floatingLabel}</label>
         </div>
         </section>
     )

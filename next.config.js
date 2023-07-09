@@ -61,6 +61,10 @@ const nextConfig = {
           {
             source: "/signup_register",
             destination: "https://milidu-backend-ykzlu.run.goorm.site/signup",
+          },
+          {
+            source: "/login",
+            destination: "https://milidu-backend-ykzlu.run.goorm.site/login",
           }
         ];
       }

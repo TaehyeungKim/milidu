@@ -9,6 +9,7 @@ interface AuthRedirect {
 }
 
 export const authOptions = {
+    secret: process.env.NEXTAUTH_SECRET,
     providers: [
         CredentialsProvider(
             {name: "credentials",
@@ -17,17 +18,17 @@ export const authOptions = {
                 password: {label: "password", type: "password", placeholder: '비밀번호를 입력하세요'}
             },
             async authorize(credentials, req) {
-                const body = {
+                const body:any = {
                         username: credentials?.username,
                         password: credentials?.password
                 }
                 // Add logic here to look up the user from the credentials supplied
-                const res = await axios.post("https://milidu-backend-ykzlu.run.goorm.site/login", body, {
+                const res:any = await axios.post("https://milidu-backend-ykzlu.run.goorm.site/login", body, {
                     headers: {
                         'Content-Type': 'application/json'
                     }
                 });
-                console.log(res)
+               
 
                 if(res.status !== 200) return null
 
@@ -36,7 +37,7 @@ export const authOptions = {
           
                 if (user) {
                   // Any object returned will be saved in `user` property of the JWT
-                //   console.log(user);
+                 
                   return user
                 } else {
                   // If you return null then an error will be displayed advising the user to check their details.
@@ -52,21 +53,38 @@ export const authOptions = {
     pages: {
         signIn: '/signin'
     },
+    session: {
+        jwt: true,
+        maxAge: 24*60*60,
+        updateAge: 24*60*60
+    },
     callbacks: {
+
+        async signIn({ user, account, profile, email, credentials }:any) {
+            return true;
+        },
+
         async redirect({url, baseUrl}:AuthRedirect) {
             return baseUrl
         },
-        // async jwt({ token, account, profile }:any) {
-        //     if (account) {
-        //       token.accessToken = account.access_token 
-        //       token.id = profile.id
-        //     }
-        //     return token 
-        // },
-        // async session({session, user, token}:any) {
-        //     session.accessToken = token.accessToken
-        //     return session
-        // }
+        async jwt({ token, account, user  }:any) {
+                token.name = user.name;
+                token.sex = user.sex;
+                token.birthday = user.birthday;
+                token.major = user.major
+                return token 
+        
+        },
+        async session({session, user, token}:any) {
+           
+                session.user.name = token.name;
+                session.user.major = token.major;
+                session.user.sex = token.sex;
+                session.user.birthday = token.birthday
+                return session
+            
+            
+        }
     }
 }
 

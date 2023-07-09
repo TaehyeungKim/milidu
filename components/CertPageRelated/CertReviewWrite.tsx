@@ -1,8 +1,9 @@
 import styles from './CertReviewWrite.module.scss'
-import { useEffect, useRef, useState, useCallback } from 'react'
+import { useEffect, useRef, useState, useCallback,  useContext } from 'react'
 import { textAreaResize } from '@/utils/textAreaResize'
 import StarRateComponent from '@/components/StarRate/StarRateComponent'
 import axios from 'axios'
+import {UserContext} from '@/pages/_app'
 
 
 interface CertReviewWriteProps {
@@ -15,6 +16,8 @@ const METHODS = [
 ]
 
 export default function CertReviewWrite({cert_name, cert_code}: CertReviewWriteProps){
+
+    const userContext = useContext(UserContext)
 
     const textarea = useRef<HTMLTextAreaElement>(null)
     const [studyYear, studyMonth, studyWeek] = [useRef<HTMLInputElement>(null),useRef<HTMLInputElement>(null),useRef<HTMLInputElement>(null)]
@@ -49,7 +52,10 @@ export default function CertReviewWrite({cert_name, cert_code}: CertReviewWriteP
             recommend_book: bookRef.current?.value,
             num_attempts: trynum,
             content: textarea.current?.value,
-            study_method: methods.join(',')
+            study_method: methods.join(','),
+            major: userContext?.user?.major,
+            sex: userContext?.user?.sex,
+            birthday: userContext?.user?.birthday
         }
         
         

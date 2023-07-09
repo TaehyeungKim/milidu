@@ -1,6 +1,6 @@
 import styles from './ScheduleTable.module.scss'
 import {useContext} from 'react'
-import { ScheduleContext, CertTestSchedule } from '@/pages/certification/[id]'
+import { ScheduleContext } from '@/pages/certification/[id]'
 
 
 const yieldDataWithString = (str: string) => `${str.slice(0,4)}.${str.slice(4,6)}.${str.slice(6,8)}`
@@ -12,7 +12,7 @@ export default function ScheduleTable() {
     const schedule = useContext(ScheduleContext)
 
 
-    if(schedule)
+    if(!schedule||schedule.length === 0) return (<></>)
 
     return(
         <table className = {styles.table}>

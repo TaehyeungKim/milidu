@@ -3,7 +3,7 @@ import ChartComponent from '@/components/Chart/Chart'
 import LectureList from '@/components/LectureList/LectureList'
 import BookList from '@/components/BookList/BookList'
 import ScheduleTable from '@/components/ScheduleTable/ScheduleTable'
-import {CertInfoAndStats, CertTestSchedule} from '@/pages/certification/[id]';
+import {CertInfoAndStats} from '@/pages/certification/[id]';
 import {CertInfo} from '@/utils/DataCollector';
 
 

@@ -14,7 +14,6 @@ export default function CertPagination({pageNum, flipper, curPage}:CertPaginatio
 
     const isSmallSize = useMediaQuery({query: '(max-width: 500px'});
     const deferredMedia = useDeferredValue(isSmallSize)
-    const deferredPage = useDeferredValue(curPage)
 
     let PAGEPERBLOCK = 10;
 
@@ -26,7 +25,7 @@ export default function CertPagination({pageNum, flipper, curPage}:CertPaginatio
         if(pageBlockIndex >  0) setPageBlockIndex(block=>block-1)
     }
     const toNextBlock = () => {
-        if(pageBlockIndex < pageNum/10 - 1) setPageBlockIndex(block=>block+1)
+        if(pageBlockIndex < pageNum/PAGEPERBLOCK - 1) setPageBlockIndex(block=>block+1)
     }
 
     const liGenerator = (index: number) => {

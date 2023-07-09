@@ -2,7 +2,9 @@
 
 .container {
     padding: toremfunc.toRem(12);
+	text-align: center;
     .lectureList {
+		text-align: initial;
         position: relative;
         box-sizing: border-box;
         border-bottom: 1px solid gray;
@@ -37,6 +39,13 @@
 
 @media screen and (max-width: 550px) {
 	.container {
+		&::after {
+			content: "";
+			border: 1px solid #efefef;
+			width: 100%;
+			display: block;
+			margin-top: 1.2em;
+		}
 		.lectureList {
 			.lectureList--lecture {
 				font-size:toremfunc.toRem(12);

@@ -1,7 +1,7 @@
 import styles from './[id].module.scss'
 import axios from 'axios'
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
-import { ParsedUrlQuery } from 'querystring'
+
 import CertAside from '@/components/CertPageRelated/CertAside'
 import { useReducer, useSyncExternalStore, useEffect, useState, createContext } from 'react'
 import CertInfoComponent from '@/components/CertPageRelated/CertInfo'
@@ -54,12 +54,7 @@ export type CertReview = {
 
 export type ReviewData = {
 
-    // user: {
-    //     name: string,
-    //     age: number,
-    //     sex: string,
-    //     major: string
-    // },
+    
     username: string
     cert_code: string|number,
     cert_name: string,
@@ -72,7 +67,10 @@ export type ReviewData = {
     recommend_book: string,
     num_likes: number,
     updated_at: string,
-    id: number
+    id: number,
+    major: string,
+    birthday: string,
+    sex: string
 }
 
 type CertServerSideProps = {
