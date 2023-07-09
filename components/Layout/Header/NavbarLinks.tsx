@@ -34,7 +34,7 @@ export default function NavbarLinks() {
                 :
                 <>    
                 
-                    <SignButton className={style.signbut} onClick={handleSignout}>로그아웃</SignButton>
+                    <SignButton onClick={handleSignout}>로그아웃</SignButton>
                     {session.user?.name}
                 
                 </>
