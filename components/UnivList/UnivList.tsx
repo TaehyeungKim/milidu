@@ -52,7 +52,8 @@ export default function UnivList({dispatch, state, data}: UnivListProps) {
                         elmement.setAttribute('style', 'opacity: 0')
 
                         }}>
-                        <img className={styles.univ_logo} src={UnivLogoMap[elm.school_name] ? `/univlogo/${UnivLogoMap[elm.school_name]}` : `/univlogo/${UnivLogoMap["서울대학교"]}`}></img>
+                        
+                        <img className={styles.univ_logo} src={UnivLogoMap[elm.school_name] ? `/univlogo/${UnivLogoMap[elm.school_name]}` : `/univlogo/200.png`}></img>
                         <h6 className = {styles.univ_name}>{elm.school_name}</h6>
                     </article>
                 ))}
