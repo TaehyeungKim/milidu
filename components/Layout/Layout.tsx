@@ -16,7 +16,7 @@ export default function Layout({children}:NestedReactComponent) {
    
 
     return (
-        <div className = {styles.layout}>
+        <div className = {styles.layout} id="portal">
         {router.pathname !== '/signin' && router.pathname !== '/signup' ? <Header></Header> : null}
         
             <Main>

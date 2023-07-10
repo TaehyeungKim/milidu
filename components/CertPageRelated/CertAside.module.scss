@@ -7,6 +7,7 @@
     right: 0;
     height: fit-content;
     margin-left: toremfunc.toRem(40);
+    
 
     .aside_select, .aside_button {
         position: relative;
@@ -63,4 +64,9 @@
 	.aside {
 		font-size:toremfunc.toRem(12);
 	}
+}
+
+#unauthorized {
+    opacity: 0.2;
+    
 }

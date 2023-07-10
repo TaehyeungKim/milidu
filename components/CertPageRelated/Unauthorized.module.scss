@@ -1,0 +1,34 @@
+@use '@/utils/toremfunc';
+
+@keyframes unauthAnim {
+    0% {
+        transform: translateX(100%);
+    }
+    20% {
+        transform: translateX(0);
+    }
+    80% {
+        transform: translateX(0)
+    }
+    100% {
+        transform: translateX(100%)
+    }
+}
+
+.unauthorized {
+    width: fit-content;
+    background-color: #ff1493;
+    
+    text-align: center;
+    padding: toremfunc.toRem(10);
+ 
+    font-size: toremfunc.toRem(2em);
+    color: white;
+    position: fixed;
+    top: toremfunc.toRem(100);
+    right: 0;
+
+    animation: unauthAnim 2s ease-in-out;
+    animation-fill-mode: backwards;
+    z-index: 1000;
+}
