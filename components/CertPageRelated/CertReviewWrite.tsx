@@ -80,9 +80,11 @@ export default function CertReviewWrite({cert_name, cert_code, dispatch}: CertRe
         if(data.difficulty === 0 
         || data.num_attempts === 0 
         || data.study_method === ""  
-        || data.time_taken === "년개월주"
         || data.recommend_book === 'null'
-        || data.content === "" ) return 401;
+        || data.content === ""
+        || studyYear === ""
+        || studyMonth === ""
+        || studyWeek === "" ) return 401;
         
         
         const res = await axios.post('/create_cert_review', data, {
@@ -91,7 +93,7 @@ export default function CertReviewWrite({cert_name, cert_code, dispatch}: CertRe
             }
         })
         return res.status
-    },[])
+    },[studyYear, studyMonth, studyWeek])
 
     const [reviewPostingStatus, setReviewPostingStatus] = useState<string>("plain");
 
