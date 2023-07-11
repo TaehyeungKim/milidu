@@ -13,7 +13,7 @@ export default function ScheduleTable() {
 
 
     if(!schedule||schedule.length === 0) return (<></>)
-
+P[i]
     return(
         <table className = {styles.table}>
             <thead>

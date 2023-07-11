@@ -9,7 +9,7 @@ export default function LectureList({lecture_data}:LectureListProps) {
 
 
     if(lecture_data.length === 0) return(
-        <div className = {styles.container} style = {{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+        <div className = {styles.container} style = {{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
             강의가 없습니다.
         </div>
     )

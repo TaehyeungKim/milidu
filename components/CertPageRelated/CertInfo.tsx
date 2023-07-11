@@ -5,7 +5,6 @@ import BookList from '@/components/BookList/BookList'
 import ScheduleTable from '@/components/ScheduleTable/ScheduleTable'
 import {CertInfoAndStats} from '@/pages/certification/[id]';
 import {CertInfo} from '@/utils/DataCollector';
-import { useEffect } from "react"
 
 
 interface CertInfoProps {
@@ -15,9 +14,6 @@ interface CertInfoProps {
 
 export default function CertInfo({certInfoAndStats, certInfo}: CertInfoProps) {
 
-    useEffect(()=>{
-        console.log(certInfoAndStats)
-    },[])
 
     return(
         <>

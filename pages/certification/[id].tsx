@@ -102,8 +102,6 @@ export const ScheduleContext = createContext<CertTestSchedule[]|null>(null)
 
 export const getServerSideProps: GetServerSideProps<{ certServerSideProps: CertServerSideProps }> = async({params}) => {
 
-    //selfserver
-    //const certInfoAndStatsRes = await axios.get(`https://milidu-selfserver.run.goorm.site/cert_stats?cert_code=${params?.id}`)
 
     //real backend
     const certInfoAndStatsRes = await axios.get(`https://milidu-backend-ykzlu.run.goorm.site/cert_stats?cert_code=${params?.id}`)
@@ -172,6 +170,7 @@ export default function Certification({certServerSideProps}: InferGetServerSideP
     },[data])
 
     useEffect(()=>{
+        console.log(router.query.id)
         const fetchSchedule = async() => {
             const res = await axios.post('/cert_test_schedule', {
                 cert_code: router.query.id
