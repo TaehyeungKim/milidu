@@ -9,11 +9,12 @@ import CertReview from '@/components/CertPageRelated/CertReview'
 import CertReviewWrite from '@/components/CertPageRelated/CertReviewWrite'
 import Link from 'next/link'
 import { doubleArrowLeft } from '@/public/icons/icons'
-import {certDataCollector} from '@/utils/DataCollector'
+import {certDataCollector, certReviewDataCollector} from '@/utils/DataCollector'
 import { CertInfo } from '@/utils/DataCollector'
 import { useRouter } from 'next/router'
 import { subscribe, getSnapshotOfData } from '@/utils/DataCollector'
 import Loading from '@/components/Loading/Loading'
+import { BookInfo } from '@/Interface/interface'
 
 
 export type CertDetailInfo = {
@@ -42,7 +43,8 @@ export type CertLecture = {
 export type CertInfoAndStats = {
     cert_info: CertDetailInfo,
     data: CertStats[],
-    lecture_info: CertLecture[]
+    lecture_info: CertLecture[],
+    recommend_book: string[]
 }
 
 export type CertReview = {
@@ -119,6 +121,7 @@ export const getServerSideProps: GetServerSideProps<{ certServerSideProps: CertS
     }})
 
     const certReview:CertReview = await certReviewRes.data
+    certReviewDataCollector.data = certReview
 
 
     const certServerSideProps = {
@@ -157,8 +160,8 @@ export default function Certification({certServerSideProps}: InferGetServerSideP
     
 
     useEffect(()=>{
-        if(!data) certDataCollector.collectCertData()
-
+        if(!data) certDataCollector.collectData('/certs', "GET")
+        return(()=>{certReviewDataCollector.data = null})
     },[])
 
     useEffect(()=>{
@@ -205,7 +208,7 @@ export default function Certification({certServerSideProps}: InferGetServerSideP
                         )
                     case "write":
                         return(
-                            <CertReviewWrite cert_name={certServerSideProps.certInfoAndStats.cert_info.name} cert_code={detailData.code}/>
+                            <CertReviewWrite cert_name={certServerSideProps.certInfoAndStats.cert_info.name} cert_code={detailData.code} dispatch={dispatch}/>
                         )
                 }   
             })()}

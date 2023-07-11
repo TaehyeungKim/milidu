@@ -65,7 +65,20 @@ const nextConfig = {
           {
             source: "/login",
             destination: "https://milidu-backend-ykzlu.run.goorm.site/login",
+          },
+          {
+            source: "/bookSearch",
+            destination: "https://www.nl.go.kr/NL/search/openApi/search.do"
+          },
+          {
+            source: "/check_username",
+            destination: "https://milidu-backend-ykzlu.run.goorm.site/check_username"
+          },
+          {
+            source: "/get_cert_review",
+            destination: "https://milidu-backend-ykzlu.run.goorm.site/get_cert_review"
           }
+         
         ];
       }
 }

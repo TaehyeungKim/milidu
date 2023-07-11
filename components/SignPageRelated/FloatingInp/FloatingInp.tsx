@@ -2,6 +2,7 @@
 import { useEffect, useRef, Dispatch, useCallback, forwardRef, MutableRefObject } from 'react'
 import styles from './FloatingInp.module.scss'
 import { RegisterAction, StatePropertyData } from '@/pages/signup'
+import axios, { AxiosError } from 'axios'
 
 
 export type RegisterInpProps = {
@@ -38,14 +39,29 @@ function Floating_RegisterId({dispatch, state}: RegisterInpProps) {
 
     const idInp = useRef<HTMLInputElement>(null)
 
+    
 
 
-    const checkId = useCallback(() => {
+
+    const checkId = useCallback(async() => {
         const typedId = idInp.current?.value as string
         const regExp = /(?=.*[a-z])(?=.*[0-9])(?=.{6,})/g;
         if(!regExp.test(typedId)) return dispatch({field: "id", status: false, data: "", message: "아이디는 영문(소), 숫자 포함 6자 이상이어야 합니다."})
 
-        dispatch({field: "id", status: true, data: typedId, message: "사용할 수 있는 아이디입니다."})
+        try {
+            await axios.post('/check_username', {
+                username: typedId
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            return dispatch({field: "id", status: true, data: typedId, message: "사용할 수 있는 아이디입니다."})
+        } catch(e:any) {
+            if(e.response.status === 409) return dispatch({field: "id", status: false, data: "", message: "중복된 아이디입니다."})
+        }
+        
+        
 
     },[])
 

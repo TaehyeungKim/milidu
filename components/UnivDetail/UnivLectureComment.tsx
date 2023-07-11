@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { arrowRight, arrowLeft } from '@/public/icons/icons'
-import { useState, useEffect, useRef, useCallback, useContext } from "react"
+import { useState, useEffect, useRef, useCallback, useContext, useMemo, useSyncExternalStore } from "react"
 import { toRem } from "@/utils/toRem"
 import { textAreaResize } from "@/utils/textAreaResize"
 import StarRateComponent from "../StarRate/StarRateComponent"
@@ -8,6 +8,7 @@ import axios from 'axios'
 import { LectureInfoContext, LectureComment } from "./UniveLectureList"
 
 import styles from './UnivLectureComment.module.scss'
+import { getSnapshotOfData, subscribe, UnivLectureReviewDataCollector } from "@/utils/DataCollector"
 
 export type LectureCommentData = {
     period: string,
@@ -50,8 +51,6 @@ const ServerDataArr: LectureCommentData[] = [
 ]
 
 const commentDataArr = [ServerDataArr[0], ServerDataArr[1], ServerDataArr[2]]
-
-
 
 const MAXPERPAGE = 3;
 
@@ -135,8 +134,8 @@ const PageButton = styled.button`
 const LeftButton = styled(PageButton)<{$index:number}>`
     opacity: ${props=>props.$index === 0 ? 0.4 : 1}
 `
-const RightButton = styled(PageButton)<{$index:number}>`
-    opacity: ${props=>(props.$index+1) * MAXPERPAGE >= ServerDataArr.length  ? 0.4 : 1}
+const RightButton = styled(PageButton)<{$index:number, $dataLength: number}>`
+    opacity: ${props=>(props.$index+1) * MAXPERPAGE >= props.$dataLength  ? 0.4 : 1}
 `
 const CommentTextArea = styled.textarea`
     resize: none;
@@ -168,7 +167,7 @@ const LabelForStarBox = styled.span`
         font-size: ${toRem(11)}rem;
     }
 `
-const RegisterButton = styled.button`
+const RegisterButton = styled.button<{$commentPosting: boolean}>`
     all: unset;
     font-size: ${toRem(14)}rem;
     font-family: '--main-kr';
@@ -188,6 +187,7 @@ const RegisterButton = styled.button`
         color: white;
         cursor: pointer;
     }
+    opacity: ${props=>props.$commentPosting ? 0.4 : 1};
 `
 const SelectContainer = styled.div`
     position: relative;
@@ -266,9 +266,15 @@ interface UnivLectureCommentProps {
 }
 
 
+
+
 export default function UnivLectureComment({data}:UnivLectureCommentProps) {
 
     const lectureInfo = useContext(LectureInfoContext)
+
+    const collectorRef = useRef<UnivLectureReviewDataCollector>(new UnivLectureReviewDataCollector());
+
+    const [commentPosting, setCommentPosting] = useState<boolean>(false)
 
     
     const [page, setPage] = useState<number>(0);
@@ -287,9 +293,13 @@ export default function UnivLectureComment({data}:UnivLectureCommentProps) {
 
     const Inp = (id:string, name: string, updater: (arg: string)=>void, value: string) => <input className = {styles.radio} type="radio" name={name} hidden id={id} onChange={()=>updater(value)}/>
 
+    const syncCommentData = useSyncExternalStore(subscribe.bind(collectorRef.current), getSnapshotOfData.bind(collectorRef.current), getSnapshotOfData.bind(collectorRef.current))
+
+    let comments: LectureComment[] = data;
+    if(syncCommentData) comments = syncCommentData as LectureComment[];
 
     const pageIncrement = () => {
-        if((page+1)*MAXPERPAGE< ServerDataArr.length) setPage(page=>page+1);
+        if((page+1)*MAXPERPAGE< comments.length) setPage(page=>page+1);
     }
 
     const pageDecrease = () => {
@@ -300,33 +310,51 @@ export default function UnivLectureComment({data}:UnivLectureCommentProps) {
     const textarea = useRef<HTMLTextAreaElement>(null);
     
     const [selectedYear, setSelectedYear] = useState<string>("");
-    const [selectedSem, setSelectedSem] = useState<string>("1");
+    const [selectedSem, setSelectedSem] = useState<string>("");
     const [rate, setRate] = useState<number>(0);
+    const [commentText, setCommentText] = useState<string>("");
 
     const updateYear = (year:string) => setSelectedYear(year);
     const updateSem = (sem:string)=> setSelectedSem(sem)
     const updateRate = (rate:number)=>setRate(rate)
 
 
-    const shownDataArr = data.filter((data: LectureComment, index: number)=>{
+    const shownDataArr = comments.filter((data: LectureComment, index: number)=>{
         return index >= page*MAXPERPAGE && index < (page+1)*MAXPERPAGE
     })
 
+    const commentSubmitData = useMemo(()=>{
+        const data = {
+            ...lectureInfo,
+            username:'taehyeungkim98',
+            content: commentText,
+            semester: selectedYear + '년도 ' + selectedSem + '학기',
+            rating:rate,
+            load:load,
+            grade:grade
+        }
+        return data
+    },[selectedYear, selectedSem, rate, load, grade, commentText])
+
     
     const handleSubmit = useCallback(async(data:LectureReviewInp)=>{
-        if(textarea.current?.value === ""
-        || selectedYear === ""
-        || selectedSem === ""
-        || rate === 0
-        || load === ""
-        || grade === "") return ;
+        if(commentPosting) return ;
+        setCommentPosting(true)
+        if(data.content === ""
+        || data.semester === "년도학기"
+        || data.rating === 0
+        || data.load === ""
+        || data.grade === "") return ;
         const res = await axios.post('/create_lect_review', data, {
             headers: {
                 'Content-Type': 'application/json'
             }
         })
-        console.log(res.data)
-    },[selectedYear, selectedSem, rate, load, grade])
+        if(res.status === 200) collectorRef.current.collectData('/get_lect_review', "POST", {
+            category: "강좌ID",
+            keyword: lectureInfo.lecture_id
+        }).finally(()=>setCommentPosting(false))
+    },[commentPosting])
     
 
     useEffect(()=>{
@@ -344,11 +372,20 @@ export default function UnivLectureComment({data}:UnivLectureCommentProps) {
         updateSem(OPTION[0]);
     },[])
 
+    useEffect(()=>{
+        
+        collectorRef.current.data = data as LectureComment[];
+        return(()=>{
+            collectorRef.current.data = null
+            
+        })
+    },[])
+
     
 
     return(
         <div style={{overflow: 'hidden'}}>
-        {data.length === 0 ? <div style={{textAlign: 'center'}}>강의평이 존재하지 않습니다.</div>
+        {comments.length === 0 ? <div style={{textAlign: 'center'}}>강의평이 존재하지 않습니다.</div>
         :
         <>
         <CommentList>
@@ -365,7 +402,7 @@ export default function UnivLectureComment({data}:UnivLectureCommentProps) {
         </CommentList>
         <Wrapper>
             <LeftButton $index={page} onClick={pageDecrease} ref={left}>{arrowLeft()}</LeftButton>
-            <RightButton $index={page} onClick={pageIncrement} ref={right}>{arrowRight()}</RightButton>
+            <RightButton $index={page} $dataLength={comments.length} onClick={pageIncrement} ref={right}>{arrowRight()}</RightButton>
         </Wrapper>
         </>
         }
@@ -419,36 +456,28 @@ export default function UnivLectureComment({data}:UnivLectureCommentProps) {
                 <div className= {styles.load_part}>
                     <span>로드: </span>
                     <div style={{display: 'flex', marginLeft: `${toRem(10)}rem`}}>
-                        {Inp("load_little", "load", updateLoad, "적음")}
-                        <RadioLabel htmlFor="load_little">적음</RadioLabel>
-                        {Inp("load_normal", "load", updateLoad, "보통")}
-                        <RadioLabel htmlFor="load_normal">보통</RadioLabel>
-                        {Inp("load_lot", "load", updateLoad, "많음")}
-                        <RadioLabel htmlFor="load_lot">많음</RadioLabel>
+                        {Inp(`load_little_${lectureInfo.lecture_id}`, "load", updateLoad, "적음")}
+                        <RadioLabel htmlFor={`load_little_${lectureInfo.lecture_id}`}>적음</RadioLabel>
+                        {Inp(`load_normal_${lectureInfo.lecture_id}`, "load", updateLoad, "보통")}
+                        <RadioLabel htmlFor={`load_normal_${lectureInfo.lecture_id}`}>보통</RadioLabel>
+                        {Inp(`load_lot_${lectureInfo.lecture_id}`, "load", updateLoad, "많음")}
+                        <RadioLabel htmlFor={`load_lot_${lectureInfo.lecture_id}`}>많음</RadioLabel>
                     </div>
                 </div>
                 <div className= {styles.load_part}>
                     <span>성적: </span>
                     <div style={{display: 'flex', marginLeft: `${toRem(10)}rem`}}>
-                        {Inp("grade_poor", "grade", updateGrade, "박함")}
-                        <RadioLabel htmlFor="grade_poor">박함</RadioLabel>
-                        {Inp("grade_normal", "grade", updateGrade, "적당함")}
-                        <RadioLabel htmlFor="grade_normal">적당함</RadioLabel>
-                        {Inp("grade_well", "grade", updateGrade, "너그러움")}
-                        <RadioLabel htmlFor="grade_well">너그러움</RadioLabel>
+                        {Inp(`grade_poor_${lectureInfo.lecture_id}`, "grade", updateGrade, "박함")}
+                        <RadioLabel htmlFor={`grade_poor_${lectureInfo.lecture_id}`}>박함</RadioLabel>
+                        {Inp(`grade_normal_${lectureInfo.lecture_id}`, "grade", updateGrade, "적당함")}
+                        <RadioLabel htmlFor={`grade_normal_${lectureInfo.lecture_id}`}>적당함</RadioLabel>
+                        {Inp(`grade_well_${lectureInfo.lecture_id}`, "grade", updateGrade, "너그러움")}
+                        <RadioLabel htmlFor={`grade_well_${lectureInfo.lecture_id}`}>너그러움</RadioLabel>
                     </div>
                 </div>
             </div>
-            <div style={{width: '100%', display: 'flex'}}><CommentTextArea ref={textarea} placeholder="한 줄 수강평을 입력해주세요!"/></div>
-            <RegisterButton onClick={()=>handleSubmit({
-                    ...lectureInfo,
-                    username:'taehyeungkim98',
-                    content:textarea.current?.value as string,
-                    semester: selectedYear + '년도 ' + selectedSem + '학기',
-                    rating:rate,
-                    load:load,
-                    grade:grade
-            })}>수강평 등록하기</RegisterButton>           
+            <div style={{width: '100%', display: 'flex'}}><CommentTextArea ref={textarea} onChange={(e)=>setCommentText(e.target.value)} placeholder="한 줄 수강평을 입력해주세요!"/></div>
+            <RegisterButton $commentPosting = {commentPosting} onClick={()=>handleSubmit(commentSubmitData)}>{commentPosting ? "수강평 등록중..." : "수강평 등록하기"}</RegisterButton>           
         </section>
         
         

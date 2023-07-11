@@ -5,6 +5,7 @@ import BookList from '@/components/BookList/BookList'
 import ScheduleTable from '@/components/ScheduleTable/ScheduleTable'
 import {CertInfoAndStats} from '@/pages/certification/[id]';
 import {CertInfo} from '@/utils/DataCollector';
+import { useEffect } from "react"
 
 
 interface CertInfoProps {
@@ -14,6 +15,9 @@ interface CertInfoProps {
 
 export default function CertInfo({certInfoAndStats, certInfo}: CertInfoProps) {
 
+    useEffect(()=>{
+        console.log(certInfoAndStats)
+    },[])
 
     return(
         <>
@@ -46,7 +50,7 @@ export default function CertInfo({certInfoAndStats, certInfo}: CertInfoProps) {
                 <h3 className = {styles.field}>무료강의</h3>
                 <h3 className = {styles.field}>도서추천</h3>
                 <LectureList lecture_data={certInfoAndStats.lecture_info}/>
-                <BookList/>
+                <BookList recommend_book={certInfoAndStats.recommend_book}/>
             </section>
             <section className = {styles.cert_schedule}>
                 <ScheduleTable/>

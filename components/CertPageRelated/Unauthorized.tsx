@@ -1,12 +1,13 @@
-import {useState, useEffect, useRef} from 'react';
-import { createPortal } from 'react-dom';
+import {useEffect, useRef} from 'react';
+
 import styles from './Unauthorized.module.scss'
+
 
 interface UnauthorizedProps {
   toggle: ()=>void;
 }
 
-const Unauthroized = ({toggle}:UnauthorizedProps) => {
+export const Unauthorized = ({toggle}:UnauthorizedProps) => {
 
     const TRANSITIONDUR = '2s'
     const unauthRef = useRef<HTMLDivElement>(null)
@@ -24,22 +25,3 @@ const Unauthroized = ({toggle}:UnauthorizedProps) => {
     )
 }
 
-interface UnauthroizedPortalProps {
-  toggle: ()=>void;
-}
-
-export default function UnauthorizedPortal({toggle}:UnauthroizedPortalProps) {
-    const [isCSR, setIsCSR] = useState<boolean>(false);
-  
-    useEffect(() => {
-      setIsCSR(true);
-    }, [])
-    
-    if (typeof window === 'undefined') return <></>;
-    if (!isCSR) return <></>;
-  
-    
-    const portal = createPortal(<Unauthroized toggle={toggle}/>, document.getElementById('portal') as HTMLDivElement);
-  
-    return portal
-}

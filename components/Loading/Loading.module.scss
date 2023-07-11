@@ -15,11 +15,11 @@
     align-items: center;
     justify-content: center;
     flex-grow: 1;
-
+	background:white;
     .container {
         width: 80%;
-        
-        
+        padding:toremfunc.toRem(20);
+        height:auto;
 
         h3 {
             text-align: center;
@@ -27,7 +27,61 @@
             margin-top: toremfunc.toRem(20);
         }
         
-
+		.loadingbookimg {
+			display:flex;
+			margin:toremfunc.toRem(100) auto toremfunc.toRem(50) auto;
+		}
+		.loadingtext {
+			-webkit-font-smoothing: antialiased;
+			display: flex;
+  			justify-content: center;
+  			align-items: center;
+		}
+		.loadingtext h3 {
+			height: toremfunc.toRem(100);
+		}
+		.loadingtext h3 span {
+			position: relative;
+  			top: toremfunc.toRem(10);
+  			display: inline-block;
+  			animation: bounce .3s ease infinite alternate;
+  			font-family:fantasy;
+  			font-size: toremfunc.toRem(50);
+			color:#FF9671;
+			text-shadow: 0 1px 0 #CCC,
+						 0 2px 0 #CCC,
+						 0 3px 0 #CCC,
+						 0 4px 0 #CCC,
+						 0 5px 0 #CCC,
+						 0 6px 0 transparent,
+						 0 7px 0 transparent,
+						 0 8px 0 transparent,
+						 0 9px 0 transparent,
+						 0 10px 10px rgba(0, 0, 0, .4);
+		}
+		
+		.loadingtext h3 span:nth-child(2) { animation-delay: .1s; }
+		.loadingtext h3 span:nth-child(3) { animation-delay: .2s; }
+		.loadingtext h3 span:nth-child(4) { animation-delay: .3s; }
+		.loadingtext h3 span:nth-child(5) { animation-delay: .4s; }
+		.loadingtext h3 span:nth-child(6) { animation-delay: .5s; }
+		
+		@keyframes bounce {
+  		100% {
+    		top: -20px;
+    		text-shadow: 0 1px 0 #CCC,
+						 0 2px 0 #CCC,
+					 	 0 3px 0 #CCC,
+					 	 0 4px 0 #CCC,
+					 	 0 5px 0 #CCC,
+					 	 0 6px 0 #CCC,
+					 	 0 7px 0 #CCC,
+					 	 0 8px 0 #CCC,
+					 	 0 9px 0 #CCC,
+					 	 0 50px 25px rgba(0, 0, 0, .2);
+  			}
+		}
+		
         .logo {
             max-width: toremfunc.toRem(300);
             margin: 0 auto;
@@ -52,13 +106,26 @@
                     height: toremfunc.toRem(20);
                     transform:skewX(30deg);
                     &:nth-child(even) {
-                        background-color: yellow;
+                        background-color: #FF6F91;
                     }
                     &:nth-child(odd) {
-                        background-color: orange;
+                        background-color: #FFC75F;
                     }
                 }
             }
         }
     }
+}
+
+@media screen and (max-width: 777px) {
+	.wrapper {
+		width: 100%;
+		.loadingbookimg {
+			
+			width: toremfunc.toRem(120);
+		}
+		.loadingtext h3 {
+			font-size: toremfunc.toRem(10);
+		}
+	}
 }

@@ -61,7 +61,7 @@ export default function Certification() {
     
 
     useEffect(()=>{
-        if(!data) certDataCollector.collectCertData()
+        if(!data) certDataCollector.collectData('/certs', "GET")
     },[])
 
     useEffect(()=>{

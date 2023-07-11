@@ -3,7 +3,8 @@ import { Dispatch, useCallback, useContext, useEffect, useState } from 'react';
 import styles from './CertAside.module.scss';
 import { CertDetailPageAction, CertDetailPageState } from '@/pages/certification/[id]';
 import {UserContext} from '@/pages/_app'
-import UnauthorizedPortal from './Unauthorized';
+import {ComponentPortal} from '@/utils/ComponentPortal'
+import {Unauthorized} from './Unauthorized';
 
 interface CertAsideProps {
     dispatch: Dispatch<CertDetailPageAction>
@@ -39,7 +40,7 @@ export default function CertAside({dispatch, state}:CertAsideProps) {
             <label className={styles.aside_select} htmlFor='review'>합격후기</label>
             <input type="radio" name="asideSelect" id="write" hidden onChange={memoizedFunc}/>
             <label className={styles.aside_select} id={!userContext?.user ? styles.unauthorized : undefined}htmlFor='write' onClick={!userContext?.user ? (e)=>{e.preventDefault();alertOn()} : undefined}>합격후기 쓰기</label> 
-            {unauthorizedAlert ? <UnauthorizedPortal toggle={alertOff}/>:null}
+            {unauthorizedAlert ? <ComponentPortal component={<Unauthorized toggle={alertOff}/>}/>:null}
         </aside>
         
         

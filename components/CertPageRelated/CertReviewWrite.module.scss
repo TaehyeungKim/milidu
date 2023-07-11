@@ -1,6 +1,15 @@
 //자격증 후기 작성 페이지
 @use 'utils/toremfunc';
 
+@keyframes bookSelected {
+    0% {
+        width: 0%;
+    } 100% {
+        width: 100%;
+    }
+}
+
+
 .cert {
     font-size: toremfunc.toRem(25);
     margin-bottom: toremfunc.toRem(30);
@@ -27,6 +36,15 @@
 
 }
 
+.posting {
+    opacity: 0.4;
+
+    &:hover {
+        color: inherit !important;
+        background-color: inherit !important;
+    }
+}
+
 .text {
     .textarea {
         width: 100%;
@@ -43,7 +61,25 @@
     }
 }
 
+.bookSrchBt {
+    padding: toremfunc.toRem(5) !important;
+    border-radius: 0 !important;
+    margin-left: toremfunc.toRem(10);
+    background-color: white;
+    color: black;
+    font-size: toremfunc.toRem(14);
+}
+
+
+
+
 .questionaire {
+
+    #bookSearch {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
     .question {
         font-size: toremfunc.toRem(18);
         display: flex;
@@ -53,6 +89,25 @@
         height: toremfunc.toRem(70);
         justify-content: space-between;
 		margin-left:toremfunc.toRem(12);
+
+
+        .bookSearchResult {
+            >div {
+                display: flex;
+                font-size: 0.8em;    
+            }
+            padding: toremfunc.toRem(5);
+            &::after {
+                content: "";
+                width: 100%;
+                border: 1px solid #d2d2d2;
+                display: block;
+                animation: bookSelected 1s ease-in-out;
+                animation-fill-mode: backwards;
+            }
+            
+        }
+
         .question_label {
             display: inline-flex;
             height: 100%;

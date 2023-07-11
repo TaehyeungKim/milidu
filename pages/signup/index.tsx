@@ -1,5 +1,5 @@
 import Layout from "@/components/SignPageRelated/Layout/Layout"
-import {  useRef, useReducer, useCallback, useContext} from "react"
+import {  useRef, useReducer, useCallback, useContext, useEffect} from "react"
 import { Floating_RegisterId, Floating_RegisterPw, Floating_RegisterTextInput } from "@/components/SignPageRelated/FloatingInp/FloatingInp"
 import { UserContext } from "../_app"
 
@@ -13,6 +13,7 @@ import axios from 'axios'
 import { useRouter } from "next/router"
 
 import { handleSubmit } from "@/utils/HandleUser"
+import LoadingBlocking from "@/components/Global/LoadinBlocking/LoadingBlocking"
 
 
 
@@ -149,6 +150,8 @@ const regProcessReducer = (status: RegProcessStatus, action: RegProcessAction) =
 
 export default function Signup() {
 
+    const submitBtRef = useRef<HTMLButtonElement>(null)
+
     const userContext = useContext(UserContext)
 
     const [regProcess, processing] = useReducer(regProcessReducer, {status: 'plain'})    
@@ -181,10 +184,21 @@ export default function Signup() {
                 return handleSubmit(state.id.data, state.pw.data, userContext, ()=>router.push('/'))
             }
             return processing({type: 'fail'})
-            
-            
         }
+        return processing({type: "fail"})
     },[state.id.state,state.pw.state,state.gender.state])
+
+
+    useEffect(()=>{
+        const keySubmitEvent = (e:KeyboardEvent) => {
+            if(e.key === "Enter") submitBtRef.current?.click()
+        }
+        window.addEventListener('keydown', keySubmitEvent)
+        return(()=>{
+            window.removeEventListener('keydown', keySubmitEvent)
+        })
+    },[])
+    
 
     
 
@@ -192,9 +206,10 @@ export default function Signup() {
         
         <Layout>
             {regProcess.status === 'plain' ? null :  
-            <div className = {styles.blocking}>
+            <LoadingBlocking>
                 {regProcess.status === 'fail' ? <CustomButton onClick={()=>processing({type: 'plain'})}>회원가입이 실패하였습니다.</CustomButton> : null}
-            </div>}
+            </LoadingBlocking>
+           }
             <Floating_RegisterId dispatch={dispatch} state={state.id}/>
             <Floating_RegisterPw dispatch={dispatch} state={state.pw}/>
             <Floating_RegisterTextInput label={"이름"} floatingLabel={"Name"} ref={nameRef}/>
@@ -202,7 +217,7 @@ export default function Signup() {
             <GenderSection dispatch={dispatch} state={state.gender}/>
             <BirthDateSection state={birthState} dispatch={birthDispatch}/>
             <footer className = {styles.signup_footer}>
-                <CustomButton onClick={register}>제출하기</CustomButton>
+                <CustomButton onClick={register} ref={submitBtRef}>제출하기</CustomButton>
                 <Link href='./signin'>
                     <SignButton>이미 계정이 있으신가요?</SignButton>
                 </Link>

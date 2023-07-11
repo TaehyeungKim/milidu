@@ -5,7 +5,8 @@
     margin: toremfunc.toRem(10) 0;
     //border-bottom: 4px solid gray;
     padding: toremfunc.toRem(10);
-
+    width: 100%;
+    box-sizing: border-box;
 
     &:last-child, &:nth-last-child(2){
         border-bottom: none;

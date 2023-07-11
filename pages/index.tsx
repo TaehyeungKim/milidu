@@ -10,8 +10,8 @@ export default function App() {
     // const {data: session, status} = useSession()
 
     useEffect(()=>{
-        certDataCollector.collectCertData();
-        univDataCollector.collectUnivData();
+        certDataCollector.collectData('/certs', 'GET');
+        univDataCollector.collectData('/get_unischedule', 'POST');
     },[])
 
 

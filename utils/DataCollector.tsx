@@ -1,4 +1,6 @@
-import axios from "axios"
+import axios, { AxiosResponse } from "axios"
+import { CertReview } from "@/pages/certification/[id]"
+import { LectureComment } from "@/components/UnivDetail/UniveLectureList"
 
 export type CertInfo = {
     code: string|number,
@@ -17,7 +19,7 @@ export type UnivObject = {
 }
 
 interface DataCollector {
-    _data: null|CertInfo[]|UnivObject[]
+    _data: null|CertInfo[]|UnivObject[]|CertReview|LectureComment[]
     _listener: Array<any>
 }
 
@@ -53,6 +55,37 @@ class DataCollector {
         }
     }
 
+    async collectData(url: string, method: string, body?: any) {
+        const initconfig = {
+            url: url,
+            method: method,
+            mode: 'no-cors',
+            headers: {
+              'Access-Control-Allow-Origin': '*',
+              'Content-Type': 'application/json',
+            },
+            withCredentials: true,
+            credentials: 'same-origin',
+          }
+        
+          let res: AxiosResponse
+
+        switch(method) {
+            //GET
+            default:
+                res = await axios.get(url, initconfig)
+                break;
+            case "POST":
+                res = await axios.post(url, body, initconfig);
+                break;
+        }
+        
+        const data = res.data
+
+        this.data = data;
+        return data
+    }
+
     
 
 
@@ -79,24 +112,6 @@ class CertDataCollector extends DataCollector {
         this._dataOnRange = [];
     }
 
-    async collectCertData() {
-        const initconfig = {
-            method: 'GET',
-            mode: 'no-cors',
-            headers: {
-              'Access-Control-Allow-Origin': '*',
-              'Content-Type': 'application/json',
-            },
-            withCredentials: true,
-            credentials: 'same-origin',
-          }
-        
-        const res = await axios.get('/certs', initconfig)
-        const data = await res.data
-        // const json = await res.json();
-        this.data = data;
-        return data
-    }
 
     get dataOnRange() {return this._dataOnRange}
     set dataOnRange(data) {this._dataOnRange = data }
@@ -107,27 +122,26 @@ class UnivDataCollector extends DataCollector {
     constructor() {
         super()
     }
+}
 
-    async collectUnivData() {
-        const initconfig = {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: {
-              'Access-Control-Allow-Origin': '*',
-              'Content-Type': 'application/json',
-            },
-            withCredentials: true,
-            credentials: 'same-origin',
-          }
-        const res = await axios.post('/get_unischedule', initconfig)
-        const data = await res.data
-        // const json = await res.json();
-        this.data = data;
-        return data
+class CertReviewDataCollector extends DataCollector {
+    constructor() {
+        super()
     }
 }
+
+class UnivLectureReviewDataCollector extends DataCollector {
+    constructor() {
+        super()
+    }
+}
+
+export {UnivLectureReviewDataCollector}
 
 
 const certDataCollector = new CertDataCollector();
 const univDataCollector = new UnivDataCollector();
-export {certDataCollector, univDataCollector}
+const certReviewDataCollector = new CertReviewDataCollector()
+
+
+export {certDataCollector, univDataCollector, certReviewDataCollector}

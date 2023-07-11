@@ -9,12 +9,14 @@
     font-size: toremfunc.toRem(16);
     justify-content: center;
     padding: toremfunc.toRem(40) 0;
+    
     .container {
         width: toremfunc.toRem(300);
         padding: toremfunc.toRem(30);
 		border:1px solid #dadce0;
 		border-radius:toremfunc.toRem(12);
         position: relative;
+        overflow: hidden;
         section {
             margin: toremfunc.toRem(10) 0;
         }

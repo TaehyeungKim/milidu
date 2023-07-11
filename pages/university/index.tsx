@@ -55,13 +55,12 @@ export default function University() {
     const showUnivList = () => dispatch({type: "finishedSearchTyping"}) 
 
     useEffect(()=>{
-        if(!data) univDataCollector.collectUnivData();
+        if(!data) univDataCollector.collectData('/get_unischedule', "POST");
     },[])
 
+
+
     if(!data) return (<Loading/>)    
-
-
-   
 
 
     return(
