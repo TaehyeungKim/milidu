@@ -1,5 +1,5 @@
 import Layout from "@/components/SignPageRelated/Layout/Layout"
-import {  useRef, useReducer, useCallback, useContext, useEffect} from "react"
+import {  useRef, useReducer, useCallback, useContext, useEffect } from "react"
 import { Floating_RegisterId, Floating_RegisterPw, Floating_RegisterTextInput } from "@/components/SignPageRelated/FloatingInp/FloatingInp"
 import { UserContext } from "../_app"
 
@@ -14,6 +14,7 @@ import { useRouter } from "next/router"
 
 import { handleSubmit } from "@/utils/HandleUser"
 import LoadingBlocking from "@/components/Global/LoadinBlocking/LoadingBlocking"
+import { RegisterUserData } from "@/Interface/interface"
 
 
 
@@ -169,24 +170,19 @@ export default function Signup() {
         date: now.getUTCDate()
     })
 
-    const register = useCallback(async()=>{
+
+    const register = useCallback(async(data: RegisterUserData)=>{
+        
         processing({type: 'processing'})
         if(state.id.state && state.pw.state && state.gender.state && nameRef.current?.value !== "") {
-            const res = await axios.post('/signup_register', {
-                name: nameRef.current?.value as string,
-                username: state.id.data,
-                password:state.pw.data,
-                major: majorRef.current?.value as string,
-                sex: state.gender.data,
-                birthday: `${birthState.year}.${birthState.month}.${birthState.date}`
-            })
+            const res = await axios.post('/signup_register', data)
             if(res.status === 200)  {
                 return handleSubmit(state.id.data, state.pw.data, userContext, ()=>router.push('/'))
             }
             return processing({type: 'fail'})
         }
         return processing({type: "fail"})
-    },[state.id.state,state.pw.state,state.gender.state])
+    },[state])
 
 
     useEffect(()=>{
@@ -217,7 +213,16 @@ export default function Signup() {
             <GenderSection dispatch={dispatch} state={state.gender}/>
             <BirthDateSection state={birthState} dispatch={birthDispatch}/>
             <footer className = {styles.signup_footer}>
-                <CustomButton onClick={register} ref={submitBtRef}>제출하기</CustomButton>
+                <CustomButton onClick={()=>register(
+                    {
+                        name: nameRef.current?.value as string,
+                        username: state.id.data,
+                        password:state.pw.data,
+                        major: majorRef.current?.value as string,
+                        sex: state.gender.data,
+                        birthday: `${birthState.year}.${birthState.month}.${birthState.date}`
+                    }
+                )} ref={submitBtRef}>제출하기</CustomButton>
                 <Link href='./signin'>
                     <SignButton>이미 계정이 있으신가요?</SignButton>
                 </Link>

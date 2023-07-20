@@ -12,11 +12,11 @@ interface CertReviewArticleProps {
 
 function CertReviewArticle({reviewArr}: CertReviewArticleProps) {
 
-
+    const sorted = reviewArr.sort((a:ReviewData,b:ReviewData)=> -(Date.parse(a.created_at) - Date.parse(b.created_at)))
 
     return(
         <section className = {styles.reviewArea}>
-            {reviewArr.map((data: ReviewData, index: number)=>(
+            {sorted.map((data: ReviewData, index: number)=>(
                  <article className={styles.review} key={index}>
                     <header className={styles.review_writer}>
                         <em>{data.num_attempts}수 합격</em>/<em>{data.time_taken}</em><br/>
@@ -34,12 +34,15 @@ function CertReviewArticle({reviewArr}: CertReviewArticleProps) {
                                 <span key={index}>{method}</span>
                             ))}
                         </div>
+                        {data.recommend_book !== 'null' ? 
                         <div className = {styles.studyMaterial}>
                             <span className={styles.label}>교재: </span>
                             <span>{JSON.parse(data.recommend_book).title}</span> / 
                             <span>{JSON.parse(data.recommend_book).author}</span> / 
                             <span>{JSON.parse(data.recommend_book).publisher}</span>
-                        </div>
+                        </div> : null
+                        }
+                        
                     </div>
                  <div className={styles.text}>
                  {data.content}
@@ -81,7 +84,7 @@ export default function CertReviewComponent({reviewData, certInfo}:CertReviewPro
             </div>
             <div className = {styles.sum_container}>
                 <h3 className = {styles.sum_label}>시험 횟수</h3>
-                <span className = {styles.value}>{data.average_num_attempts}수</span>
+                <span className = {styles.value}>{data.average_num_attempts.toFixed(1)}수</span>
             </div>
         </section>
         {data.ReviewList.length > 0 ? <CertReviewArticle reviewArr={data.ReviewList}/>:<h3>아직 등록된 리뷰가 없습니다.</h3>}

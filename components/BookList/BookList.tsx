@@ -11,6 +11,8 @@ interface BookListProps {
 
 export default function BookList({recommend_book}:BookListProps) {
 
+    const bookList = recommend_book.filter((book: string)=>book !== 'null')
+
     const [shownIndex, setShownIndex] = useState<number>(1);
     const prevIndex = useDeferredValue(shownIndex)
 
@@ -29,7 +31,7 @@ export default function BookList({recommend_book}:BookListProps) {
 
 
     useEffect(()=>{
-        if(recommend_book.length > 1) {
+        if(bookList.length > 1) {
             const list = document.querySelectorAll('.'+ styles.bookList);
             const container = slideContainer.current as HTMLDivElement
 
@@ -58,15 +60,15 @@ export default function BookList({recommend_book}:BookListProps) {
     
 
     useEffect(()=>{
-        if(recommend_book.length > 1) {
+        if(bookList.length > 1) {
             const container = slideContainer.current as HTMLDivElement
             const adjustingAfterTransition = () => {
                 container.classList.add(styles.transitionRemoved);
                 if(shownIndex === 0 && prevIndex === 1) {
-                    container.setAttribute('style', `transform: translateX(-${100*recommend_book.length}%)`);
-                    setShownIndex(recommend_book.length)
+                    container.setAttribute('style', `transform: translateX(-${100*bookList.length}%)`);
+                    setShownIndex(bookList.length)
                 }
-                else if(shownIndex === recommend_book.length + 1 && prevIndex === recommend_book.length) {
+                else if(shownIndex === bookList.length + 1 && prevIndex === bookList.length) {
                     container.setAttribute('style', 'transform: translateX(-100%)')
                     setShownIndex(1)
                 } 
@@ -82,15 +84,15 @@ export default function BookList({recommend_book}:BookListProps) {
     },[shownIndex])
 
     useLayoutEffect(()=>{
-        if(recommend_book.length > 1) {
+        if(bookList.length > 1) {
             const container = slideContainer.current as HTMLDivElement
-            if(!(prevIndex === recommend_book.length + 1 && shownIndex === 1) && !(prevIndex === 0 && shownIndex === recommend_book.length))
+            if(!(prevIndex === bookList.length + 1 && shownIndex === 1) && !(prevIndex === 0 && shownIndex === bookList.length))
             container.setAttribute('style', `transform: translateX(-${100*shownIndex}%)`)
         }   
         
     },[shownIndex])
 
-    if(recommend_book.length === 0) return(
+    if(bookList.length === 0) return(
         <div className = {styles.container}>
             <div className = {styles.slideContainer}>
                 <article className = {styles.bookList} style={{textAlign: 'center'}}>
@@ -105,7 +107,7 @@ export default function BookList({recommend_book}:BookListProps) {
 
     return(
         <div className = {styles.container}>
-            {recommend_book.length > 1 ? 
+            {bookList.length > 1 ? 
             <>
             <button className = {styles.slide} id={styles.right}>{booklistArrowRight()}</button>
             <button className = {styles.slide} id={styles.left}>{booklistArrowLeft()}</button>
@@ -115,7 +117,8 @@ export default function BookList({recommend_book}:BookListProps) {
             }
             
             <div className = {styles.slideContainer} ref={slideContainer}>
-            {recommend_book.map((data: string, index: number)=>(
+            {bookList.map((data: string, index: number)=>(
+                data === "null" ? null :  
                 <article className = {styles.bookList} key={index}>
                 <figure className = {styles.bookImage}>
                     <img src={JSON.parse(data).image_url} onError={(e)=>{

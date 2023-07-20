@@ -12,6 +12,10 @@ export type User = {
     birthday:string
 }
 
+export type RegisterUserData = User & {
+    password: string
+}
+
 export type BookInfo = {
     title: string,
     author: string,

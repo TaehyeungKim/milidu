@@ -74,13 +74,14 @@ export default function CertReviewWrite({cert_name, cert_code, dispatch}: CertRe
             birthday: userContext?.user?.birthday as string
         }
         return data
-    },[starRate, trynum, selectedBook, studyYear, studyMonth, studyWeek, content])
+    },[starRate, trynum, selectedBook, studyYear, studyMonth, studyWeek, content, methods])
 
     const submitReview = useCallback(async(data:SubmitCertReviewData) => {
+        
         if(data.difficulty === 0 
         || data.num_attempts === 0 
         || data.study_method === ""  
-        || data.recommend_book === 'null'
+        // || data.recommend_book === 'null'
         || data.content === ""
         || studyYear === ""
         || studyMonth === ""

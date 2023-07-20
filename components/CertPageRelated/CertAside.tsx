@@ -30,6 +30,12 @@ export default function CertAside({dispatch, state}:CertAsideProps) {
 
     const memoizedFunc = useCallback(pageModeChangeFunc, [])
 
+    useEffect(()=>{
+        const mark = document.getElementById(state.page) as HTMLInputElement;
+        mark.checked = true;
+        return(()=>{mark.checked = false})
+    },[state.page])
+
 
     return(
         
