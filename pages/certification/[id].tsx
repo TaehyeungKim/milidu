@@ -17,6 +17,7 @@ import Loading from '@/components/Loading/Loading'
 import { BookInfo } from '@/Interface/interface'
 
 
+
 export type CertDetailInfo = {
     name: string,
     description: string,
@@ -104,12 +105,12 @@ export const getServerSideProps: GetServerSideProps<{ certServerSideProps: CertS
 
 
     //real backend
-    const certInfoAndStatsRes = await axios.get(`https://milidu-backend-ykzlu.run.goorm.site/cert_stats?cert_code=${params?.id}`)
+    const certInfoAndStatsRes = await axios.get(`https://selectionhistory-jentv.run.goorm.site/cert_stats?cert_code=${params?.id}`)
     
 
     const certInfoAndStats: CertInfoAndStats = await certInfoAndStatsRes.data
 
-    const certReviewRes = await axios.post("https://milidu-backend-ykzlu.run.goorm.site/get_cert_review",
+    const certReviewRes = await axios.post(`https://selectionhistory-jentv.run.goorm.site/get_cert_review`,
     {
         category: "자격증코드",
         keyword: `${params?.id}`
@@ -120,6 +121,7 @@ export const getServerSideProps: GetServerSideProps<{ certServerSideProps: CertS
 
     const certReview:CertReview = await certReviewRes.data
     certReviewDataCollector.data = certReview
+    console.log(certReview)
 
 
     const certServerSideProps = {

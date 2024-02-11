@@ -1,7 +1,7 @@
 import styles from './CertReviewWrite.module.scss'
 import { useEffect, useRef, useState, useCallback,  useContext, useMemo } from 'react'
 import { textAreaResize } from '@/utils/textAreaResize'
-import StarRateComponent from '@/components/StarRate/StarRateComponent'
+import StarRateComponent from '@/components/UnivDetail/Comment/StarRateComponent'
 import axios from 'axios'
 import {UserContext} from '@/pages/_app'
 import {CustomButton} from '@/components/Global/CustomButton'

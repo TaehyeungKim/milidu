@@ -1,9 +1,9 @@
 import styles from './CertReview.module.scss';
-import StarRateComponent from '@/components/StarRate/StarRateComponent';
+import StarRateComponent from '@/components/UnivDetail/Comment/StarRateComponent';
 import { CertReview, ReviewData } from '@/pages/certification/[id]';
 import { CertInfo, certReviewDataCollector, getSnapshotOfData, subscribe } from '@/utils/DataCollector';
 import { useSyncExternalStore } from 'react';
-
+import { age } from '@/utils/ageCompute';
 
 interface CertReviewArticleProps {
     reviewArr: ReviewData[]
@@ -20,7 +20,7 @@ function CertReviewArticle({reviewArr}: CertReviewArticleProps) {
                  <article className={styles.review} key={index}>
                     <header className={styles.review_writer}>
                         <em>{data.num_attempts}수 합격</em>/<em>{data.time_taken}</em><br/>
-                        <span>{data.birthday}세</span>/<span>{data.sex}</span>/<span>{data.major}</span><br/>
+                        <span>{age(data.birthday, data.created_at)}세</span>/<span>{data.sex}</span>/<span>{data.major}</span><br/>
                         <span>{data.username}</span>
                     </header>
                     <div className = {styles.below_header}>
@@ -41,7 +41,7 @@ function CertReviewArticle({reviewArr}: CertReviewArticleProps) {
                             <span>{JSON.parse(data.recommend_book).author}</span> / 
                             <span>{JSON.parse(data.recommend_book).publisher}</span>
                         </div> : null
-                        }
+                        }   
                         
                     </div>
                  <div className={styles.text}>

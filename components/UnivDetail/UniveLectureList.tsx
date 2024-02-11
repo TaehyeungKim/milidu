@@ -2,10 +2,11 @@ import styles from './UnivDetail.module.scss'
 // import { lectureData } from './UnivDetail'
 
 import { useState, useRef, useEffect, createContext, useCallback } from 'react'
-import UnivLectureComment from './UnivLectureComment'
+import UnivLectureComment from './Comment/UnivLectureComment'
 import styled from 'styled-components'
 import {UnivLectureData} from '@/components/UnivDetail/UnivDetail'
-import {LectureReviewInp} from '@/components/UnivDetail/UnivLectureComment'
+// import {LectureReviewInp} from '@/components/UnivDetail/UnivLectureComment'
+import { CommentData } from './Comment/UnivLectureComment'
 import axios from 'axios'
 
 
@@ -24,7 +25,7 @@ const CommentShowButton = styled.button<{$commentVisible:boolean}>`
         transition: transform 0.5s ease-in-out, color 0.5s ease-in-out;
         color: ${props=>props.$commentVisible ? 'teal' : 'aquamarine'};
     `
-type LectureInfoContextType = {
+export type LectureInfoContextType = {
     school_name:string,
     lecture_name:string,
     lecture_id:number
@@ -36,7 +37,7 @@ type CommentOuterInfo = {
     id: number
 }
 
-export type LectureComment = LectureReviewInp & CommentOuterInfo
+export type LectureComment = CommentData & CommentOuterInfo
 
 
 export const LectureInfoContext = createContext<LectureInfoContextType>({
@@ -128,6 +129,7 @@ export default function UniveLectureList({lectureDataArr}:UniveLectureListProps)
         <div className = {styles.lectureListContainer}>
         <h3>강의 목록</h3>
         <ul className={styles.lectureList}>
+                
                 {lectureDataArr.map((data: UnivLectureData)=>(
                     <LectureLi data={data} key={data.id}/>
                 ))}

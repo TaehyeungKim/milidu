@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
+
+const PATH = "https://selectionhistory-jentv.run.goorm.site"
+
 const nextConfig = {
     async rewrites() {
         return [
@@ -7,7 +10,7 @@ const nextConfig = {
             source: "/certs",
 
             //real backend
-            destination: "https://milidu-backend-ykzlu.run.goorm.site/certs",
+            destination: `${PATH}/certs`,
 
             //self backend
             // destination: "https://milidu-selfserver.run.goorm.site/certs"
@@ -32,39 +35,39 @@ const nextConfig = {
           // },
           {
             source: "/get_unischedule",
-            destination: "https://milidu-backend-ykzlu.run.goorm.site/get_unischedule",
+            destination: `${PATH}/get_unischedule`,
           },
           {
             source: "/create_cert_review",
-            destination: "https://milidu-backend-ykzlu.run.goorm.site/create_cert_review",
+            destination: `${PATH}/create_cert_review`,
           },
           {
             source: "/get_cert_review",
-            destination: "https://milidu-backend-ykzlu.run.goorm.site/get_cert_review",
+            destination: `${PATH}/get_cert_review`,
           },
           {
             source: "/cert_test_schedule",
-            destination: "https://milidu-backend-ykzlu.run.goorm.site/cert_test_schedule",
+            destination: `${PATH}/cert_test_schedule`,
           },
           {
             source: "/get_lecture",
-            destination: "https://milidu-backend-ykzlu.run.goorm.site/get_lecture",
+            destination: `${PATH}/get_lecture`,
           },
           {
             source: "/create_lect_review",
-            destination: "https://milidu-backend-ykzlu.run.goorm.site/create_lect_review",
+            destination: `${PATH}/create_lect_review`,
           },
           {
             source: "/get_lect_review",
-            destination: "https://milidu-backend-ykzlu.run.goorm.site/get_lect_review",
+            destination: `${PATH}/get_lect_review`,
           },
           {
             source: "/signup_register",
-            destination: "https://milidu-backend-ykzlu.run.goorm.site/signup",
+            destination: `${PATH}/signup`,
           },
           {
             source: "/login",
-            destination: "https://milidu-backend-ykzlu.run.goorm.site/login",
+            destination: `${PATH}/login`,
           },
           {
             source: "/bookSearch",
@@ -72,11 +75,11 @@ const nextConfig = {
           },
           {
             source: "/check_username",
-            destination: "https://milidu-backend-ykzlu.run.goorm.site/check_username"
+            destination: `${PATH}/check_username`
           },
           {
             source: "/get_cert_review",
-            destination: "https://milidu-backend-ykzlu.run.goorm.site/get_cert_review"
+            destination: `${PATH}/get_cert_review`
           }
          
         ];

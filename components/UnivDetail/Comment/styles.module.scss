@@ -1,4 +1,12 @@
 @use '@/utils/toremfunc';
+
+.load_part {
+	display:flex;
+	align-items: center;
+	padding:toremfunc.toRem(10);
+}
+
+
 .radio {
     &:checked + label {
         border: 2px solid orange;
@@ -26,14 +34,6 @@
 		}
 	}
 }
-.load_part {
-	display:flex;
-	align-items: center;
-	padding:toremfunc.toRem(10);
-}
-
-
-
 
 @media screen and (max-width: 459px) {
 	.review_box {

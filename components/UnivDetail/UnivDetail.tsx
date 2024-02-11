@@ -61,17 +61,23 @@ const lectureDataArr: lectureData[] = [
 
 
 
-const fetchUnivData = async(name: string, path:string) => {
+const fetchUnivData = async(name: string, method: "POST"|"GET", path:string) => {
     const body = {
         school_name: name
-     }
-    const res = await axios.post(path, body, {
-        headers: {
-            "Content-Type": 'application/json'
-        }
-    })
-
+    }
+    let res;
+    switch(method) {
+        case "POST":
+            res = await axios.post(path,body)
+            break;
+        case "GET":
+            res = await axios.get(path);
+            break;
+    }
     return res.data
+    
+
+    
 }
 
 const yieldDateFormat = (data: Date) => `${data.getFullYear()}.${data.getMonth()+1}.${data.getUTCDay()}`
@@ -86,8 +92,8 @@ export default function UnivDetail({state}:UnivDetailProps) {
     const updateLectureList = (list: UnivLectureData[]) => setLectureList(list) 
 
     useEffect(()=>{
-        fetchUnivData(state.univName as string, '/get_unischedule').then((data:any)=>updateUnivSchedule(data))
-        fetchUnivData(state.univName as string, '/get_lecture').then((data:any)=>updateLectureList(data))
+        fetchUnivData(state.univName as string, "POST", '/get_unischedule').then((data:any)=>updateUnivSchedule(data))
+        fetchUnivData(state.univName as string, "POST", '/get_lecture').then((data:any)=>updateLectureList(data))
 
     },[])
      

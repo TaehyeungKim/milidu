@@ -26,7 +26,7 @@ const signInReducer = (state: SignInState, action: SignInAction) => {
         default:
             return {...state}
         case "fail":
-            return {state: "fail"}
+            return {state: "fail", message: action.message}
         case "loading":
             return {state: "loading"}
     }
@@ -68,7 +68,9 @@ export default function Signin() {
             <footer className={styles.register}>
                 <CustomButton ref={submitBtRef} onClick={()=>{
                     dispatch({type: "loading"})
-                    handleSubmit(idRef.current?.value as string, pwRef.current?.value as string, userContext, ()=>router.push('/'), ()=>dispatch({type: "fail", message: "로그인이 실패하셨습니다."}))
+                    handleSubmit(idRef.current?.value as string, pwRef.current?.value as string, userContext, ()=>{
+                        router.push('/')
+                    }, ()=>dispatch({type: "fail", message: "로그인이 실패하셨습니다."}))
                     }}>로그인</CustomButton>
                 <Link href={'/signup'}>
                     <SignButton>회원가입하기</SignButton>
