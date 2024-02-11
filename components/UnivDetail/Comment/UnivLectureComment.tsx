@@ -41,23 +41,30 @@ export type CommentData = LectureInfoContextType & {
 export type CommentDataAction = {type: keyof CommentData, data: string|number}
 
 
+
+
 const commentDataReducer = (state: CommentData, action: CommentDataAction) => {
     return {...state, [action.type]: action.data}
 }
 
+
+
 export default function UnivLectureComment({data}:UnivLectureCommentProps) {
     const lectureInfo = useContext(LectureInfoContext)
-
-    const [commentData, dispatch] = useReducer(commentDataReducer, {
+    const initialArg = {
         ...lectureInfo,
         username:'taehyeungkim98',
         content: "",
         rate:0,
         load:"",
         grade:"",
-        year: "",
-        semester: ""
-    })
+        year: new Date().getFullYear().toString(),
+        semester: OPTION[0]
+    }
+
+    const [commentData, dispatch] = useReducer(commentDataReducer, initialArg)
+
+    
     
 
     const collectorRef = useRef<UnivLectureReviewDataCollector>(new UnivLectureReviewDataCollector());
@@ -95,10 +102,10 @@ export default function UnivLectureComment({data}:UnivLectureCommentProps) {
     //     }
     // },[page])
 
-    useEffect(()=>{
-        dispatch({type: "year", data: new Date().getFullYear().toString()})
-        dispatch({type: "semester", data: OPTION[0]})
-    },[])
+    // useEffect(()=>{
+    //     dispatch({type: "year", data: new Date().getFullYear().toString()})
+    //     dispatch({type: "semester", data: OPTION[0]})
+    // },[])
 
     useEffect(()=>{
         collectorRef.current.data = data as LectureComment[];
@@ -132,7 +139,8 @@ export default function UnivLectureComment({data}:UnivLectureCommentProps) {
         </Wrapper>
         </>
         }
-        <UnivCommentWrite data={commentData} dispatch={dispatch} collectorRef={collectorRef}/>    
+        <UnivCommentWrite data={commentData} dispatch={dispatch} collectorRef={collectorRef} initialArg={initialArg}/>    
+        {/* {postStatus.status === "fail" ? <div>{postStatus.reason}</div> : null} */}
         </div>
     )
 }

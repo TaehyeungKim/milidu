@@ -61,7 +61,7 @@ export default function StarRateComponent({size, disabled, value, updater}:StarR
     },[])
 
     useEffect(()=>{
-        if(value) starRate.current?.setAttribute('style', `width: ${value * 10}%`)
+        if(typeof value === 'number') starRate.current?.setAttribute('style', `width: ${value * 10}%`)
     },[value])
     return(
         <StarRateBox $size={size}ref={starRateBox}>

@@ -1,10 +1,11 @@
 import styles from './styles.module.scss'
 import { toRem } from '@/utils/toRem'
-import { RadioLabel, SelectContainer, Selected, SelectUl } from './sc'
+import { RadioLabel, SelectContainer, Selected, SelectUl, CommentTextArea } from './sc'
 import { CommentData, CommentDataAction } from './UnivLectureComment'
-import { Dispatch, useState } from 'react'
+import { Dispatch, useState, useEffect, useRef } from 'react'
 import { LabelForStarBox } from './sc'
 import StarRateComponent from './StarRateComponent'
+import { textAreaResize } from "@/utils/textAreaResize"
 
 type IdValue = {
     id: string,
@@ -15,11 +16,19 @@ interface UnivLectReviewRadioProps{
     idValueArr: IdValue[],
     name: string,
     updater: (arg: string) => void
-    children: JSX.Element
+    children: JSX.Element,
+    posting: boolean
 }
 
-export function UnivLectReviewRadio({idValueArr, name, updater, children}: UnivLectReviewRadioProps) {
+export function UnivLectReviewRadio({idValueArr, name, updater, children, posting}: UnivLectReviewRadioProps) {
     const Inp = (id:string, name: string, updater: (arg: string)=>void, value: string) => <input className = {styles.radio} type="radio" name={name} hidden id={id} onChange={()=>updater(value)}/>
+    const initialRef = useRef<HTMLInputElement>(null)
+
+    useEffect(()=>{
+        if(!posting) {
+            initialRef.current?.click(); 
+        }
+    },[posting])
     return(
         <div className= {styles.load_part}>
             {children}
@@ -31,19 +40,21 @@ export function UnivLectReviewRadio({idValueArr, name, updater, children}: UnivL
                     </>
                 ))}
             </div>
+            <input hidden type="radio" name={name} ref={initialRef}></input>
         </div>
     )
 }
 
 interface UnivLectReviewStarboxProps {
+    rate: number
     dispatch: Dispatch<CommentDataAction>
 }
 
-export function UnivLectReviewStarbox({dispatch}:UnivLectReviewStarboxProps) {
+export function UnivLectReviewStarbox({dispatch, rate}:UnivLectReviewStarboxProps) {
     return(
         <div className = {styles.review_mini_box}>
             <LabelForStarBox >별점을 매겨주세요!</LabelForStarBox>
-            <StarRateComponent size={40} disabled={false} updater={(rate: number)=>dispatch({type: "rate", data: rate})}/>
+            <StarRateComponent size={40} disabled={false} updater={(rate: number)=>dispatch({type: "rate", data: rate})} value={rate}/>
         </div>
     )
 }
@@ -56,6 +67,7 @@ interface YearSelectProps {
 function YearSelect({year, dispatch}: YearSelectProps){
     const [yearSelectVisible, setYearSelectVisible] = useState<boolean>(false);
     const toggleYearSelect = () => setYearSelectVisible(v=>!v);
+
     return(
         <div className= {styles.review_day} onClick={toggleYearSelect}>
             <span className= {styles.lecture_year}>수강년도: </span>
@@ -122,5 +134,24 @@ export function UnivLectReviePeriodSelect({data, dispatch}:UnivLectReviePeriodSe
             <YearSelect year={data.year} dispatch={dispatch}></YearSelect>            
             <SemSelect semester={data.semester} dispatch={dispatch}></SemSelect>                  
         </div>
+    )
+}
+
+interface UnivLectCommentTextareaProps {
+    dispatch: Dispatch<CommentDataAction>,
+    posting: boolean
+}
+
+export function UnivLectCommentTextarea({dispatch, posting}: UnivLectCommentTextareaProps) {
+    const textarea = useRef<HTMLTextAreaElement>(null);
+    useEffect(()=>{
+        textAreaResize(textarea.current as HTMLTextAreaElement);
+    },[])
+
+    useEffect(()=>{
+        if(!posting) textarea.current!.value = ""
+    },[posting])
+    return(
+        <CommentTextArea ref={textarea} onChange={(e)=>dispatch({type: "content", data: e.target.value})} placeholder="한 줄 수강평을 입력해주세요!"/>
     )
 }

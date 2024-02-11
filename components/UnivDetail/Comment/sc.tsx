@@ -197,3 +197,10 @@ export const CommentTextArea = styled.textarea`
     }
     flex-grow: 1;
 `
+
+export const CommentPostMessage = styled.div`
+    text-align: center;
+    padding: ${toRem(5)}rem;
+    color: #DE2D39;
+    font-size: 1.3em;
+`
