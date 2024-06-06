@@ -1,4 +1,4 @@
-# Milidu - 국방 장병들을 위한 교육 정보 제공 서비스
+# 📚Milidu - 국방 장병들을 위한 교육 정보 제공 서비스
 📌 Front: Typescript + Next.js + SCSS  
 📌 Back: Python Flask + sqlalchemy
 
