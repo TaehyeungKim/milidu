@@ -1,17 +1,13 @@
-import NextAuth from "next-auth"
-import CredentialsProvider from 'next-auth/providers/credentials';
-import {User} from '@/Interface/interface'
+import NextAuth from 'next-auth';
+import { authConfig } from './auth.config';
+import Credentials from 'next-auth/providers/credentials';
 import axios from 'axios'
+import {PATH} from '@/next.config.mjs'
 
-interface AuthRedirect {
-    baseUrl: string,
-    url: string
-}
-
-export const authOptions = {
-    secret: process.env.NEXTAUTH_SECRET,
+export const { auth, signIn, signOut } = NextAuth({
+    ...authConfig,
     providers: [
-        CredentialsProvider(
+        Credentials(
             {name: "credentials",
             credentials: {
                 username: {label: "username", type: "text", placeholder: "아이디를 입력하세요"},
@@ -23,7 +19,7 @@ export const authOptions = {
                         password: credentials?.password
                 }
                 // Add logic here to look up the user from the credentials supplied
-                const res:any = await axios.post("https://milidu-backend-ykzlu.run.goorm.site/login", body, {
+                const res:any = await axios.post(`${PATH}/login`, body, {
                     headers: {
                         'Content-Type': 'application/json'
                     }
@@ -50,42 +46,4 @@ export const authOptions = {
             
         ),
     ],
-    pages: {
-        signIn: '/signin'
-    },
-    session: {
-        jwt: true,
-        maxAge: 24*60*60,
-        updateAge: 24*60*60
-    },
-    callbacks: {
-
-        async signIn({ user, account, profile, email, credentials }:any) {
-            return true;
-        },
-
-        async redirect({url, baseUrl}:AuthRedirect) {
-            return baseUrl
-        },
-        async jwt({ token, account, user  }:any) {
-                token.name = user.name;
-                token.sex = user.sex;
-                token.birthday = user.birthday;
-                token.major = user.major
-                return token 
-        
-        },
-        async session({session, user, token}:any) {
-           
-                session.user.name = token.name;
-                session.user.major = token.major;
-                session.user.sex = token.sex;
-                session.user.birthday = token.birthday
-                return session
-            
-            
-        }
-    }
-}
-
-export default NextAuth(authOptions)
+  });

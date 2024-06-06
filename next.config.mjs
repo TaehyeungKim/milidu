@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 
-const PATH = "https://selectionhistory-jentv.run.goorm.site"
+export const PATH = "https://selectionhistory-jentv.run.goorm.site"
 
 const nextConfig = {
     async rewrites() {
@@ -86,4 +86,4 @@ const nextConfig = {
       }
 }
 
-module.exports = nextConfig
+export default nextConfig
