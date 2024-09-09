@@ -6,6 +6,8 @@
 1) 국가기술자격증 정보: 자격증 정보 데이터는 비교적 변화가 적은 정적 데이터이기 때문에, 관련 공공 API를 통해 정보를 일괄 수집한 다음 데이터베이스에 등록한 후 사용자의 요청에 따라 정보를 가공하여 제시하는 식으로 설계하였습니다. 또한 사용자는 각 자격증 별로 시험 횟수, 공부 방법, 소요 기간, 사용 교재 등의 입력값을 포함한 합격 후기를 등록할 수 있습니다. 교재 검색은 국립중앙도서관의 도서 검색 API를 활용하였습니다.
 2) 대학 원격 강좌 정보: 대학 원격 강좌 정보 역시 정적 데이터이기 때문에 관련 정보를 일괄적으로 데이터베이스에 등록한 후 사용자의 요청에 따라 알맞은 정보를 제공합니다. 사용자는 각 수업별로 수강 후기를 등록할 수 있습니다.
 
+<video src="https://github.com/TaehyeungKim/milidu/assets/85505622/347c47bb-e81b-41a8-87b1-69ae963781f3"/>
+
 <img width="1440" alt="스크린샷 2024-06-07 오전 3 24 24" src="https://github.com/TaehyeungKim/milidu/assets/85505622/07ca7fda-0d67-4539-a8e2-58b2233c711b">
 <img width="1440" alt="스크린샷 2024-06-07 오전 3 24 46" src="https://github.com/TaehyeungKim/milidu/assets/85505622/69777316-76bf-4805-a66d-d71ffdced58d">
 <img width="1440" alt="스크린샷 2024-06-07 오전 3 25 09" src="https://github.com/TaehyeungKim/milidu/assets/85505622/59b07559-a3ba-4f57-b257-c248525a5fc0">
@@ -16,8 +18,7 @@
 <img width="1440" alt="스크린샷 2024-06-07 오전 3 26 21" src="https://github.com/TaehyeungKim/milidu/assets/85505622/c0d9c1bb-55f5-483f-97d5-ff19bfd6fd47">
 
 
-사이트 녹화 기록 👇        
-https://github.com/TaehyeungKim/milidu/assets/85505622/347c47bb-e81b-41a8-87b1-69ae963781f3
+
 
 
 
